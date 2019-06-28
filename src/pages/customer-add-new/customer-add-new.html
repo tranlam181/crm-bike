@@ -1,0 +1,50 @@
+<!--
+  Generated template for the CustomerAddNewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Thêm mới Khách hàng</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+    <form (ngSubmit)="addNewCustomer()">
+      <ion-item>
+        <ion-label>Tên KH:</ion-label>
+        <ion-input type="text" [(ngModel)]="customer.full_name" name="full_name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tỉnh/TP:</ion-label>
+        <ion-select placeholder='Chọn Tỉnh/TP' [(ngModel)]="customer.province_code" name="province_code" interface='popover' (ionChange)="onChangeProvince($event)">
+          <ion-option *ngFor="let province of province_list" value="{{province.province_code}}">{{province.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Quận:</ion-label>
+        <ion-select placeholder='Chọn Quận' [(ngModel)]="customer.district_code" name="district_code" interface='popover' (ionChange)="onChangeDistrict($event)">
+            <ion-option *ngFor="let district of district_list" value="{{district.district_code}}">{{district.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Phường:</ion-label>
+        <ion-select placeholder='Chọn Phường' [(ngModel)]="customer.precinct_code" name="precinct_code" interface='popover'>
+            <ion-option *ngFor="let precinct of precinct_list" value="{{precinct.precinct_code}}">{{precinct.name}}</ion-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Điện thoại:</ion-label>
+        <ion-input type="tel" [(ngModel)]="customer.phone" name="phone"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ngày sinh:</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="customer.birthday" name="birthday"></ion-datetime>
+      </ion-item>     
+      <button ion-button type="submit" block>Thêm Khách hàng</button>
+    </form>
+</ion-content>

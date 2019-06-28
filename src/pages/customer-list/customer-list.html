@@ -1,0 +1,42 @@
+<!--
+  Generated template for the CustomerListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <!-- <ion-title>DS Khách hàng</ion-title> -->
+      <ion-searchbar (ionInput)="searchCustomer($event)"></ion-searchbar>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+  <!-- <ion-searchbar (ionInput)="searchCustomer($event)"></ion-searchbar> -->
+  <ion-list>
+    <ion-item-sliding *ngFor='let user of filterUsers'>
+      <ion-item (click)='showDetailCustomer($event, user)'>
+        <ion-avatar item-start>
+          <img src="">
+        </ion-avatar>
+        <h2>{{user.name}}</h2>
+        <p>{{user.email}}</p>
+        <p>{{user.phone}}</p>
+        <p>{{user.website}}</p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="primary" (click)="smsCustomer($event, user)">
+          <ion-icon name="text"></ion-icon>
+          Sms
+        </button>
+        <button ion-button color="secondary" (click)="callCustomer($event, user)">
+          <ion-icon name="call"></ion-icon>
+          Gọi
+        </button>
+      </ion-item-options>      
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
