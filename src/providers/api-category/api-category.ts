@@ -10,6 +10,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ApiCategoryProvider {
 
+  baseUrl = ''
+  
   fakeProvinceList = [
     {province_code: 'QTR', name: 'Quảng Trị'},
     {province_code: 'TTH', name: 'Thừa Thiên Huế'},
