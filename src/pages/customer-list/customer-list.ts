@@ -19,25 +19,25 @@ export class CustomerListPage {
   users: any
   filterUsers: any
   searchCustomerString: string = ''
-  loading: any
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
     public apiCustomer: ApiCustomerProvider,
     public loadingCtrl: LoadingController) {
-      this.loading = this.loadingCtrl.create({
-        spinner: 'dots',
-        content: 'Đang tải...',
-        duration: 5000        
-      });
+      
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CustomerListPage');
-    this.loading.present()
-    this.loading.setContent("Another One Bites the Dust");
+    let loading = this.loadingCtrl.create({
+      spinner: 'dots',
+      content: 'Đang tải...',
+      duration: 5000        
+    })
+    loading.present()
+    loading.setContent("Another One Bites the Dust");
     this._getUsers().then(data => {
-      this.loading.dismiss()
+      loading.dismiss()
     })
   }
 
