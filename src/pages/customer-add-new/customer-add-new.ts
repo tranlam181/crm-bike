@@ -57,6 +57,7 @@ export class CustomerAddNewPage {
     this.district_list = [{district_code:'', name:'Đang tải...'}]
     this.apiCategory.getDistricts(val).then(data => {
       this.district_list = data
+      this.precinct_list = []
     })
   }
 
