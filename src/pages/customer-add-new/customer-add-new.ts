@@ -21,16 +21,17 @@ export class CustomerAddNewPage {
     district_code: '',
     precinct_code: '',
     phone: '',
-    birthday: ''
+    birthday: '',
+    bike_type_id: ''
   }
   province_list: any
   district_list: any
   precinct_list: any
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiCategory: ApiCategoryProvider,
-    public loadingCtrl: LoadingController) {      
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -38,7 +39,7 @@ export class CustomerAddNewPage {
     let loading:any = this.loadingCtrl.create({
       spinner: 'dots',
       content: 'Đang tải...',
-      duration: 5000        
+      duration: 5000
     })
     loading.present()
     this.apiCategory.getProvinces().then(data => {
@@ -53,7 +54,7 @@ export class CustomerAddNewPage {
   }
 
   onChangeProvince(val) {
-    console.log(val);   
+    console.log(val);
     this.district_list = [{district_code:'', name:'Đang tải...'}]
     this.apiCategory.getDistricts(val).then(data => {
       this.district_list = data

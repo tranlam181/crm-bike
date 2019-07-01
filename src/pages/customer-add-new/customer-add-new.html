@@ -44,7 +44,14 @@
       <ion-item>
         <ion-label>Ngày sinh:</ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" [(ngModel)]="customer.birthday" name="birthday"></ion-datetime>
-      </ion-item>     
+      </ion-item>
+      <ion-item-divider color="light">Thông tin xe</ion-item-divider>
+      <ion-item>
+        <ion-label>Loại xe:</ion-label>
+        <ion-select placeholder='Chọn loại xe' [(ngModel)]="customer.bike_type_id" name="bike_type_id" interface='popover'>
+          <ion-option *ngFor="let bike_type of bike_type_list" value="{{bike_type.id}}">{{bike_type.name}}</ion-option>
+        </ion-select>
+      </ion-item>
       <button ion-button type="submit" block>Thêm Khách hàng</button>
     </form>
 </ion-content>
