@@ -10,42 +10,63 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ApiCategoryProvider {
 
-  baseUrl = 'http://localhost:9191/api/crm'
-  
-  fakeProvinceList:any
-  fakeDistrictList: any
-  fakePrecinctList:any
+  baseUrl = 'http://localhost:9191/api/crm'  
 
   constructor(public http: HttpClient) {
     console.log('Hello ApiCategoryProvider Provider');
   }
 
   getProvinces() {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       // http get
       this.http.get(this.baseUrl + '/category/provinces').subscribe(data => {
-        this.fakeProvinceList = data
-        resolve(this.fakeProvinceList)
+        resolve(data)
+      }, err => {
+        reject(err.message)
       })
     })
   }
 
   getDistricts(province_code: string) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       // http get
       this.http.get(this.baseUrl + '/category/districts/' + province_code).subscribe(data => {
-        this.fakeDistrictList = data
-        resolve(this.fakeDistrictList)
+        resolve(data)
+      }, err => {
+        reject(err.message)
       })
     })
   }
 
   getPrecincts(province_code: string, district_code: string) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       // http get
       this.http.get(this.baseUrl + '/category/precincts/' + province_code + '/' + district_code).subscribe(data => {
-        this.fakePrecinctList = data
-        resolve(this.fakePrecinctList)
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
+  getBikeTypes() {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/category/bike-types').subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
+  getShops() {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/category/shops').subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
       })
     })
   }

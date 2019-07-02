@@ -15,9 +15,25 @@
 
 <ion-content>
     <form (ngSubmit)="addNewCustomer()">
+      <ion-item-divider color="light">Thông tin Khách hàng</ion-item-divider>
       <ion-item>
         <ion-label>Tên KH:</ion-label>
-        <ion-input type="text" [(ngModel)]="customer.full_name" name="full_name"></ion-input>
+        <ion-input type="text" placeholder="Nhập Họ tên" [(ngModel)]="customer.full_name" name="full_name" text-right text-capitalize></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ngày sinh:</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" [(ngModel)]="customer.birthday" name="birthday"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Giới tính:</ion-label>
+        <ion-select placeholder='Giới tính' [(ngModel)]="customer.sex" name="sex" interface='popover'>
+          <ion-option value="0">Nữ</ion-option>
+          <ion-option value="1">Nam</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Điện thoại:</ion-label>
+        <ion-input type="tel" placeholder="Nhập điện thoại" [(ngModel)]="customer.phone" name="phone" text-right></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>Tỉnh/TP:</ion-label>
@@ -37,19 +53,25 @@
             <ion-option *ngFor="let precinct of precinct_list" value="{{precinct.precinct_code}}">{{precinct.name}}</ion-option>
           </ion-select>
       </ion-item>
-      <ion-item>
-        <ion-label>Điện thoại:</ion-label>
-        <ion-input type="tel" [(ngModel)]="customer.phone" name="phone"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Ngày sinh:</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" [(ngModel)]="customer.birthday" name="birthday"></ion-datetime>
-      </ion-item>
       <ion-item-divider color="light">Thông tin xe</ion-item-divider>
       <ion-item>
         <ion-label>Loại xe:</ion-label>
-        <ion-select placeholder='Chọn loại xe' [(ngModel)]="customer.bike_type_id" name="bike_type_id" interface='popover'>
+        <ion-select placeholder='Chọn loại xe' [(ngModel)]="customer.bike_type_id" name="bike_type_id" interface='action-sheet'>
           <ion-option *ngFor="let bike_type of bike_type_list" value="{{bike_type.id}}">{{bike_type.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Biển số xe:</ion-label>
+        <ion-input type="text" placeholder="Nhập biển số xe" [(ngModel)]="customer.bike_number" name="bike_number" text-right text-uppercase></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ngày mua xe:</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" [(ngModel)]="customer.buy_date" name="buy_date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cửa hàng:</ion-label>
+        <ion-select placeholder='Chọn cửa hàng' [(ngModel)]="customer.shop_id" name="shop_id" interface='popover'>
+          <ion-option *ngFor="let shop of shop_list" value="{{shop.id}}">{{shop.name}}</ion-option>
         </ion-select>
       </ion-item>
       <button ion-button type="submit" block>Thêm Khách hàng</button>
