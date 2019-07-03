@@ -12,7 +12,6 @@ export class ApiCustomerProvider {
   baseUrl = 'http://localhost:9191/api/crm'
 
   constructor(public http: HttpClient) {
-    console.log('Hello ApiCustomerProvider Provider');
   }
 
   addCustomer(customer) {
@@ -24,6 +23,17 @@ export class ApiCustomerProvider {
         resolve(data);
       }, err => {
         reject(err);
+      })
+    })
+  }
+
+  getCustomers() {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/customers').subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
       })
     })
   }

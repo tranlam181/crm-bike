@@ -19,24 +19,17 @@
   <ion-list>
     <ion-item-sliding *ngFor='let user of filterUsers'>
       <ion-item (click)='showDetailCustomer($event, user)'>
-        <ion-avatar item-start>
-          <img src="">
-        </ion-avatar>
-        <h2>{{user.name}}</h2>
-        <p>{{user.email}}</p>
+        <h2>{{user.full_name}}</h2>
         <p>{{user.phone}}</p>
-        <p>{{user.website}}</p>
+        <p>{{user.district}}</p>
+        <p>{{user.precinct}}</p>
       </ion-item>
-      <ion-item-options side="right">
-        <button ion-button color="primary" (click)="smsCustomer($event, user)">
-          <ion-icon name="text"></ion-icon>
-          Sms
-        </button>
+      <!-- <ion-item-options side="right">
         <button ion-button color="secondary" (click)="callCustomer($event, user)">
           <ion-icon name="call"></ion-icon>
           Gọi
         </button>
-      </ion-item-options>      
+      </ion-item-options> -->
     </ion-item-sliding>
   </ion-list>
 </ion-content>

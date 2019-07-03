@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import EVENTS from '../../providers/EVENTS';
 
 /**
  * Generated class for the CustomerDetailPage page.
@@ -16,8 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class CustomerDetailPage {
   user: any
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log(navParams.data.user);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
     this.user =  navParams.data.user   
   }
 
@@ -25,4 +25,8 @@ export class CustomerDetailPage {
     console.log('ionViewDidLoad CustomerDetailPage');
   }
 
+  onEditCustomer(ev) {
+    console.log('Click edit customer');
+    this.events.publish(EVENTS.CUSTOMER_EDITED, this.user, Date.now());
+  }
 }

@@ -13,7 +13,6 @@ export class ApiCategoryProvider {
   baseUrl = 'http://localhost:9191/api/crm'  
 
   constructor(public http: HttpClient) {
-    console.log('Hello ApiCategoryProvider Provider');
   }
 
   getProvinces() {
