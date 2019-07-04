@@ -4,6 +4,7 @@ import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
 import { CustomerDetailPage } from '../customer-detail/customer-detail';
 import Utils from "../../utils/utils";
 import EVENTS from '../../providers/EVENTS';
+import { CustomerAddNewPage } from '../customer-add-new/customer-add-new';
 
 /**
  * Generated class for the CustomerListPage page.
@@ -69,7 +70,10 @@ export class CustomerListPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.filterUsers = this.users.filter((item) => {
-        return (item.full_name.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (
+          item.full_name.toLowerCase().indexOf(val.toLowerCase()) > -1
+          || item.phone.toLowerCase().indexOf(val.toLowerCase()) > -1
+        );
       })
     }
   }
@@ -79,5 +83,9 @@ export class CustomerListPage {
 
   showDetailCustomer(ev, user) {
     this.navCtrl.push(CustomerDetailPage, {user: user});
+  }
+
+  onAddCustomer(ev) {
+    this.navCtrl.setRoot(CustomerAddNewPage)
   }
 }

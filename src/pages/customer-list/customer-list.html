@@ -10,7 +10,7 @@
         <ion-icon name="menu"></ion-icon>
       </button>
       <!-- <ion-title>DS Khách hàng</ion-title> -->
-      <ion-searchbar (ionInput)="searchCustomer($event)"></ion-searchbar>
+      <ion-searchbar placeholder="Tìm tên hoặc điện thoại" (ionInput)="searchCustomer($event)"></ion-searchbar>
     </ion-navbar>
   </ion-header>
 
@@ -20,9 +20,8 @@
     <ion-item-sliding *ngFor='let user of filterUsers'>
       <ion-item (click)='showDetailCustomer($event, user)'>
         <h2>{{user.full_name}}</h2>
-        <p>{{user.phone}}</p>
-        <p>{{user.district}}</p>
-        <p>{{user.precinct}}</p>
+        <p><ion-icon name="call"></ion-icon> {{user.phone}}</p>
+        <p><ion-icon name="pin"></ion-icon> {{user.precinct}}, {{user.district}}</p>
       </ion-item>
       <!-- <ion-item-options side="right">
         <button ion-button color="secondary" (click)="callCustomer($event, user)">
@@ -32,4 +31,9 @@
       </ion-item-options> -->
     </ion-item-sliding>
   </ion-list>
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="onAddCustomer($event)">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
