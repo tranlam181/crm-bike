@@ -13,6 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CustomerAddNewPage } from '../pages/customer-add-new/customer-add-new';
 import { CustomerDetailPage } from '../pages/customer-detail/customer-detail';
 import { ApiCategoryProvider } from '../providers/api-category/api-category';
+import { TabComingPage } from '../pages/customer-list/tab-coming/tab-coming';
+import { TabPassivePage } from '../pages/customer-list/tab-passive/tab-passive';
+import { TabBirthdayPage } from '../pages/customer-list/tab-birthday/tab-birthday';
+import { TabAllPage } from '../pages/customer-list/tab-all/tab-all';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { ApiCategoryProvider } from '../providers/api-category/api-category';
     CustomerListPage,
     CustomerAddNewPage,
     CustomerDetailPage,
+    TabComingPage,
+    TabPassivePage,
+    TabBirthdayPage,
+    TabAllPage,
     HomePage
   ],
   imports: [
@@ -33,6 +41,10 @@ import { ApiCategoryProvider } from '../providers/api-category/api-category';
     CustomerListPage,
     CustomerAddNewPage,
     CustomerDetailPage,
+    TabComingPage,
+    TabPassivePage,
+    TabBirthdayPage,
+    TabAllPage,
     HomePage
   ],
   providers: [
