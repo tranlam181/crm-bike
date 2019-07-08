@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { ApiCustomerProvider } from '../../../providers/api-customer/api-customer';
+import Utils from '../../../utils/utils';
+import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 
 /**
  * Generated class for the TabBirthdayPage page.
@@ -14,11 +17,27 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class TabBirthdayPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  customers:any
+
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public apiCustomer: ApiCustomerProvider) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TabBirthdayPage');
+    let loading = Utils.showLoading(this.loadingCtrl)
+    this.apiCustomer.getCustomers('birthday').then(data => {
+      this.customers = data
+      loading.dismiss()
+    }).catch (err => {
+      console.log("Error on ionViewDidLoad TabBirthdayPage:>>", err);  
+      loading.dismiss()
+    })
   }
 
+  showDetailCustomer(ev, customer) {
+    this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
+  }
+  
 }

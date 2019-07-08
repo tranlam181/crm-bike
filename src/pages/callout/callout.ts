@@ -2,23 +2,26 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the CustomerCallOutPage page.
+ * Generated class for the CalloutPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-customer-call-out',
-  templateUrl: 'customer-call-out.html',
+  selector: 'page-callout',
+  templateUrl: 'callout.html',
 })
-export class CustomerCallOutPage {
+export class CalloutPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CustomerCallOutPage');
+    console.log('ionViewDidLoad CalloutPage');
   }
 
+  onSaveCallout() {
+    this.navCtrl.pop()
+  }
 }

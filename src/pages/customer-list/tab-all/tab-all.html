@@ -14,26 +14,19 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <!-- <ion-searchbar (ionInput)="searchCustomer($event)"></ion-searchbar> -->
+<ion-content no-padding>
   <ion-list>
-    <ion-item-sliding *ngFor='let user of filterUsers'>
-      <ion-item (click)='showDetailCustomer($event, user)'>
-        <h2>{{user.full_name}}</h2>
-        <p><ion-icon name="call"></ion-icon> {{user.phone}}</p>
-        <p><ion-icon name="pin"></ion-icon> {{user.precinct}}, {{user.district}}</p>
+    <ion-item-sliding *ngFor='let customer of filterCustomers'>
+      <ion-item (click)='showDetailCustomer($event, customer)'>
+        <h2>{{customer.full_name}}</h2>
+        <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+        <p><ion-icon name="pin"></ion-icon> {{customer.precinct}}, {{customer.district}}</p>
       </ion-item>
-      <!-- <ion-item-options side="right">
-        <button ion-button color="secondary" (click)="callCustomer($event, user)">
-          <ion-icon name="call"></ion-icon>
-          Gọi
-        </button>
-      </ion-item-options> -->
     </ion-item-sliding>
   </ion-list>
   <ion-fab bottom right>
     <button ion-fab mini (click)="onAddCustomer($event)">
-      <ion-icon name="person-add"></ion-icon>
+      <ion-icon name="add-circle-outline"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>

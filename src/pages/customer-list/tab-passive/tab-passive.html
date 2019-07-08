@@ -13,6 +13,15 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
-</ion-content>
+<ion-content no-padding>
+    <ion-list>
+      <ion-item-sliding *ngFor='let customer of customers'>
+        <ion-item (click)='showDetailCustomer($event, customer)'>
+          <h2>{{customer.full_name}}</h2>
+          <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+          <p><ion-icon name="rose"></ion-icon> {{customer.birthday}}</p>
+          <p><ion-icon name="pin"></ion-icon> {{customer.precinct}}, {{customer.district}}</p>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-content>

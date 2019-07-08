@@ -27,10 +27,22 @@ export class ApiCustomerProvider {
     })
   }
 
-  getCustomers() {
+  getCustomers(filter?, s?) {
     return new Promise((resolve, reject) => {
       // http get
-      this.http.get(this.baseUrl + '/customers').subscribe(data => {
+      this.http.get(this.baseUrl + '/customers?filter=' + filter + '&s=' + s).subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
+  getCustomer(khach_hang_id) {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/customers/' + khach_hang_id).subscribe(data => {
+        console.log(data);
         resolve(data)
       }, err => {
         reject(err.message)

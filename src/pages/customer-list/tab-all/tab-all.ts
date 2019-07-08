@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, App } from 'ionic-angular';
 import { ApiCustomerProvider } from '../../../providers/api-customer/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 import Utils from "../../../utils/utils";
@@ -19,17 +19,19 @@ import { CustomerAddNewPage } from '../../customer-add-new/customer-add-new';
 })
 export class TabAllPage {
 
-  users: any
-  filterUsers: any
+  customers: any
+  filterCustomers: any
   searchCustomerString: string = ''
+  isSearching: boolean = false
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiCustomer: ApiCustomerProvider,
     public loadingCtrl: LoadingController,
-    public events: Events) {
-      events.subscribe(EVENTS.CUSTOMER_EDITED, (user, time) => {
-        console.log('We clicked on Customer Detail page', user, time);
+    public events: Events,
+    public app: App) {
+      events.subscribe(EVENTS.CUSTOMER_EDITED, (customer, time) => {
+        console.log('subscribe ' + EVENTS.CUSTOMER_EDITED, customer, time);
       })
   }
 
@@ -38,8 +40,8 @@ export class TabAllPage {
     
     let loading = Utils.showLoading(this.loadingCtrl)
     this.apiCustomer.getCustomers().then(data => {
-      this.users = data
-      this.filterUsers = data
+      this.customers = data
+      this.filterCustomers = data
       loading.dismiss()
     }).catch (err => {
       console.log("Error on ionViewDidLoad CustomerListPage:>>", err);  
@@ -57,7 +59,7 @@ export class TabAllPage {
   }
 
   _resetFilterUsers() {
-    this.filterUsers = [...this.users]
+    this.filterCustomers = [...this.customers]
   }
 
   searchCustomer(ev) {
@@ -67,25 +69,40 @@ export class TabAllPage {
     // set val to the value of the searchbar
     const val = ev.target.value;
 
+    if (!val || val.length <= 2 || this.isSearching == true) return;
+
     // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.filterUsers = this.users.filter((item) => {
-        return (
-          item.full_name.toLowerCase().indexOf(val.toLowerCase()) > -1
-          || item.phone.toLowerCase().indexOf(val.toLowerCase()) > -1
-        );
-      })
-    }
+    // if (val && val.trim() != '') {
+    //   this.filterCustomers = this.customers.filter((item) => {
+    //     return (
+    //       item.full_name.toLowerCase().indexOf(val.toLowerCase()) > -1
+    //       || item.phone.toLowerCase().indexOf(val.toLowerCase()) > -1
+    //     );
+    //   })
+    // }
+
+    this.isSearching = true
+    let loading = Utils.showLoading(this.loadingCtrl, 'Đang tìm...')
+    this.apiCustomer.getCustomers('', val).then(data => {
+      this.filterCustomers = data
+      loading.dismiss()
+      this.isSearching = false
+    }).catch (err => {
+      console.log("Error on searchCustomer:>>", err);  
+      loading.dismiss()
+      this.isSearching = false
+    })
   }
 
-  callCustomer(ev, user) {
+  callCustomer(ev, customer) {
   }
 
-  showDetailCustomer(ev, user) {
-    this.navCtrl.push(CustomerDetailPage, {user: user});
+  showDetailCustomer(ev, customer) {
+    this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
   }
 
   onAddCustomer(ev) {
-    this.navCtrl.setRoot(CustomerAddNewPage)
+    this.navCtrl.push(CustomerAddNewPage)
+    // this.app.getRootNav().setRoot(CustomerAddNewPage)
   }
 }

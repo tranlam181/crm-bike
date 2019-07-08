@@ -8,11 +8,20 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
-
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+          <button ion-button secondary (click)="onGoToPage('CustomerListPage')">
+            <ion-icon name="people"></ion-icon>DS Khách hàng
+          </button>
+          </ion-col>
+      <ion-col col-6>
+          <button ion-button secondary (click)="onGoToPage('CustomerAddNewPage')">
+            <ion-icon name="add"></ion-icon>Thêm Khách hàng
+          </button>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>

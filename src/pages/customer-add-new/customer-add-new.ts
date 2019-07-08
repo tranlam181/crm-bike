@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
 import Utils from "../../utils/utils";
+import { CustomerDetailPage } from '../customer-detail/customer-detail';
 
 /**
  * Generated class for the CustomerAddNewPage page.
@@ -11,7 +12,6 @@ import Utils from "../../utils/utils";
  * Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-customer-add-new',
   templateUrl: 'customer-add-new.html',
@@ -75,6 +75,7 @@ export class CustomerAddNewPage {
     this.apiCustomer.addCustomer(this.customer).then((data:any) => {
       loading.dismiss()
       Utils.showToast(this.toastCtrl, data.msg) //this._showToast(data.msg)
+      this.navCtrl.setRoot(CustomerDetailPage)
     }).catch(err => {
       loading.dismiss()
       Utils.showToast(this.toastCtrl, err.msg) //this._showToast(err.msg)

@@ -6,40 +6,55 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Khách hàng<br>{{user.full_name}}</ion-title>
+    <ion-title>Chi tiết Khách hàng</ion-title>
+    <ion-buttons end>
+        <button ion-button clear (click)="onEditCustomer($event)">Sửa</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-    <ion-list>
-      <ion-item >
-        <p>Tên Khách hàng</p>
-        <h3>{{user.full_name}}</h3>
-      </ion-item>
-      <ion-item >
-        <p>Điện thoại</p>
-        <h3>{{user.phone}}</h3>
-      </ion-item>
-      <ion-item >
-        <p>Email</p>
-        <h3>{{user.email}}</h3>
-      </ion-item>
-    </ion-list>
-</ion-content>
+    <ion-card no-padding>
+      <ion-card-header no-padding>
+        Thông tin Khách hàng
+      </ion-card-header>
+      <ion-list>
+        <ion-item >
+          <p>Tên Khách hàng</p>
+          <h3>{{customer.full_name}}</h3>
+        </ion-item>
+        <ion-item >
+          <p>Điện thoại</p>
+          <h3>{{customer.phone}}</h3>
+        </ion-item>
+        <ion-item >
+          <p>Sinh nhật</p>
+          <h3>{{customer.birthday}}</h3>
+        </ion-item>
+      </ion-list>
+    </ion-card>
 
-<ion-footer>
-  <ion-grid no-padding>
-    <ion-row>
-      <ion-col >
-          <button ion-button icon-start (click)="onEditCustomer($event)"  full>
-            <ion-icon name="create"></ion-icon> Sửa
-          </button>  
-      </ion-col>
-      <ion-col >
-          <button ion-button color="secondary" icon-start (click)="Upload()"  full>
-            <ion-icon name="call"></ion-icon> Gọi
-          </button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-footer>
+    <ion-card no-padding>
+        <ion-card-header no-padding>
+          Thông tin xe
+        </ion-card-header>
+        <ion-list>
+          <ion-item-sliding>
+          <ion-item >
+            <p>Sinh nhật</p>
+            <h3>{{customer.birthday}}</h3>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button (click)="onMaintance()">
+                <ion-icon slot="icon-only" name="construct"></ion-icon>
+                Bảo dưỡng
+            </button>
+            <button ion-button color="secondary" (click)="onCallout()">
+                <ion-icon slot="icon-only" name="call"></ion-icon>
+                Gọi ra
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+    </ion-card>
+</ion-content>

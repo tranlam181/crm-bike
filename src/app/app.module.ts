@@ -17,6 +17,9 @@ import { TabComingPage } from '../pages/customer-list/tab-coming/tab-coming';
 import { TabPassivePage } from '../pages/customer-list/tab-passive/tab-passive';
 import { TabBirthdayPage } from '../pages/customer-list/tab-birthday/tab-birthday';
 import { TabAllPage } from '../pages/customer-list/tab-all/tab-all';
+import { CustomerEditPage } from '../pages/customer-edit/customer-edit';
+import { MaintancePage } from '../pages/maintance/maintance';
+import { CalloutPage } from '../pages/callout/callout';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { TabAllPage } from '../pages/customer-list/tab-all/tab-all';
     CustomerListPage,
     CustomerAddNewPage,
     CustomerDetailPage,
+    CustomerEditPage,
+    MaintancePage,
+    CalloutPage,
     TabComingPage,
     TabPassivePage,
     TabBirthdayPage,
@@ -41,6 +47,9 @@ import { TabAllPage } from '../pages/customer-list/tab-all/tab-all';
     CustomerListPage,
     CustomerAddNewPage,
     CustomerDetailPage,
+    CustomerEditPage,
+    MaintancePage,
+    CalloutPage,
     TabComingPage,
     TabPassivePage,
     TabBirthdayPage,
