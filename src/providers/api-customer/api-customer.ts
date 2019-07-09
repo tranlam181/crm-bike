@@ -49,4 +49,16 @@ export class ApiCustomerProvider {
       })
     })
   }
+
+  getCustomerBikes(khach_hang_id) {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/customers/' + khach_hang_id + '/bikes').subscribe(data => {
+        console.log(data);
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
 }

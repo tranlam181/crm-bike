@@ -30,6 +30,7 @@ export class CustomerDetailPage {
     province: '',
     sex: ''
   }
+  bikes:any
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -44,6 +45,12 @@ export class CustomerDetailPage {
     let loading = Utils.showLoading(this.loadingCtrl)
     this.apiCustomer.getCustomer(this.khach_hang_id).then((data:any) => {
       this.customer = data
+      return 'OK'
+    }).then(msg => {
+      return this.apiCustomer.getCustomerBikes(this.khach_hang_id).then(data => {
+        this.bikes = data
+      })
+    }).then(data => {
       loading.dismiss()
     }).catch (err => {
       console.log("Error on ionViewDidLoad CustomerDetailPage:>>", err);  
@@ -57,11 +64,11 @@ export class CustomerDetailPage {
     this.navCtrl.push(CustomerEditPage, {khach_hang_id: this.khach_hang_id})
   }
 
-  onMaintance() {
-    this.navCtrl.push(MaintancePage)
+  onMaintance(khach_hang_xe_id) {
+    this.navCtrl.push(MaintancePage, {khach_hang_xe_id: khach_hang_xe_id})
   }
 
-  onCallout() {
-    this.navCtrl.push(CalloutPage)
+  onCallout(khach_hang_xe_id) {
+    this.navCtrl.push(CalloutPage, {khach_hang_xe_id: khach_hang_xe_id})
   }
 }

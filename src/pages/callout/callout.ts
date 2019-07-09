@@ -14,14 +14,30 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class CalloutPage {
 
+  khach_hang_xe_id: number
+  customer = {
+    full_name: '',
+    phone: '',
+    birthday: ''
+  }
+  callout = {
+    y_kien_mua_xe_id: '',
+    note: '',
+    book_date: ''
+  }
+  opinion_list:any
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CalloutPage');
+    console.log('ionViewDidLoad CalloutPage ' + this.khach_hang_xe_id);
   }
 
   onSaveCallout() {
-    this.navCtrl.pop()
+    console.log(this.callout);
+    
+    //this.navCtrl.pop()
   }
 }

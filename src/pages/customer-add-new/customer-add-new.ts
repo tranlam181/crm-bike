@@ -4,6 +4,7 @@ import { ApiCategoryProvider } from '../../providers/api-category/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
 import Utils from "../../utils/utils";
 import { CustomerDetailPage } from '../customer-detail/customer-detail';
+import { CustomerListPage } from '../customer-list/customer-list';
 
 /**
  * Generated class for the CustomerAddNewPage page.
@@ -74,8 +75,18 @@ export class CustomerAddNewPage {
     let loading = Utils.showLoading(this.loadingCtrl) //this._showLoading()
     this.apiCustomer.addCustomer(this.customer).then((data:any) => {
       loading.dismiss()
-      Utils.showToast(this.toastCtrl, data.msg) //this._showToast(data.msg)
-      this.navCtrl.setRoot(CustomerDetailPage)
+      // Utils.showToast(this.toastCtrl, data.msg) //this._showToast(data.msg)
+      // Tại sao lại có chỗ này ?
+      // Vì có 2 con đường đi đến view detail
+      // 1. menu > add new > detail
+      // 2. menu > tab all > add > detail
+      if (this.navCtrl.canGoBack()) {
+        this.navCtrl.pop({animate: false})
+        this.navCtrl.push(CustomerDetailPage, {khach_hang_id: data.khach_hang_id})
+      } else {
+        this.navCtrl.setRoot(CustomerListPage, {}, {animate: false})
+        this.navCtrl.push(CustomerDetailPage, {khach_hang_id: data.khach_hang_id})
+      }
     }).catch(err => {
       loading.dismiss()
       Utils.showToast(this.toastCtrl, err.msg) //this._showToast(err.msg)

@@ -14,11 +14,14 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class MaintancePage {
 
+  khach_hang_xe_id: number
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MaintancePage');
+    console.log('ionViewDidLoad MaintancePage:' + this.khach_hang_xe_id);    
   }
 
   onSaveMaintance() {

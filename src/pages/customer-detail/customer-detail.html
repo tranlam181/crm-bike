@@ -7,9 +7,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Chi tiết Khách hàng</ion-title>
-    <ion-buttons end>
+    <!-- <ion-buttons end>
         <button ion-button clear (click)="onEditCustomer($event)">Sửa</button>
-    </ion-buttons>
+    </ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
@@ -20,41 +20,35 @@
       </ion-card-header>
       <ion-list>
         <ion-item >
-          <p>Tên Khách hàng</p>
-          <h3>{{customer.full_name}}</h3>
-        </ion-item>
-        <ion-item >
-          <p>Điện thoại</p>
-          <h3>{{customer.phone}}</h3>
-        </ion-item>
-        <ion-item >
-          <p>Sinh nhật</p>
-          <h3>{{customer.birthday}}</h3>
-        </ion-item>
+          <h2>{{customer.full_name}}</h2>
+          <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+          <p><ion-icon name="notifications"></ion-icon> {{customer.birthday}}</p>
+        </ion-item>        
       </ion-list>
     </ion-card>
 
     <ion-card no-padding>
         <ion-card-header no-padding>
-          Thông tin xe
+          Xe đã mua
         </ion-card-header>
         <ion-list>
-          <ion-item-sliding>
-          <ion-item >
-            <p>Sinh nhật</p>
-            <h3>{{customer.birthday}}</h3>
-          </ion-item>
-          <ion-item-options side="right">
-            <button ion-button (click)="onMaintance()">
-                <ion-icon slot="icon-only" name="construct"></ion-icon>
-                Bảo dưỡng
-            </button>
-            <button ion-button color="secondary" (click)="onCallout()">
-                <ion-icon slot="icon-only" name="call"></ion-icon>
-                Gọi ra
-            </button>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
+          <ion-item-sliding *ngFor="let bike of bikes">
+            <ion-item>
+              <h3>{{bike.bike_name}}</h3>
+              <p>CH: {{bike.shop_name}}</p>
+              <p>Ngày mua: {{bike.buy_date}}</p>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button (click)="onMaintance(bike.id)">
+                  <ion-icon slot="icon-only" name="construct"></ion-icon>
+                  Bảo dưỡng
+              </button>
+              <button ion-button color="secondary" (click)="onCallout(bike.id)">
+                  <ion-icon slot="icon-only" name="call"></ion-icon>
+                  Gọi ra
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
     </ion-card>
 </ion-content>
