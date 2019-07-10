@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
-import EVENTS from '../../providers/EVENTS';
+import EVENTS from '../../config/EVENTS';
 import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
 import Utils from '../../utils/utils';
 import { Customer } from '../../interfaces/customer';
@@ -31,6 +31,7 @@ export class CustomerDetailPage {
     sex: ''
   }
   bikes:any
+  isLoading:boolean = false
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -42,7 +43,8 @@ export class CustomerDetailPage {
 
   ionViewDidLoad() {
     this.khach_hang_id =  this.navParams.data.khach_hang_id
-    let loading = Utils.showLoading(this.loadingCtrl)
+    this.isLoading = true
+
     this.apiCustomer.getCustomer(this.khach_hang_id).then((data:any) => {
       this.customer = data
       return 'OK'
@@ -51,10 +53,10 @@ export class CustomerDetailPage {
         this.bikes = data
       })
     }).then(data => {
-      loading.dismiss()
+      this.isLoading = false
     }).catch (err => {
       console.log("Error on ionViewDidLoad CustomerDetailPage:>>", err);  
-      loading.dismiss()
+      this.isLoading = false
     })
   }
 

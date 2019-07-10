@@ -3,7 +3,7 @@ import { NavController, NavParams, LoadingController, Events, App } from 'ionic-
 import { ApiCustomerProvider } from '../../../providers/api-customer/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 import Utils from "../../../utils/utils";
-import EVENTS from '../../../providers/EVENTS';
+import EVENTS from '../../../config/EVENTS';
 import { CustomerAddNewPage } from '../../customer-add-new/customer-add-new';
 
 /**
@@ -38,14 +38,14 @@ export class TabAllPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad customerList');
     
-    let loading = Utils.showLoading(this.loadingCtrl)
+    this.isSearching = true
     this.apiCustomer.getCustomers().then(data => {
       this.customers = data
       this.filterCustomers = data
-      loading.dismiss()
+      this.isSearching = false
     }).catch (err => {
       console.log("Error on ionViewDidLoad CustomerListPage:>>", err);  
-      loading.dismiss()
+      this.isSearching = false
     })
   }
 
@@ -82,14 +82,12 @@ export class TabAllPage {
     // }
 
     this.isSearching = true
-    let loading = Utils.showLoading(this.loadingCtrl, 'Đang tìm...')
+
     this.apiCustomer.getCustomers('', val).then(data => {
       this.filterCustomers = data
-      loading.dismiss()
       this.isSearching = false
     }).catch (err => {
       console.log("Error on searchCustomer:>>", err);  
-      loading.dismiss()
       this.isSearching = false
     })
   }

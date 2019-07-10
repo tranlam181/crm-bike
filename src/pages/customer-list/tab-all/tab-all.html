@@ -16,13 +16,15 @@
 
 <ion-content no-padding>
   <ion-list>
-    <ion-item-sliding *ngFor='let customer of filterCustomers'>
-      <ion-item (click)='showDetailCustomer($event, customer)'>
-        <h2>{{customer.full_name}}</h2>
-        <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
-        <p><ion-icon name="pin"></ion-icon> {{customer.precinct}}, {{customer.district}}</p>
-      </ion-item>
-    </ion-item-sliding>
+    <ion-item *ngIf='isSearching'>
+      <h2>Đang tải...</h2>
+      <ion-spinner name='dots'></ion-spinner>
+    </ion-item>
+    <ion-item *ngFor='let customer of filterCustomers' (click)='showDetailCustomer($event, customer)'>
+      <h2>{{customer.full_name}}</h2>
+      <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+      <p><ion-icon name="pin"></ion-icon> {{customer.precinct}}, {{customer.district}}</p>
+    </ion-item>
   </ion-list>
   <ion-fab bottom right>
     <button ion-fab mini (click)="onAddCustomer($event)">

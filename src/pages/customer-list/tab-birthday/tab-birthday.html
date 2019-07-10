@@ -10,6 +10,9 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>KH đến sinh nhật</ion-title>
+    <ion-buttons end>
+        <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

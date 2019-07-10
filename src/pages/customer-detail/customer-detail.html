@@ -10,12 +10,15 @@
     <!-- <ion-buttons end>
         <button ion-button clear (click)="onEditCustomer($event)">Sửa</button>
     </ion-buttons> -->
+    <ion-buttons end>
+        <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
     <ion-card no-padding>
-      <ion-card-header no-padding>
+      <ion-card-header no-padding color='primary'>
         Thông tin Khách hàng
       </ion-card-header>
       <ion-list>
@@ -28,8 +31,8 @@
     </ion-card>
 
     <ion-card no-padding>
-        <ion-card-header no-padding>
-          Xe đã mua
+        <ion-card-header no-padding color='primary'>
+          Xe đã mua <span style="font-size: 0.8em;font-style: italic">(Vuốt sang trái để thao tác)</span>
         </ion-card-header>
         <ion-list>
           <ion-item-sliding *ngFor="let bike of bikes">

@@ -18,6 +18,7 @@ import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 export class TabPassivePage {
 
   customers:any
+  isLoading:boolean = false
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -26,13 +27,13 @@ export class TabPassivePage {
   }
 
   ionViewDidLoad() {
-    let loading = Utils.showLoading(this.loadingCtrl)
+    this.isLoading = true
     this.apiCustomer.getCustomers('passive').then(data => {
       this.customers = data
-      loading.dismiss()
+      this.isLoading = false
     }).catch (err => {
       console.log("Error on ionViewDidLoad TabBirthdayPage:>>", err);  
-      loading.dismiss()
+      this.isLoading = false
     })
   }
 

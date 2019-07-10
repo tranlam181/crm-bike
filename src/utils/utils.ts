@@ -1,4 +1,4 @@
-import { LoadingController, ToastController } from "ionic-angular";
+import { LoadingController, ToastController, AlertController } from "ionic-angular";
 
 export default class Utils {
     static showLoading(loadingCtrl:LoadingController, msg?: string) {
@@ -19,5 +19,19 @@ export default class Utils {
           dismissOnPageChange: true
         });
         toast.present();
+    }
+
+    static showConfirmAlert(alertCtrl: AlertController, title: string, msg: string, handler?) {
+      let confirm = alertCtrl.create({
+        title: title,
+        message: msg,
+        buttons: [         
+          {
+            text: 'OK',
+            handler: handler
+          }
+        ]
+      });
+      confirm.present()
     }
 }

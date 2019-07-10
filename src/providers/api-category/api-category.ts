@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import AppConfig from '../../config/app-config';
 
 /*
   Generated class for the ApiCategoryProvider provider.
@@ -10,7 +11,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ApiCategoryProvider {
 
-  baseUrl = 'http://localhost:9191/api/crm'  
+  baseUrl = AppConfig.baseUrl
 
   constructor(public http: HttpClient) {
   }
@@ -63,6 +64,28 @@ export class ApiCategoryProvider {
     return new Promise((resolve, reject) => {
       // http get
       this.http.get(this.baseUrl + '/category/shops').subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
+  getBuyOpinions() {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/category/buy-opinions').subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
+  getCallResults() {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/category/call-results').subscribe(data => {
         resolve(data)
       }, err => {
         reject(err.message)

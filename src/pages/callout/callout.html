@@ -7,39 +7,49 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Kết quả gọi ra</ion-title>
+    <ion-buttons end>
+        <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-card no-padding>
-    <ion-card-header no-padding>      
+  <ion-card no-padding no-margin style="width: 100%;">
+    <ion-card-header no-padding color='primary'>    
+      Khách hàng
     </ion-card-header>
     <ion-list>
       <ion-item >
-        <h2>{{customer.full_name}}</h2>
+        <h2 style="padding-top: 6px">{{customer.full_name}}</h2>
         <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
         <p><ion-icon name="notifications"></ion-icon> {{customer.birthday}}</p>
-        <p><ion-icon name="bicycle"></ion-icon></p>
-      </ion-item>        
+        <p><ion-icon name="bicycle"></ion-icon> {{customer.bike_name}}</p>
+      </ion-item>
     </ion-list>
   </ion-card>
 
   <form (ngSubmit)="onSaveCallout()">
-    <ion-item-divider color="light">Nhập kết quả gọi ra</ion-item-divider>
+    <ion-item-divider>Nhập kết quả gọi ra</ion-item-divider>
+    <ion-item>
+      <ion-label>Kết quả gọi:</ion-label>
+      <ion-select placeholder='Chọn kết quả gọi' [(ngModel)]="callout.ket_qua_goi_ra_id" interface="action-sheet" name='ket_qua_goi_ra_id' >
+        <ion-option *ngFor="let call_result of call_result_list" value="{{call_result.id}}">{{call_result.name}}</ion-option>
+      </ion-select>
+    </ion-item>
     <ion-item>
       <ion-label>Ý kiến sau mua xe:</ion-label>
-      <ion-select placeholder='Chọn ý kiến KH' [(ngModel)]="callout.y_kien_mua_xe_id" name='y_kien_mua_xe_id' interface='popover' (ionChange)="onChangeOpinion($event)">
+      <ion-select placeholder='Chọn ý kiến KH' [(ngModel)]="callout.y_kien_mua_xe_id" interface="action-sheet" name='y_kien_mua_xe_id' >
         <ion-option *ngFor="let opinion of opinion_list" value="{{opinion.id}}">{{opinion.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Ngày hẹn tiếp theo:</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" [(ngModel)]="callout.book_date" name='book_date'></ion-datetime>
+      <ion-datetime displayFormat="DD/MM/YYYY" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="callout.book_date" name='book_date'></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Ghi chú:</ion-label>
-      <ion-textarea placeholder="Nhập ghi chú" [(ngModel)]="callout.note" name='note' rows="4"></ion-textarea>
-    </ion-item>    
+      <ion-textarea text-right placeholder="Nhập ghi chú" [(ngModel)]="callout.note" name='note' rows="4"></ion-textarea>
+    </ion-item>   
     <button ion-button type="submit" block><ion-icon name="paper-plane"></ion-icon> Lưu</button>
   </form>
 </ion-content>

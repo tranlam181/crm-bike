@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
 import Utils from "../../utils/utils";
@@ -42,7 +42,7 @@ export class CustomerAddNewPage {
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController) {
+    public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -59,8 +59,8 @@ export class CustomerAddNewPage {
         this.shop_list = data
       })
     }).then(msg => {
-      let curDaete = new Date()
-      let formatedDate = curDaete.toISOString().substring(0, 10)
+      let curDate = new Date()
+      let formatedDate = curDate.toISOString().substring(0, 10)
       this.customer.buy_date = formatedDate
       return "OK"
     }).then(msg => {
@@ -80,16 +80,18 @@ export class CustomerAddNewPage {
       // Vì có 2 con đường đi đến view detail
       // 1. menu > add new > detail
       // 2. menu > tab all > add > detail
-      if (this.navCtrl.canGoBack()) {
-        this.navCtrl.pop({animate: false})
-        this.navCtrl.push(CustomerDetailPage, {khach_hang_id: data.khach_hang_id})
-      } else {
-        this.navCtrl.setRoot(CustomerListPage, {}, {animate: false})
-        this.navCtrl.push(CustomerDetailPage, {khach_hang_id: data.khach_hang_id})
-      }
+      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
+        if (this.navCtrl.canGoBack()) {
+          this.navCtrl.pop({animate: false})
+          this.navCtrl.push(CustomerDetailPage, {khach_hang_id: data.khach_hang_id})
+        } else {
+          this.navCtrl.setRoot(CustomerListPage, {}, {animate: false})
+          this.navCtrl.push(CustomerDetailPage, {khach_hang_id: data.khach_hang_id})
+        }
+      })
     }).catch(err => {
       loading.dismiss()
-      Utils.showToast(this.toastCtrl, err.msg) //this._showToast(err.msg)
+      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message)
     })
   }
 
