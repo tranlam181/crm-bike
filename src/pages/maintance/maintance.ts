@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import Utils from '../../utils/utils';
 import { ApiCategoryProvider } from '../../providers/api-category/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
+import { IonicSelectableComponent } from 'ionic-selectable';
 
 /**
  * Generated class for the MaintancePage page.
@@ -10,6 +10,10 @@ import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
+class Port {
+  public id: number;
+  public name: string;
+}
 
 @Component({
   selector: 'page-maintance',
@@ -24,15 +28,19 @@ export class MaintancePage {
     birthday: '',
     bike_name: ''
   }
-  callout = {
+  maintance = {
     khach_hang_xe_id: '',
-    y_kien_mua_xe_id: '',
+    book_date: '',
     note: '',
-    book_date: ''
+    details: [
+      {loai_bao_duong:{}, price:''}
+    ]
   }
-  opinion_list:any
+  maintance_type_list: any
   isLoading:boolean = false
   maxSelectableDate: string
+  port: Port;
+  isSearchMaintanceType: boolean = false
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -41,7 +49,7 @@ export class MaintancePage {
     public loadingCrtl: LoadingController,
     public alertCtrl: AlertController) {
       this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
-      this.callout.khach_hang_xe_id = navParams.data.khach_hang_xe_id
+      this.maintance.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       let curDate = new Date()
       curDate.setFullYear(curDate.getFullYear() + 5)
       this.maxSelectableDate = curDate.toISOString().substring(0, 10)
@@ -51,8 +59,8 @@ export class MaintancePage {
     console.log('MaintancePage khach_hang_xe_id= ' + this.khach_hang_xe_id);
     this.isLoading = true
 
-    this.apiCategory.getBuyOpinions().then(data => {
-      this.opinion_list = data
+    this.apiCategory.getMaintanceTypes().then(data => {
+      this.maintance_type_list = data
       return 'OK'
     }).then(msg => {
       return this.apiCustomer.getCustomerBikeInfo(this.khach_hang_xe_id).then((data:any) => {
@@ -67,18 +75,54 @@ export class MaintancePage {
   }
 
   onSaveMaintance() {
-    console.log(this.callout);
+    console.log(this.maintance);
 
-    let loading = Utils.showLoading(this.loadingCrtl)
+    // let loading = Utils.showLoading(this.loadingCrtl)
 
-    this.apiCustomer.addCallout(this.callout).then((data:any) => {
-      loading.dismiss()
-      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
-        this.navCtrl.pop()
-      })
-    }).catch(err => {
-      loading.dismiss()
-      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
-    })   
+    // this.apiCustomer.addCallout(this.maintance).then((data:any) => {
+    //   loading.dismiss()
+    //   Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
+    //     this.navCtrl.pop()
+    //   })
+    // }).catch(err => {
+    //   loading.dismiss()
+    //   Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
+    // })
+  }
+
+  onAddMaintance(ev: Event) {
+    console.log('hello');
+    ev.preventDefault()
+    this.maintance.details.push({loai_bao_duong:{id:'', name:''}, price: ''})
+  }
+
+  onMaintanceChange(event: {
+    component: IonicSelectableComponent,
+    value: any 
+  }) {
+    console.log('port:', event.value);
+  }
+
+  onSearchMaintance(event: {
+    component: IonicSelectableComponent,
+    text: string
+  }) {    
+    let text = event.text.trim().toLowerCase();
+    event.component.startSearch();
+
+    if (!text || this.isSearchMaintanceType) {
+      // event.component.items = [];
+      event.component.endSearch();
+      return;
+    }
+
+    this.isSearchMaintanceType =  true
+    this.apiCategory.getMaintanceTypes(text).then((data:any) => {
+      event.component.items = data
+      event.component.endSearch();
+      this.isSearchMaintanceType =  false
+    }).catch (err => {
+      this.isSearchMaintanceType =  false
+    })
   }
 }

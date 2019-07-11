@@ -21,6 +21,8 @@ import { CustomerEditPage } from '../pages/customer-edit/customer-edit';
 import { MaintancePage } from '../pages/maintance/maintance';
 import { CalloutPage } from '../pages/callout/callout';
 
+import { IonicSelectableModule } from "ionic-selectable";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -39,6 +41,7 @@ import { CalloutPage } from '../pages/callout/callout';
   imports: [
     BrowserModule,
     HttpClientModule,
+    IonicSelectableModule,
     IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],

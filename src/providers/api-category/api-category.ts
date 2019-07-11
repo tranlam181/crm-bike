@@ -92,4 +92,15 @@ export class ApiCategoryProvider {
       })
     })
   }
+
+  getMaintanceTypes(filter?) {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/category/maintance-types?filter=' + filter).subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
 }

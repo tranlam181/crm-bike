@@ -18,11 +18,9 @@
 
 <ion-content>
     <ion-card no-padding>
-      <ion-card-header no-padding color='primary'>
-        Thông tin Khách hàng
-      </ion-card-header>
       <ion-list>
         <ion-item >
+          <p ion-text color="primary">Khách hàng</p>
           <h2>{{customer.full_name}}</h2>
           <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
           <p><ion-icon name="notifications"></ion-icon> {{customer.birthday}}</p>
@@ -31,9 +29,7 @@
     </ion-card>
 
     <ion-card no-padding>
-        <ion-card-header no-padding color='primary'>
-          Xe đã mua <span style="font-size: 0.8em;font-style: italic">(Vuốt sang trái để thao tác)</span>
-        </ion-card-header>
+        <p ion-text color="primary">Xe đã mua <span style="font-size: 0.8em;font-style: italic">(Vuốt sang trái để thao tác)</span></p>
         <ion-list>
           <ion-item-sliding *ngFor="let bike of bikes">
             <ion-item>

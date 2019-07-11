@@ -15,11 +15,9 @@
   
   <ion-content padding>
     <ion-card no-padding no-margin style="width: 100%;">
-      <ion-card-header no-padding color='primary'>    
-        Khách hàng
-      </ion-card-header>
       <ion-list>
         <ion-item >
+          <p ion-text color="primary">Khách hàng</p>
           <h2 style="padding-top: 6px">{{customer.full_name}}</h2>
           <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
           <p><ion-icon name="notifications"></ion-icon> {{customer.birthday}}</p>
@@ -28,22 +26,40 @@
       </ion-list>
     </ion-card>
   
-    <form (ngSubmit)="onSaveMaintance()">
-      <ion-item-divider>Nhập chi tiết bảo dưỡng</ion-item-divider>
-      <ion-item>
-        <ion-label>Ý kiến sau mua xe:</ion-label>
-        <ion-select placeholder='Chọn ý kiến KH' [(ngModel)]="callout.y_kien_mua_xe_id" interface="action-sheet" name='y_kien_mua_xe_id' >
-          <ion-option *ngFor="let opinion of opinion_list" value="{{opinion.id}}">{{opinion.name}}</ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Ngày hẹn tiếp theo:</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="callout.book_date" name='book_date'></ion-datetime>
-      </ion-item>
-      <ion-item>
-        <ion-label>Ghi chú:</ion-label>
-        <ion-textarea text-right placeholder="Nhập ghi chú" [(ngModel)]="callout.note" name='note' rows="4"></ion-textarea>
-      </ion-item>   
-      <button ion-button type="submit" block><ion-icon name="paper-plane"></ion-icon> Lưu</button>
-    </form>
+      <p ion-text color="primary">Nhập chi tiết bảo dưỡng</p>
+      <form (ngSubmit)="onSaveMaintance()">      
+        <div *ngFor='let detail of maintance.details; let i = index; trackBy: customTrackBy'>
+          <ion-item no-lines>
+            <ion-label>Loại bảo dưỡng</ion-label>
+            <ionic-selectable
+              item-content
+              [(ngModel)]="maintance.details[i].loai_bao_duong"
+              [name]="'chi_phi' + i"
+              [items]="maintance_type_list"
+              itemValueField="id"
+              itemTextField="name"
+              placeholder='Chọn loại bảo dưỡng'
+              [canSearch]="true"
+              (onChange)="onMaintanceChange($event)"
+              (onSearch)="onSearchMaintance($event)">
+            </ionic-selectable>
+          </ion-item>
+          <ion-item>
+            <ion-label>Giá</ion-label>
+            <ion-input type="tel" placeholder="0" [(ngModel)]="maintance.details[i].price" [name]="'price-'+i" text-right></ion-input>
+          </ion-item>
+        </div>      
+        <button ion-fab mini small no-margin no-padding (click)='onAddMaintance($event)'>
+          <ion-icon name="add"></ion-icon>
+        </button>
+        <ion-item>
+          <ion-label>Ngày hẹn tiếp theo:</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="maintance.book_date" name='book_date'></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ghi chú:</ion-label>
+          <ion-textarea text-right placeholder="Nhập ghi chú" [(ngModel)]="maintance.note" name='note' rows="4"></ion-textarea>
+        </ion-item>   
+        <button ion-button type="submit" block><ion-icon name="paper-plane"></ion-icon> Lưu</button>
+      </form>
   </ion-content>
