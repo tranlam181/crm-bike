@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ViewController, Events } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
 import { IonicSelectableComponent } from 'ionic-selectable';
+import Utils from '../../utils/utils';
+import { TabComingPage } from '../customer-list/tab-coming/tab-coming';
+import EVENTS from '../../config/EVENTS';
 
 /**
  * Generated class for the MaintancePage page.
@@ -47,7 +50,8 @@ export class MaintancePage {
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCrtl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public events: Events) {
       this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       this.maintance.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       let curDate = new Date()
@@ -75,32 +79,39 @@ export class MaintancePage {
   }
 
   onSaveMaintance() {
-    console.log(this.maintance);
+    console.log(this.maintance);    
+    let tabNameNeedReload = this.navCtrl.first().name;
+    let loading = Utils.showLoading(this.loadingCrtl)
 
-    // let loading = Utils.showLoading(this.loadingCrtl)
-
-    // this.apiCustomer.addCallout(this.maintance).then((data:any) => {
-    //   loading.dismiss()
-    //   Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
-    //     this.navCtrl.pop()
-    //   })
-    // }).catch(err => {
-    //   loading.dismiss()
-    //   Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
-    // })
+    this.apiCustomer.addMaintance(this.maintance).then((data:any) => {
+      loading.dismiss()
+      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
+        this.events.publish(EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, Date.now());
+        this.navCtrl.pop()
+      })
+    }).catch(err => {
+      loading.dismiss()
+      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
+    })
   }
 
   onAddMaintance(ev: Event) {
-    console.log('hello');
+    // console.log('hello');
     ev.preventDefault()
     this.maintance.details.push({loai_bao_duong:{id:'', name:''}, price: ''})
+  }
+
+  onDellMaintance(ev: Event, index) {
+    ev.preventDefault()
+    console.log(index);
+    this.maintance.details.splice(index, 1)
   }
 
   onMaintanceChange(event: {
     component: IonicSelectableComponent,
     value: any 
   }) {
-    console.log('port:', event.value);
+    // console.log('port:', event.value);
   }
 
   onSearchMaintance(event: {

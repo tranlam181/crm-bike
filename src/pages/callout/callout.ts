@@ -68,7 +68,6 @@ export class CalloutPage {
     .then(data => {
       this.isLoading = false
     }).catch(err => {
-      console.log("Error on CalloutPage:>>", err);  
       this.isLoading = false
     })
   }

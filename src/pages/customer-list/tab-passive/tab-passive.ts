@@ -32,7 +32,6 @@ export class TabPassivePage {
       this.customers = data
       this.isLoading = false
     }).catch (err => {
-      console.log("Error on ionViewDidLoad TabBirthdayPage:>>", err);  
       this.isLoading = false
     })
   }

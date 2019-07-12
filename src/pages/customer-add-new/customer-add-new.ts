@@ -66,7 +66,6 @@ export class CustomerAddNewPage {
     }).then(msg => {
       loading.dismiss()
     }).catch(err => {
-      console.log("Error on ionViewDidLoad:>>", err);  
       loading.dismiss()    
     })
   }

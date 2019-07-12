@@ -28,32 +28,41 @@
   
       <p ion-text color="primary">Nhập chi tiết bảo dưỡng</p>
       <form (ngSubmit)="onSaveMaintance()">      
-        <div *ngFor='let detail of maintance.details; let i = index; trackBy: customTrackBy'>
-          <ion-item no-lines>
-            <ion-label>Loại bảo dưỡng</ion-label>
-            <ionic-selectable
-              item-content
-              [(ngModel)]="maintance.details[i].loai_bao_duong"
-              [name]="'chi_phi' + i"
-              [items]="maintance_type_list"
-              itemValueField="id"
-              itemTextField="name"
-              placeholder='Chọn loại bảo dưỡng'
-              [canSearch]="true"
-              (onChange)="onMaintanceChange($event)"
-              (onSearch)="onSearchMaintance($event)">
-            </ionic-selectable>
-          </ion-item>
-          <ion-item>
-            <ion-label>Giá</ion-label>
-            <ion-input type="tel" placeholder="0" [(ngModel)]="maintance.details[i].price" [name]="'price-'+i" text-right></ion-input>
-          </ion-item>
-        </div>      
-        <button ion-fab mini small no-margin no-padding (click)='onAddMaintance($event)'>
-          <ion-icon name="add"></ion-icon>
+        <ion-list>
+          <div *ngFor='let detail of maintance.details; let i = index; trackBy: customTrackBy'>
+            <ion-item-sliding>
+              <ion-item no-lines>
+                <ion-label>Loại bảo dưỡng</ion-label>
+                <ionic-selectable
+                  item-content
+                  [(ngModel)]="maintance.details[i].loai_bao_duong"
+                  [name]="'chi_phi' + i"
+                  [items]="maintance_type_list"
+                  itemValueField="id"
+                  itemTextField="name"
+                  placeholder='Chọn loại bảo dưỡng'
+                  [canSearch]="true"
+                  (onChange)="onMaintanceChange($event)"
+                  (onSearch)="onSearchMaintance($event)">
+                </ionic-selectable>
+              </ion-item>              
+              <ion-item-options side="right">
+                <button ion-button color='danger' (click)="onDellMaintance($event, i)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>
+            <ion-item >
+              <ion-label>Giá</ion-label>
+              <ion-input type="tel" placeholder="0" [(ngModel)]="maintance.details[i].price" [name]="'price-'+i" text-right></ion-input>
+            </ion-item>
+          </div>
+        </ion-list>
+        <button ion-button no-margin clear (click)='onAddMaintance($event)'>
+            <ion-icon name="add"></ion-icon>&nbsp;Thêm
         </button>
         <ion-item>
-          <ion-label>Ngày hẹn tiếp theo:</ion-label>
+          <ion-label>Hẹn ngày tiếp theo:</ion-label>
           <ion-datetime displayFormat="DD/MM/YYYY" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="maintance.book_date" name='book_date'></ion-datetime>
         </ion-item>
         <ion-item>

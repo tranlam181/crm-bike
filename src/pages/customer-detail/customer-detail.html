@@ -33,8 +33,8 @@
         <ion-list>
           <ion-item-sliding *ngFor="let bike of bikes">
             <ion-item>
-              <h3>{{bike.bike_name}}</h3>
-              <p>CH: {{bike.shop_name}}</p>
+              <h3><ion-icon name="bicycle"></ion-icon> {{bike.bike_name}}</h3>
+              <p><ion-icon name="basket"></ion-icon> {{bike.shop_name}}</p>
               <p>Ngày mua: {{bike.buy_date}}</p>
             </ion-item>
             <ion-item-options side="right">

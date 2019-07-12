@@ -22,6 +22,7 @@ export class TabAllPage {
   filterCustomers: any
   searchCustomerString: string = ''
   isSearching: boolean = false
+  searchString: string = ''
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,23 +30,16 @@ export class TabAllPage {
     public loadingCtrl: LoadingController,
     public events: Events,
     public app: App) {
-      events.subscribe(EVENTS.CUSTOMER_EDITED, (customer, time) => {
-        console.log('subscribe ' + EVENTS.CUSTOMER_EDITED, customer, time);
+      events.subscribe(EVENTS.TAB_NEED_RELOAD, (tabNameNeedReload, time) => {
+        if (tabNameNeedReload == TabAllPage.name) {
+          this._searchCustomer(this.searchString)
+          console.log('subscribe ' + EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, time);
+        }
       })
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad customerList');
-    
-    this.isSearching = true
-    this.apiCustomer.getCustomers().then(data => {
-      this.customers = data
-      this.filterCustomers = data
-      this.isSearching = false
-    }).catch (err => {
-      console.log("Error on ionViewDidLoad CustomerListPage:>>", err);  
-      this.isSearching = false
-    })
+    this._load()
   }
 
   ionViewDidEnter() {
@@ -57,11 +51,35 @@ export class TabAllPage {
     this.events.unsubscribe(EVENTS.CUSTOMER_EDITED)
   }
 
+  _load() {
+    this.isSearching = true
+    this.apiCustomer.getCustomers().then(data => {
+      this.customers = data
+      this.filterCustomers = data
+      this.isSearching = false
+    }).catch (err => {
+      this.isSearching = false
+    })
+  }
+
   _resetFilterUsers() {
     this.filterCustomers = [...this.customers]
   }
 
+  _searchCustomer(s) {
+    this.isSearching = true
+
+    this.apiCustomer.getCustomers('', s).then(data => {
+      this.filterCustomers = data
+      this.isSearching = false
+    }).catch (err => {
+      this.isSearching = false
+    })
+  }
+
   searchCustomer(ev) {
+    console.log(this.searchString);
+    
     // Reset items back to all of the items
     this._resetFilterUsers()
 
@@ -80,15 +98,7 @@ export class TabAllPage {
     //   })
     // }
 
-    this.isSearching = true
-
-    this.apiCustomer.getCustomers('', val).then(data => {
-      this.filterCustomers = data
-      this.isSearching = false
-    }).catch (err => {
-      console.log("Error on searchCustomer:>>", err);  
-      this.isSearching = false
-    })
+    this._searchCustomer(val)
   }
 
   callCustomer(ev, customer) {

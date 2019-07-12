@@ -55,7 +55,6 @@ export class CustomerDetailPage {
     }).then(data => {
       this.isLoading = false
     }).catch (err => {
-      console.log("Error on ionViewDidLoad CustomerDetailPage:>>", err);  
       this.isLoading = false
     })
   }

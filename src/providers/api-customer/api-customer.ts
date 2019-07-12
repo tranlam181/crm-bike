@@ -88,4 +88,17 @@ export class ApiCustomerProvider {
       })
     })
   }
+
+  addMaintance(maintance) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + `/customers-bikes/${maintance.khach_hang_xe_id}/maintances`, 
+          JSON.stringify(maintance), 
+          {headers: {'Content-Type': 'application/json'}})
+      .subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      })
+    })
+  }
 }
