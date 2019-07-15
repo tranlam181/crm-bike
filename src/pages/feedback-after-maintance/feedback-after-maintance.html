@@ -1,0 +1,68 @@
+<!--
+  Generated template for the FeedbackAfterBuyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <ion-title>Phản hồi sau dịch vụ</ion-title>
+      <ion-buttons end>
+          <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content padding>
+      <ion-card no-padding no-margin style="width: 100%;">    
+        <ion-list>
+          <ion-item >
+            <p ion-text color="primary">Thông tin</p>
+            <h2 style="padding-top: 6px">{{customer.full_name}}</h2>
+            <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+            <p><ion-icon name="bicycle"></ion-icon> {{customer.bike_name}}</p>
+            <p><ion-icon name="calendar"></ion-icon> Ngày dịch vụ: {{customer.maintance_date}}</p>
+            <p><ion-icon name="megaphone"></ion-icon> Ý kiến KH: <i>Chưa có</i></p>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+
+      <ion-card no-padding no-margin style="width: 100%;">    
+        <ion-list>
+          <ion-item >
+            <p ion-text color="primary">Chi tiết dịch vụ</p>
+            <ion-row *ngFor="let maintance_detail of maintance_details">
+              <ion-col no-padding>
+                <p>{{maintance_detail.name}}</p>
+              </ion-col>
+              <ion-col no-padding ion-text text-right>
+                <p>{{maintance_detail.price | number}}</p>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col no-padding>
+                <p>TỔNG</p>
+              </ion-col>
+              <ion-col no-padding ion-text text-right>
+                <p style="font-weight: bold">{{sum | number}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+    
+      <p ion-text color="primary">Nhập phản hồi KH sau khi làm dịch vụ</p>
+      <form (ngSubmit)="onSaveFeedbackAfterMaintance()">
+        <ion-item>
+          <ion-label>KH phàn nàn?: <i>({{feedback_after_maintance.is_complain ? 'Có' : 'Không'}})</i></ion-label>
+          <ion-toggle checked="false" [(ngModel)]="feedback_after_maintance.is_complain" name="is_complain"></ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-label>Ý kiến KH:</ion-label>
+          <ion-textarea text-right placeholder="Nhập ý kiến Khách hàng" [(ngModel)]="feedback_after_maintance.feedback" name='feedback' rows="4"></ion-textarea>
+        </ion-item>   
+        <button ion-button type="submit" block><ion-icon name="paper-plane"></ion-icon> Lưu</button>
+      </form>
+    </ion-content>
+  

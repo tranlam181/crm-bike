@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import Utils from '../../../utils/utils';
 import { ApiCustomerProvider } from '../../../providers/api-customer/api-customer';
-import { CustomerDetailPage } from '../../customer-detail/customer-detail';
+import { FeedbackAfterBuyPage } from '../../feedback-after-buy/feedback-after-buy';
 
 /**
- * Generated class for the TabPassivePage page.
+ * Generated class for the TabAfterBuyDatePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-tab-passive',
-  templateUrl: 'tab-passive.html',
+  selector: 'page-tab-after-buy-date',
+  templateUrl: 'tab-after-buy-date.html',
 })
-export class TabPassivePage {
+export class TabAfterBuyDatePage {
 
   customers:any
   isLoading:boolean = false
@@ -26,10 +25,13 @@ export class TabPassivePage {
     public apiCustomer: ApiCustomerProvider) {
   }
 
+  ionViewDidLoad() {
+    this._load()
+  }
+
   _load() {
     this.isLoading = true
-
-    return this.apiCustomer.getCustomers('passive').then(data => {
+    return this.apiCustomer.getCustomers('after10BuyDate').then(data => {
       this.customers = data
       this.isLoading = false
     }).catch (err => {
@@ -37,12 +39,8 @@ export class TabPassivePage {
     })
   }
 
-  ionViewDidLoad() {
-    this._load()
-  }
-
-  showDetailCustomer(ev, customer) {
-    this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
+  showFeedbackAfterBuy(ev, customer) {
+    this.navCtrl.push(FeedbackAfterBuyPage, {khach_hang_xe_id: customer.khach_hang_xe_id});
   }
 
   onRefresh(refresher) {

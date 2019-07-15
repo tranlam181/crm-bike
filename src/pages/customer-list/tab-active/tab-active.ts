@@ -1,21 +1,20 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import Utils from '../../../utils/utils';
 import { ApiCustomerProvider } from '../../../providers/api-customer/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 
 /**
- * Generated class for the TabPassivePage page.
+ * Generated class for the TabActivePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-tab-passive',
-  templateUrl: 'tab-passive.html',
+  selector: 'page-tab-active',
+  templateUrl: 'tab-active.html',
 })
-export class TabPassivePage {
+export class TabActivePage {
 
   customers:any
   isLoading:boolean = false
@@ -26,10 +25,9 @@ export class TabPassivePage {
     public apiCustomer: ApiCustomerProvider) {
   }
 
-  _load() {
+  ionViewDidLoad() {
     this.isLoading = true
-
-    return this.apiCustomer.getCustomers('passive').then(data => {
+    this.apiCustomer.getCustomers('active').then(data => {
       this.customers = data
       this.isLoading = false
     }).catch (err => {
@@ -37,17 +35,8 @@ export class TabPassivePage {
     })
   }
 
-  ionViewDidLoad() {
-    this._load()
-  }
-
   showDetailCustomer(ev, customer) {
     this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
   }
 
-  onRefresh(refresher) {
-    this._load().then(data => {
-      refresher.complete();
-    })
-  }
 }

@@ -60,10 +60,10 @@
           <ion-option *ngFor="let bike_type of bike_type_list" value="{{bike_type.id}}">{{bike_type.name}}</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label>Biển số xe:</ion-label>
         <ion-input type="text" placeholder="Nhập biển số xe" [(ngModel)]="customer.bike_number" name="bike_number" text-right text-uppercase></ion-input>
-      </ion-item>
+      </ion-item> -->
       <ion-item>
         <ion-label>Ngày mua xe:</ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" [(ngModel)]="customer.buy_date" name="buy_date"></ion-datetime>

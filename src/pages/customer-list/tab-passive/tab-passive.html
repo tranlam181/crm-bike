@@ -17,12 +17,40 @@
 </ion-header>
 
 <ion-content no-padding>
+    <ion-refresher (ionRefresh)="onRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Kéo xuống để tải lại"
+      refreshingSpinner="circles"
+      refreshingText="Đang tải..."></ion-refresher-content>
+    </ion-refresher>
     <ion-list>
       <ion-item-sliding *ngFor='let customer of customers'>
         <ion-item (click)='showDetailCustomer($event, customer)'>
           <h2>{{customer.full_name}}</h2>
-          <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
-          <p><ion-icon name="rose"></ion-icon> {{customer.birthday}}</p>
+          <ion-row>
+            <ion-col no-padding>
+                <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+            </ion-col>
+            <ion-col no-padding text-right>
+                <p><ion-icon name="rose"></ion-icon> {{customer.birthday}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col no-padding>
+                <p>Lần cuối gọi ra</p>
+            </ion-col>
+            <ion-col no-padding text-right>
+                <p><ion-icon name="clock"></ion-icon> {{customer.last_call_out_date}}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col no-padding>
+                <p>Lần cuối bảo dưỡng</p>
+            </ion-col>
+            <ion-col no-padding text-right>
+                <p ion-text color='secondary'><ion-icon name="clock"></ion-icon> {{customer.last_maintance_date}}</p>
+            </ion-col>
+          </ion-row>
           <p><ion-icon name="pin"></ion-icon> {{customer.precinct}}, {{customer.district}}</p>
         </ion-item>
       </ion-item-sliding>

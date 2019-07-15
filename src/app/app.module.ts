@@ -22,6 +22,11 @@ import { MaintancePage } from '../pages/maintance/maintance';
 import { CalloutPage } from '../pages/callout/callout';
 
 import { IonicSelectableModule } from "ionic-selectable";
+import { TabActivePage } from '../pages/customer-list/tab-active/tab-active';
+import { TabAfterBuyDatePage } from '../pages/customer-list/tab-after-buy-date/tab-after-buy-date';
+import { TabAfterMaintanceDatePage } from '../pages/customer-list/tab-after-maintance-date/tab-after-maintance-date';
+import { FeedbackAfterBuyPage } from '../pages/feedback-after-buy/feedback-after-buy';
+import { FeedbackAfterMaintancePage } from '../pages/feedback-after-maintance/feedback-after-maintance';
 
 @NgModule({
   declarations: [
@@ -34,8 +39,13 @@ import { IonicSelectableModule } from "ionic-selectable";
     CalloutPage,
     TabComingPage,
     TabPassivePage,
+    TabActivePage,
     TabBirthdayPage,
     TabAllPage,
+    TabAfterBuyDatePage,
+    TabAfterMaintanceDatePage,
+    FeedbackAfterBuyPage,
+    FeedbackAfterMaintancePage,
     HomePage
   ],
   imports: [
@@ -55,8 +65,13 @@ import { IonicSelectableModule } from "ionic-selectable";
     CalloutPage,
     TabComingPage,
     TabPassivePage,
+    TabActivePage,
     TabBirthdayPage,
     TabAllPage,
+    TabAfterBuyDatePage,
+    TabAfterMaintanceDatePage,
+    FeedbackAfterBuyPage,
+    FeedbackAfterMaintancePage,
     HomePage
   ],
   providers: [

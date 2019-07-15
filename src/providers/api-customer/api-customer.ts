@@ -76,6 +76,43 @@ export class ApiCustomerProvider {
     })
   }
 
+  getCustomerMaintanceInfo(bao_duong_id) {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/customers/maintances/' + bao_duong_id).subscribe(data => {
+        console.log(data);
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
+  getMaintanceDetails(bao_duong_id) {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/maintances/' + bao_duong_id + '/details').subscribe(data => {
+        console.log(data);
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
+  updateFeedbackAfterBuy(feedback) {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.baseUrl + `/customers/bikes/${feedback.khach_hang_xe_id}`, 
+          JSON.stringify(feedback), 
+          {headers: {'Content-Type': 'application/json'}})
+      .subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      })
+    })
+  }
+
   addCallout(callout) {
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUrl + `/customers-bikes/${callout.khach_hang_xe_id}/callouts`, 
