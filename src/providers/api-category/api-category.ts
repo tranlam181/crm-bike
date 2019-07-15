@@ -93,6 +93,17 @@ export class ApiCategoryProvider {
     })
   }
 
+  getServiceTypes() {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/category/service-types').subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
   getMaintanceTypes(filter?) {
     return new Promise((resolve, reject) => {
       // http get

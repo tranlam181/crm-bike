@@ -12,10 +12,10 @@
       </ion-buttons>
     </ion-navbar>
   </ion-header>
-  
-  
+
+
   <ion-content padding>
-      <ion-card no-padding no-margin style="width: 100%;">    
+      <ion-card no-padding no-margin style="width: 100%;">
         <ion-list>
           <ion-item >
             <p ion-text color="primary">Thông tin</p>
@@ -28,7 +28,7 @@
         </ion-list>
       </ion-card>
 
-      <ion-card no-padding no-margin style="width: 100%;">    
+      <ion-card no-padding no-margin style="width: 100%;">
         <ion-list>
           <ion-item >
             <p ion-text color="primary">Chi tiết dịch vụ</p>
@@ -51,7 +51,7 @@
           </ion-item>
         </ion-list>
       </ion-card>
-    
+
       <p ion-text color="primary">Nhập phản hồi KH sau khi làm dịch vụ</p>
       <form (ngSubmit)="onSaveFeedbackAfterMaintance()">
         <ion-item>
@@ -61,8 +61,22 @@
         <ion-item>
           <ion-label>Ý kiến KH:</ion-label>
           <ion-textarea text-right placeholder="Nhập ý kiến Khách hàng" [(ngModel)]="feedback_after_maintance.feedback" name='feedback' rows="4"></ion-textarea>
-        </ion-item>   
+        </ion-item>
+        <p ion-text color="primary">Nhập lịch hẹn (nếu có)</p>
+        <ion-item>
+          <ion-label>Hẹn ngày:</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY HH:mm" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="feedback_after_maintance.book_date" name='book_date'></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Dịch vụ:</ion-label>
+          <ion-select placeholder='Chọn dịch vụ' [(ngModel)]="feedback_after_maintance.dich_vu_id" interface="action-sheet" name='dich_vu_id' >
+            <ion-option *ngFor="let dich_vu of dich_vu_list" value="{{dich_vu.id}}">{{dich_vu.name}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Miễn phí?: <i>({{feedback_after_maintance.is_free ? 'Có' : 'Không'}})</i></ion-label>
+          <ion-toggle checked="false" [(ngModel)]="feedback_after_maintance.is_free" name="is_free"></ion-toggle>
+        </ion-item>
         <button ion-button type="submit" block><ion-icon name="paper-plane"></ion-icon> Lưu</button>
       </form>
     </ion-content>
-  

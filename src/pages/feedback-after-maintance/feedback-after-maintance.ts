@@ -29,12 +29,16 @@ export class FeedbackAfterMaintancePage {
   feedback_after_maintance = {
     bao_duong_id: '',
     feedback: '',
-    is_complain: false
+    is_complain: false,
+    dich_vu_id: '',
+    is_free: false
   }
+  dich_vu_list: [any]
   opinion_list:any
   isLoading:boolean = false
+  maxSelectableDate: string
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
@@ -43,6 +47,9 @@ export class FeedbackAfterMaintancePage {
 
     this.bao_duong_id = navParams.data.bao_duong_id
     this.feedback_after_maintance.bao_duong_id = navParams.data.bao_duong_id
+    let curDate = new Date()
+    curDate.setFullYear(curDate.getFullYear() + 5)
+    this.maxSelectableDate = curDate.toISOString().substring(0, 10)
   }
 
   ionViewDidLoad() {
@@ -63,7 +70,12 @@ export class FeedbackAfterMaintancePage {
           return last
         }, 0)
       })
-    }).then(data => {
+    }).then(msg => {
+      return this.apiCategory.getServiceTypes().then(data => {
+        this.dich_vu_list = data
+      })
+    })
+    .then(data => {
       this.isLoading = false
     }).catch(err => {
       this.isLoading = false
@@ -74,7 +86,7 @@ export class FeedbackAfterMaintancePage {
     console.log(this.feedback_after_maintance);
     // let loading = Utils.showLoading(this.loadingCrtl)
 
-    // this.apiCustomer.updateFeedbackAfterBuy(this.feedback_after_maintance).then((data:any) => {
+    // this.apiCustomer.updateFeedbackAfterMaintance(this.feedback_after_maintance).then((data:any) => {
     //   loading.dismiss()
     //   Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
     //     this.navCtrl.pop()

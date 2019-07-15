@@ -10,7 +10,7 @@ import AppConfig from '../../config/app-config';
 */
 @Injectable()
 export class ApiCustomerProvider {
-  
+
   baseUrl = AppConfig.baseUrl
 
   constructor(public http: HttpClient) {
@@ -18,8 +18,8 @@ export class ApiCustomerProvider {
 
   addCustomer(customer) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.baseUrl + '/customers', 
-          JSON.stringify(customer), 
+      this.http.post(this.baseUrl + '/customers',
+          JSON.stringify(customer),
           {headers: {'Content-Type': 'application/json'}})
       .subscribe(data => {
         resolve(data);
@@ -102,8 +102,21 @@ export class ApiCustomerProvider {
 
   updateFeedbackAfterBuy(feedback) {
     return new Promise((resolve, reject) => {
-      this.http.put(this.baseUrl + `/customers/bikes/${feedback.khach_hang_xe_id}`, 
-          JSON.stringify(feedback), 
+      this.http.put(this.baseUrl + `/customers/bikes/${feedback.khach_hang_xe_id}`,
+          JSON.stringify(feedback),
+          {headers: {'Content-Type': 'application/json'}})
+      .subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      })
+    })
+  }
+
+  updateFeedbackAfterMaintance(feedback) {
+    return new Promise((resolve, reject) => {
+      this.http.put(this.baseUrl + `/maintances/${feedback.bao_duong_id}`,
+          JSON.stringify(feedback),
           {headers: {'Content-Type': 'application/json'}})
       .subscribe(data => {
         resolve(data);
@@ -115,8 +128,8 @@ export class ApiCustomerProvider {
 
   addCallout(callout) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.baseUrl + `/customers-bikes/${callout.khach_hang_xe_id}/callouts`, 
-          JSON.stringify(callout), 
+      this.http.post(this.baseUrl + `/customers-bikes/${callout.khach_hang_xe_id}/callouts`,
+          JSON.stringify(callout),
           {headers: {'Content-Type': 'application/json'}})
       .subscribe(data => {
         resolve(data);
@@ -128,8 +141,8 @@ export class ApiCustomerProvider {
 
   addMaintance(maintance) {
     return new Promise((resolve, reject) => {
-      this.http.post(this.baseUrl + `/customers-bikes/${maintance.khach_hang_xe_id}/maintances`, 
-          JSON.stringify(maintance), 
+      this.http.post(this.baseUrl + `/customers-bikes/${maintance.khach_hang_xe_id}/maintances`,
+          JSON.stringify(maintance),
           {headers: {'Content-Type': 'application/json'}})
       .subscribe(data => {
         resolve(data);
