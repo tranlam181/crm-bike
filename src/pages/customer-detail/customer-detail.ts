@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
 import EVENTS from '../../config/EVENTS';
-import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
+import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
 import { Customer } from '../../interfaces/customer';
 import { CustomerEditPage } from '../customer-edit/customer-edit';

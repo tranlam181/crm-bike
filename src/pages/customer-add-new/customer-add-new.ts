@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { ApiCategoryProvider } from '../../providers/api-category/api-category';
-import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
+import { ApiCategoryProvider } from '../../providers/api-category';
+import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from "../../utils/utils";
 import { CustomerDetailPage } from '../customer-detail/customer-detail';
 import { CustomerListPage } from '../customer-list/customer-list';

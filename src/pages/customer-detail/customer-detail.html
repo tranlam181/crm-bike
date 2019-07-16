@@ -23,19 +23,28 @@
           <p ion-text color="primary">Khách hàng</p>
           <h2>{{customer.full_name}}</h2>
           <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
-          <p><ion-icon name="notifications"></ion-icon> {{customer.birthday}}</p>
+          <p><ion-icon name="rose"></ion-icon> {{customer.birthday}}</p>
         </ion-item>        
       </ion-list>
     </ion-card>
 
     <ion-card no-padding>
-        <p ion-text color="primary">Xe đã mua <span style="font-size: 0.8em;font-style: italic">(Vuốt sang trái để thao tác)</span></p>
+        <ion-item-divider color="light"><p ion-text color="primary">Xe đã mua <span style="font-size: 0.8em;font-style: italic">(Vuốt sang trái để thao tác)</span></p></ion-item-divider>
         <ion-list>
           <ion-item-sliding *ngFor="let bike of bikes">
             <ion-item>
               <h3><ion-icon name="bicycle"></ion-icon> {{bike.bike_name}}</h3>
-              <p><ion-icon name="basket"></ion-icon> {{bike.shop_name}}</p>
-              <p>Ngày mua: {{bike.buy_date}}</p>
+              <p><ion-icon name="basket"></ion-icon>CH: {{bike.shop_name}}</p>
+              <p><ion-icon name="calendar"></ion-icon> Ngày mua: {{bike.buy_date}}</p>
+              <p><ion-icon name="calendar"></ion-icon> Ngày hẹn: {{bike.book_date}}</p>
+              <ion-row>
+                <ion-col col-8 no-padding>
+                    <p><ion-icon name="hammer"></ion-icon> Dịch vụ: {{bike.service_name}}</p>
+                </ion-col>
+                <ion-col col-4 no-padding>
+                    <p text-right><ion-icon name="cash"></ion-icon>&nbsp;{{bike.is_free == 1 ? 'Miễn phí' : ''}}</p>
+                </ion-col>
+              </ion-row>
             </ion-item>
             <ion-item-options side="right">
               <button ion-button (click)="onMaintance(bike.id)">

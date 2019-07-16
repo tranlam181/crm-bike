@@ -8,11 +8,11 @@ import { HomePage } from '../pages/home/home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { CustomerListPage } from '../pages/customer-list/customer-list';
-import { ApiCustomerProvider } from '../providers/api-customer/api-customer';
+import { ApiCustomerProvider } from '../providers/api-customer';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomerAddNewPage } from '../pages/customer-add-new/customer-add-new';
 import { CustomerDetailPage } from '../pages/customer-detail/customer-detail';
-import { ApiCategoryProvider } from '../providers/api-category/api-category';
+import { ApiCategoryProvider } from '../providers/api-category';
 import { TabComingPage } from '../pages/customer-list/tab-coming/tab-coming';
 import { TabPassivePage } from '../pages/customer-list/tab-passive/tab-passive';
 import { TabBirthdayPage } from '../pages/customer-list/tab-birthday/tab-birthday';
@@ -27,6 +27,7 @@ import { TabAfterBuyDatePage } from '../pages/customer-list/tab-after-buy-date/t
 import { TabAfterMaintanceDatePage } from '../pages/customer-list/tab-after-maintance-date/tab-after-maintance-date';
 import { FeedbackAfterBuyPage } from '../pages/feedback-after-buy/feedback-after-buy';
 import { FeedbackAfterMaintancePage } from '../pages/feedback-after-maintance/feedback-after-maintance';
+import { CallNumber } from '@ionic-native/call-number';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { FeedbackAfterMaintancePage } from '../pages/feedback-after-maintance/fe
     HomePage
   ],
   providers: [
+    CallNumber,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

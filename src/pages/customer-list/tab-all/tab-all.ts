@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, Events, App } from 'ionic-angular';
-import { ApiCustomerProvider } from '../../../providers/api-customer/api-customer';
+import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 import EVENTS from '../../../config/EVENTS';
 import { CustomerAddNewPage } from '../../customer-add-new/customer-add-new';
@@ -30,12 +30,12 @@ export class TabAllPage {
     public loadingCtrl: LoadingController,
     public events: Events,
     public app: App) {
-      events.subscribe(EVENTS.TAB_NEED_RELOAD, (tabNameNeedReload, time) => {
-        if (tabNameNeedReload == TabAllPage.name) {
-          this._searchCustomer(this.searchString)
-          console.log('subscribe ' + EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, time);
-        }
-      })
+      // events.subscribe(EVENTS.TAB_NEED_RELOAD, (tabNameNeedReload, time) => {
+      //   if (tabNameNeedReload == TabAllPage.name) {
+      //     this._searchCustomer(this.searchString)
+      //     console.log('subscribe ' + EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, time);
+      //   }
+      // })
   }
 
   ionViewDidLoad() {
@@ -48,7 +48,7 @@ export class TabAllPage {
 
   ionViewWillUnload() {
     console.log('ionViewWillUnload() customerList');
-    this.events.unsubscribe(EVENTS.CUSTOMER_EDITED)
+    // this.events.unsubscribe(EVENTS.CUSTOMER_EDITED)
   }
 
   _load() {

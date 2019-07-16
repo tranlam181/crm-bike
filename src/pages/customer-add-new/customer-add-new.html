@@ -15,7 +15,7 @@
 
 <ion-content>
     <form (ngSubmit)="addNewCustomer()">
-      <ion-item-divider color="light">Thông tin Khách hàng</ion-item-divider>
+      <ion-item-divider color="light"><p ion-text color="primary">Thông tin Khách hàng</p></ion-item-divider>
       <ion-item>
         <ion-label>Tên KH:</ion-label>
         <ion-input type="text" placeholder="Nhập Họ tên" [(ngModel)]="customer.full_name" name="full_name" text-right text-capitalize></ion-input>
@@ -53,7 +53,7 @@
             <ion-option *ngFor="let precinct of precinct_list" value="{{precinct.precinct_code}}">{{precinct.name}}</ion-option>
           </ion-select>
       </ion-item>
-      <ion-item-divider color="light">Thông tin xe</ion-item-divider>
+      <ion-item-divider color="light"><p ion-text color="primary">Thông tin xe</p></ion-item-divider>
       <ion-item>
         <ion-label>Loại xe:</ion-label>
         <ion-select placeholder='Chọn loại xe' [(ngModel)]="customer.bike_type_id" name="bike_type_id" interface='action-sheet'>

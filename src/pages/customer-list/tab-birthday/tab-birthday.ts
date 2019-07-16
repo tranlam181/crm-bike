@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { ApiCustomerProvider } from '../../../providers/api-customer/api-customer';
+import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 
 /**
@@ -25,9 +25,9 @@ export class TabBirthdayPage {
     public apiCustomer: ApiCustomerProvider) {
   }
 
-  ionViewDidLoad() {
+  _load() {
     this.isLoading = true
-    this.apiCustomer.getCustomers('birthday').then(data => {
+    return this.apiCustomer.getCustomers('birthday').then(data => {
       this.customers = data
       this.isLoading = false
     }).catch (err => {
@@ -35,8 +35,17 @@ export class TabBirthdayPage {
     })
   }
 
+  ionViewDidLoad() {
+    this._load()
+  }
+
   showDetailCustomer(ev, customer) {
     this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
   }
   
+  onRefresh(refresher) {
+    this._load().then(data => {
+      refresher.complete();
+    })
+  }	
 }

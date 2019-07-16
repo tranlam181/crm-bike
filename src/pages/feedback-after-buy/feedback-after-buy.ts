@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { ApiCategoryProvider } from '../../providers/api-category/api-category';
-import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
+import { ApiCategoryProvider } from '../../providers/api-category';
+import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
+import { CallNumber } from '@ionic-native/call-number';
 
 /**
  * Generated class for the FeedbackAfterBuyPage page.
@@ -29,20 +30,29 @@ export class FeedbackAfterBuyPage {
     khach_hang_xe_id: '',
     y_kien_mua_xe_id: '',
     bike_number: '',
-    note: ''
+    note: '',
+    book_date: '',
+    dich_vu_id: '',
+    is_free: false
   }
   opinion_list:any
   isLoading:boolean = false
+  dich_vu_list: [any]
+  maxSelectableDate: string
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCrtl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private callNumber: CallNumber) {
 
     this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
     this.feedback_after_buy.khach_hang_xe_id = navParams.data.khach_hang_xe_id
+    let curDate = new Date()
+    curDate.setFullYear(curDate.getFullYear() + 5)
+    this.maxSelectableDate = curDate.toISOString().substring(0, 10)
   }
 
   ionViewDidLoad() {
@@ -60,6 +70,10 @@ export class FeedbackAfterBuyPage {
     }).then(msg => {
       return this.apiCustomer.getCustomerBikeInfo(this.khach_hang_xe_id).then((data:any) => {
         this.customer = data
+      })
+    }).then(msg => {
+      return this.apiCategory.getServiceTypes().then((data: any) => {
+        this.dich_vu_list = data
       })
     })
     .then(data => {
@@ -82,5 +96,13 @@ export class FeedbackAfterBuyPage {
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
     })
+  }
+
+  onCallPhone(phone) {
+    console.log(phone);
+    
+    this.callNumber.callNumber(phone, true)
+    .then(res => console.log('Launched dialer!', res))
+    .catch(err => console.log('Error launching dialer', err));
   }
 }

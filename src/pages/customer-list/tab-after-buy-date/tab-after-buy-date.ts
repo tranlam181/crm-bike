@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { ApiCustomerProvider } from '../../../providers/api-customer/api-customer';
+import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { FeedbackAfterBuyPage } from '../../feedback-after-buy/feedback-after-buy';
 
 /**

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
-import { ApiCategoryProvider } from '../../providers/api-category/api-category';
-import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
+import { ApiCategoryProvider } from '../../providers/api-category';
+import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
 
 /**
@@ -22,7 +22,10 @@ export class CalloutPage {
     full_name: '',
     phone: '',
     birthday: '',
-    bike_name: ''
+    bike_name: '',
+    book_date: '',
+    service_name: '',
+    is_free: ''
   }
   callout = {
     khach_hang_xe_id: '',

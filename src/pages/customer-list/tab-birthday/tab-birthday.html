@@ -17,6 +17,12 @@
 </ion-header>
 
 <ion-content no-padding>
+  <ion-refresher (ionRefresh)="onRefresh($event)">
+      <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Kéo xuống để tải lại"
+      refreshingSpinner="circles"
+      refreshingText="Đang tải..."></ion-refresher-content>
+    </ion-refresher>
   <ion-list>
     <ion-item-sliding *ngFor='let customer of customers'>
       <ion-item (click)='showDetailCustomer($event, customer)'>

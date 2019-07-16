@@ -1,3 +1,5 @@
 page-feedback-after-maintance {
-
+    ion-content { 
+        background-color: map-get($colors, light) !important; 
+    }
 }

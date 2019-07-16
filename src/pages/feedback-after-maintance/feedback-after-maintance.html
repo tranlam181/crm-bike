@@ -20,18 +20,22 @@
           <ion-item >
             <p ion-text color="primary">Thông tin</p>
             <h2 style="padding-top: 6px">{{customer.full_name}}</h2>
-            <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
-            <p><ion-icon name="bicycle"></ion-icon> {{customer.bike_name}}</p>
-            <p><ion-icon name="calendar"></ion-icon> Ngày dịch vụ: {{customer.maintance_date}}</p>
-            <p><ion-icon name="megaphone"></ion-icon> Ý kiến KH: <i>Chưa có</i></p>
+            <ion-row>
+              <ion-col col-9>
+                <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+                <p><ion-icon name="bicycle"></ion-icon> {{customer.bike_name}}</p>
+                <p><ion-icon name="calendar"></ion-icon> Ngày dịch vụ: {{customer.maintance_date}}</p>
+                <p><ion-icon name="megaphone"></ion-icon> Ý kiến KH: <i>Chưa có</i></p>
+              </ion-col>
+              <ion-col col-3>
+                <button ion-button color="secondary" (click)="onCallPhone(customer.phone)"><ion-icon name="call"></ion-icon> Gọi</button>
+              </ion-col>
+            </ion-row>
           </ion-item>
         </ion-list>
-      </ion-card>
-
-      <ion-card no-padding no-margin style="width: 100%;">
         <ion-list>
           <ion-item >
-            <p ion-text color="primary">Chi tiết dịch vụ</p>
+            <p ion-text>Chi tiết dịch vụ</p>
             <ion-row *ngFor="let maintance_detail of maintance_details">
               <ion-col no-padding>
                 <p>{{maintance_detail.name}}</p>
@@ -52,8 +56,8 @@
         </ion-list>
       </ion-card>
 
-      <p ion-text color="primary">Nhập phản hồi KH sau khi làm dịch vụ</p>
       <form (ngSubmit)="onSaveFeedbackAfterMaintance()">
+        <ion-item-divider color="light"><p ion-text color="primary">Nhập phản hồi KH sau khi làm dịch vụ</p></ion-item-divider>
         <ion-item>
           <ion-label>KH phàn nàn?: <i>({{feedback_after_maintance.is_complain ? 'Có' : 'Không'}})</i></ion-label>
           <ion-toggle checked="false" [(ngModel)]="feedback_after_maintance.is_complain" name="is_complain"></ion-toggle>
@@ -62,7 +66,7 @@
           <ion-label>Ý kiến KH:</ion-label>
           <ion-textarea text-right placeholder="Nhập ý kiến Khách hàng" [(ngModel)]="feedback_after_maintance.feedback" name='feedback' rows="4"></ion-textarea>
         </ion-item>
-        <p ion-text color="primary">Nhập lịch hẹn (nếu có)</p>
+        <ion-item-divider color="light"><p ion-text color="primary">Nhập lịch hẹn (nếu có)</p></ion-item-divider>
         <ion-item>
           <ion-label>Hẹn ngày:</ion-label>
           <ion-datetime displayFormat="DD/MM/YYYY HH:mm" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="feedback_after_maintance.book_date" name='book_date'></ion-datetime>

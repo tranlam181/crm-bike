@@ -20,16 +20,23 @@
         <ion-item >
           <p ion-text color="primary">Thông tin</p>
           <h2 style="padding-top: 6px">{{customer.full_name}}</h2>
-          <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
-          <p><ion-icon name="bicycle"></ion-icon> {{customer.bike_name}}</p>
-          <p><ion-icon name="calendar"></ion-icon> Mua ngày: {{customer.buy_date}}</p>
-          <p><ion-icon name="megaphone"></ion-icon> Ý kiến mua xe: <i>Chưa có</i></p>
+          <ion-row>
+            <ion-col col-9>
+              <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+              <p><ion-icon name="bicycle"></ion-icon> {{customer.bike_name}}</p>
+              <p><ion-icon name="calendar"></ion-icon> Mua ngày: {{customer.buy_date}}</p>
+              <p><ion-icon name="megaphone"></ion-icon> Ý kiến mua xe: <i>Chưa có</i></p>
+            </ion-col>
+            <ion-col col-3>
+              <button ion-button color="secondary" (click)="onCallPhone(customer.phone)"><ion-icon name="call"></ion-icon> Gọi</button>
+            </ion-col>
+          </ion-row>
         </ion-item>
       </ion-list>
     </ion-card>
   
-    <p ion-text color="primary">Nhập phản hồi KH sau mua xe</p>
     <form (ngSubmit)="onSaveFeedbackAfterBuy()">
+      <ion-item-divider color="light"><p ion-text color="primary">Nhập phản hồi KH sau mua xe</p></ion-item-divider>
       <ion-item>
         <ion-label>Ý kiến sau mua xe:</ion-label>
         <ion-select placeholder='Chọn ý kiến KH' [(ngModel)]="feedback_after_buy.y_kien_mua_xe_id" interface="action-sheet" name='y_kien_mua_xe_id' >
@@ -44,6 +51,21 @@
         <ion-label>Ghi chú:</ion-label>
         <ion-textarea text-right placeholder="Nhập ghi chú" [(ngModel)]="feedback_after_buy.note" name='note' rows="4"></ion-textarea>
       </ion-item>   
+      <ion-item-divider color="light"><p ion-text color="primary">Nhập lịch hẹn (nếu có)</p></ion-item-divider>
+      <ion-item>
+        <ion-label>Hẹn ngày:</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY HH:mm" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="feedback_after_buy.book_date" name='book_date'></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Dịch vụ:</ion-label>
+        <ion-select placeholder='Chọn dịch vụ' [(ngModel)]="feedback_after_buy.dich_vu_id" interface="action-sheet" name='dich_vu_id' >
+          <ion-option *ngFor="let dich_vu of dich_vu_list" value="{{dich_vu.id}}">{{dich_vu.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Miễn phí?: <i>({{feedback_after_buy.is_free ? 'Có' : 'Không'}})</i></ion-label>
+        <ion-toggle checked="false" [(ngModel)]="feedback_after_buy.is_free" name="is_free"></ion-toggle>
+      </ion-item>
       <button ion-button type="submit" block><ion-icon name="paper-plane"></ion-icon> Lưu</button>
     </form>
   </ion-content>

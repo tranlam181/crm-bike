@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController, ViewController, Events } from 'ionic-angular';
-import { ApiCategoryProvider } from '../../providers/api-category/api-category';
-import { ApiCustomerProvider } from '../../providers/api-customer/api-customer';
+import { ApiCategoryProvider } from '../../providers/api-category';
+import { ApiCustomerProvider } from '../../providers/api-customer';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import Utils from '../../utils/utils';
 import { TabComingPage } from '../customer-list/tab-coming/tab-coming';
@@ -29,17 +29,20 @@ export class MaintancePage {
     full_name: '',
     phone: '',
     birthday: '',
-    bike_name: ''
+    bike_name: '',
+    book_date: '',
+    service_name: '',
+    is_free: ''
   }
   maintance = {
     khach_hang_xe_id: '',
-    book_date: '',
-    note: '',
+    shop_id: '',
     details: [
       {loai_bao_duong:{}, price:''}
     ]
   }
   maintance_type_list: any
+  shop_list: any
   isLoading:boolean = false
   maxSelectableDate: string
   port: Port;
@@ -70,7 +73,13 @@ export class MaintancePage {
       return this.apiCustomer.getCustomerBikeInfo(this.khach_hang_xe_id).then((data:any) => {
         this.customer = data
       })
-    }).then(data => {
+    })
+    .then(msg => {
+      return this.apiCategory.getShops().then(data => {
+        this.shop_list = data
+      })
+    })
+    .then(data => {
       this.isLoading = false
     }).catch(err => {
       console.log("Error on MaintancePage: ", err);  
@@ -80,15 +89,15 @@ export class MaintancePage {
 
   onSaveMaintance() {
     console.log(this.maintance);    
-    let tabNameNeedReload = this.navCtrl.first().name;
+    // let tabNameNeedReload = this.navCtrl.first().name;
     let loading = Utils.showLoading(this.loadingCrtl)
 
     this.apiCustomer.addMaintance(this.maintance).then((data:any) => {
-      loading.dismiss()
-      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
-        this.events.publish(EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, Date.now());
+      // loading.dismiss()
+      // Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
+      //   this.events.publish(EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, Date.now());
         this.navCtrl.pop()
-      })
+      // })
     }).catch(err => {
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
