@@ -17,25 +17,32 @@
   <ion-card no-padding no-margin style="width: 100%;">    
     <ion-list>
       <ion-item >
-        <p ion-text color="primary">Nhập chi tiết bảo dưỡng</p>
+        <p ion-text color="primary">Khách hàng</p>
         <h2 style="padding-top: 6px">{{customer.full_name}}</h2>
-        <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
-        <p><ion-icon name="bicycle"></ion-icon> {{customer.bike_name}}</p>
-        <p><ion-icon name="calendar"></ion-icon> Ngày hẹn: {{customer.book_date}}</p>
-          <ion-row>
-            <ion-col col-8 no-padding>
-                <p><ion-icon name="hammer"></ion-icon> Dịch vụ: {{customer.service_name}}</p>
-            </ion-col>
-            <ion-col col-4 no-padding>
-                <p text-right><ion-icon name="cash"></ion-icon>&nbsp;{{customer.is_free == 1 ? 'Miễn phí' : ''}}</p>
-            </ion-col>
-          </ion-row>
+        <ion-row>
+          <ion-col col-9>
+            <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
+            <p><ion-icon name="bicycle"></ion-icon> {{customer.bike_name}}</p>
+            <p><ion-icon name="calendar"></ion-icon> Ngày hẹn: {{customer.book_date}}</p>
+          </ion-col>
+          <ion-col col-3>
+            <button ion-button color="secondary" (click)="onCallPhone(customer.phone)"><ion-icon name="call"></ion-icon> Gọi</button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8 no-padding>
+              <p><ion-icon name="hammer"></ion-icon> Dịch vụ: {{customer.service_name}}</p>
+          </ion-col>
+          <ion-col col-4 no-padding>
+              <p text-right><ion-icon name="cash"></ion-icon>&nbsp;{{customer.is_free == 1 ? 'Miễn phí' : ''}}</p>
+          </ion-col>
+        </ion-row>
       </ion-item>
     </ion-list>
   </ion-card>
 
-  <p ion-text color="primary">Nhập chi tiết bảo dưỡng</p>
   <form (ngSubmit)="onSaveCallout()">
+    <ion-item-divider color="light"><p ion-text color="primary">Nhập kết quả gọi ra</p></ion-item-divider>
     <ion-item>
       <ion-label>Kết quả gọi:</ion-label>
       <ion-select placeholder='Chọn kết quả gọi' [(ngModel)]="callout.ket_qua_goi_ra_id" interface="action-sheet" name='ket_qua_goi_ra_id' >
@@ -43,19 +50,24 @@
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Ý kiến sau mua xe:</ion-label>
-      <ion-select placeholder='Chọn ý kiến KH' [(ngModel)]="callout.y_kien_mua_xe_id" interface="action-sheet" name='y_kien_mua_xe_id' >
-        <ion-option *ngFor="let opinion of opinion_list" value="{{opinion.id}}">{{opinion.name}}</ion-option>
+      <ion-label>Ghi chú:</ion-label>
+      <ion-textarea text-right placeholder="Nhập ghi chú" [(ngModel)]="callout.note" name='note' rows="4"></ion-textarea>
+    </ion-item>
+    <ion-item-divider color="light"><p ion-text color="primary">Nhập lịch hẹn (nếu có)</p></ion-item-divider>
+    <ion-item>
+      <ion-label>Hẹn ngày:</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY HH:mm" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="callout.book_date" name='book_date'></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dịch vụ:</ion-label>
+      <ion-select placeholder='Chọn dịch vụ' [(ngModel)]="callout.dich_vu_id" interface="action-sheet" name='dich_vu_id' >
+        <ion-option *ngFor="let dich_vu of dich_vu_list" value="{{dich_vu.id}}">{{dich_vu.name}}</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
-      <ion-label>Hẹn ngày tiếp theo:</ion-label>
-      <ion-datetime displayFormat="DD/MM/YYYY" max={{maxSelectableDate}} placeholder="dd/mm/yyyy" [(ngModel)]="callout.book_date" name='book_date'></ion-datetime>
+      <ion-label>Miễn phí?: <i>({{callout.is_free ? 'Có' : 'Không'}})</i></ion-label>
+      <ion-toggle checked="false" [(ngModel)]="callout.is_free" name="is_free"></ion-toggle>
     </ion-item>
-    <ion-item>
-      <ion-label>Ghi chú:</ion-label>
-      <ion-textarea text-right placeholder="Nhập ghi chú" [(ngModel)]="callout.note" name='note' rows="4"></ion-textarea>
-    </ion-item>   
     <button ion-button type="submit" block><ion-icon name="paper-plane"></ion-icon> Lưu</button>
   </form>
 </ion-content>

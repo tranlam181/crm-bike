@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
+import { CallNumber } from '@ionic-native/call-number';
 
 /**
  * Generated class for the CalloutPage page.
@@ -29,22 +30,22 @@ export class CalloutPage {
   }
   callout = {
     khach_hang_xe_id: '',
-    y_kien_mua_xe_id: '',
     ket_qua_goi_ra_id: '',
     note: '',
     book_date: ''
   }
-  opinion_list:any
   call_result_list:any
   isLoading:boolean = false
   maxSelectableDate: string
+  dich_vu_list: [any]
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCrtl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private callNumber: CallNumber) {
       this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       this.callout.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       let curDate = new Date()
@@ -56,16 +57,15 @@ export class CalloutPage {
     console.log('ionViewDidLoad CalloutPage ' + this.khach_hang_xe_id);
     this.isLoading = true
 
-    this.apiCategory.getBuyOpinions().then(data => {
-      this.opinion_list = data
-      return 'OK'
-    }).then(msg => {
-      return this.apiCustomer.getCustomerBikeInfo(this.khach_hang_xe_id).then((data:any) => {
-        this.customer = data
-      })
+    this.apiCustomer.getCustomerBikeInfo(this.khach_hang_xe_id).then((data:any) => {
+      this.customer = data
     }).then(data => {
       return this.apiCategory.getCallResults().then(data => {
         this.call_result_list = data
+      })
+    }).then(msg => {
+      return this.apiCategory.getServiceTypes().then((data: any) => {
+        this.dich_vu_list = data
       })
     })
     .then(data => {
@@ -88,6 +88,14 @@ export class CalloutPage {
     }).catch(err => {
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
-    })   
+    })
+  }
+
+  onCallPhone(phone) {
+    console.log(phone);
+    
+    this.callNumber.callNumber(phone, true)
+    .then(res => console.log('Launched dialer!', res))
+    .catch(err => console.log('Error launching dialer', err));
   }
 }

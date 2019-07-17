@@ -1,3 +1,8 @@
 page-callout {
-
+    ion-content { 
+        background-color: map-get($colors, light) !important; 
+    }
+    ion-label {
+        font-size: 0.8em
+    }
 }

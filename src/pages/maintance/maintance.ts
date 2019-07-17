@@ -93,7 +93,7 @@ export class MaintancePage {
     let loading = Utils.showLoading(this.loadingCrtl)
 
     this.apiCustomer.addMaintance(this.maintance).then((data:any) => {
-      // loading.dismiss()
+        loading.dismiss()
       // Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
       //   this.events.publish(EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, Date.now());
         this.navCtrl.pop()
