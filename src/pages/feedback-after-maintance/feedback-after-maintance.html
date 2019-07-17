@@ -27,33 +27,34 @@
                 <p><ion-icon name="calendar"></ion-icon> Ngày dịch vụ: {{customer.maintance_date}}</p>
                 <p><ion-icon name="megaphone"></ion-icon> Ý kiến KH: <i>Chưa có</i></p>
               </ion-col>
-              <ion-col col-3>
+              <ion-col col-3 text-right>
                 <button ion-button color="secondary" (click)="onCallPhone(customer.phone)"><ion-icon name="call"></ion-icon> Gọi</button>
               </ion-col>
             </ion-row>
           </ion-item>
         </ion-list>
-        <ion-list>
-          <ion-item >
-            <p ion-text>Chi tiết dịch vụ</p>
-            <ion-row *ngFor="let maintance_detail of maintance_details">
-              <ion-col no-padding>
-                <p>{{maintance_detail.name}}</p>
-              </ion-col>
-              <ion-col no-padding ion-text text-right>
-                <p>{{maintance_detail.price | number}}</p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col no-padding>
-                <p>TỔNG</p>
-              </ion-col>
-              <ion-col no-padding ion-text text-right>
-                <p style="font-weight: bold">{{sum | number}}</p>
-              </ion-col>
-            </ion-row>
-          </ion-item>
-        </ion-list>
+        <p style="padding-left: 16px">Chi tiết dịch vụ</p>
+        <ion-grid padding ngClass="table">
+          <ion-row ngClass="row-header">
+            <ion-col col-2>Dịch vụ</ion-col>
+            <ion-col col-2 text-right>Giá</ion-col>
+            <ion-col col-8></ion-col>
+          </ion-row>
+          <ion-row ngClass="row-body" *ngFor='let maintance_detail of maintance_details'>
+              <ion-col col-2>{{maintance_detail.name}}</ion-col>        
+              <ion-col col-2 ion-text text-right>{{maintance_detail.price | number}}</ion-col>
+              <ion-col col-8></ion-col>
+          </ion-row>
+          <ion-row ngClass="row-body">
+            <ion-col col-2>
+              <p>TỔNG</p>
+            </ion-col>
+            <ion-col col-2 ion-text text-right>
+              <p style="font-weight: bold">{{sum | number}}</p>
+            </ion-col>
+            <ion-col col-8></ion-col>
+          </ion-row>
+        </ion-grid>        
       </ion-card>
 
       <form (ngSubmit)="onSaveFeedbackAfterMaintance()">

@@ -15,7 +15,32 @@
 </ion-header>
 
 <ion-content no-padding>
-  <ion-list>
+  <ion-grid ngClass="table">
+    <ion-row ngClass="row-header">
+      <ion-col align-items-center>Tên</ion-col>        
+      <ion-col align-items-center>Ngày sinh</ion-col>        
+      <ion-col align-items-center>Huyện</ion-col>        
+      <ion-col align-items-center>Điện thoại</ion-col>        
+      <ion-col align-items-center>Lần cuối gọi ra</ion-col>        
+      <ion-col align-items-center>Lần cuối bảo dưỡng</ion-col>
+      <ion-col align-items-center>Hẹn ngày</ion-col>
+      <ion-col align-items-center>Thao tác</ion-col>
+    </ion-row>
+    <ion-row *ngIf='isSearching'>
+      <ion-col><ion-spinner name='dots'></ion-spinner> Đang tải...</ion-col>
+    </ion-row>
+    <ion-row ngClass="row-body" *ngFor='let customer of filterCustomers'>
+        <ion-col>{{customer.full_name}}</ion-col>        
+        <ion-col><p ion-text color='secondary' no-margin>{{customer.birthday}}</p></ion-col>        
+        <ion-col>{{customer.precinct}}, {{customer.district}}</ion-col>        
+        <ion-col>{{customer.phone}}</ion-col>        
+        <ion-col>{{customer.last_call_out_date}}</ion-col>        
+        <ion-col>{{customer.last_maintance_date}}</ion-col>
+        <ion-col><p ion-text color='secondary' no-margin>{{customer.next_book_date}}</p></ion-col>
+        <ion-col><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>Chi tiết</button></ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <ion-list>
     <ion-item *ngIf='isSearching'>
       <h2>Đang tải...</h2>
       <ion-spinner name='dots'></ion-spinner>
@@ -56,7 +81,7 @@
         </ion-row>
         <p><ion-icon name="pin"></ion-icon> {{customer.precinct}}, {{customer.district}}</p>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
   <ion-fab bottom right>
     <button ion-fab mini (click)="onAddCustomer($event)">
       <ion-icon name="add"></ion-icon>

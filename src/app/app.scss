@@ -14,3 +14,23 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.table {
+    .row-header {
+        .col {
+            border-width: 1px 1px 1px 0;
+            border-style: solid;            
+            border-color: map-get($colors, table-line-color );
+            font-weight: bold;
+            color: map-get($colors, table-text-color )
+        }
+    }
+
+    .row-body {
+        .col {
+            border-width: 0 1px 1px 0;
+            border-style: solid;            
+            border-color: map-get($colors, table-line-color );
+            color: map-get($colors, table-text-color )
+        }
+    }
+}
