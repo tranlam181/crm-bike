@@ -27,7 +27,6 @@ import { TabAfterBuyDatePage } from '../pages/customer-list/tab-after-buy-date/t
 import { TabAfterMaintanceDatePage } from '../pages/customer-list/tab-after-maintance-date/tab-after-maintance-date';
 import { FeedbackAfterBuyPage } from '../pages/feedback-after-buy/feedback-after-buy';
 import { FeedbackAfterMaintancePage } from '../pages/feedback-after-maintance/feedback-after-maintance';
-import { CallNumber } from '@ionic-native/call-number';
 
 @NgModule({
   declarations: [
@@ -76,7 +75,6 @@ import { CallNumber } from '@ionic-native/call-number';
     HomePage
   ],
   providers: [
-    CallNumber,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

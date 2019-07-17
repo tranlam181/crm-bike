@@ -3,7 +3,6 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
-import { CallNumber } from '@ionic-native/call-number';
 
 /**
  * Generated class for the FeedbackAfterMaintancePage page.
@@ -45,8 +44,7 @@ export class FeedbackAfterMaintancePage {
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCrtl: LoadingController,
-    public alertCtrl: AlertController,
-    private callNumber: CallNumber) {
+    public alertCtrl: AlertController) {
 
     this.bao_duong_id = navParams.data.bao_duong_id
     this.feedback_after_maintance.bao_duong_id = navParams.data.bao_duong_id
@@ -102,9 +100,5 @@ export class FeedbackAfterMaintancePage {
 
   onCallPhone(phone) {
     console.log(phone);
-    
-    this.callNumber.callNumber(phone, true)
-    .then(res => console.log('Launched dialer!', res))
-    .catch(err => console.log('Error launching dialer', err));
   }
 }

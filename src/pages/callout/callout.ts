@@ -3,7 +3,6 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
-import { CallNumber } from '@ionic-native/call-number';
 
 /**
  * Generated class for the CalloutPage page.
@@ -39,13 +38,12 @@ export class CalloutPage {
   maxSelectableDate: string
   dich_vu_list: [any]
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCrtl: LoadingController,
-    public alertCtrl: AlertController,
-    private callNumber: CallNumber) {
+    public alertCtrl: AlertController) {
       this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       this.callout.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       let curDate = new Date()
@@ -93,9 +91,5 @@ export class CalloutPage {
 
   onCallPhone(phone) {
     console.log(phone);
-    
-    this.callNumber.callNumber(phone, true)
-    .then(res => console.log('Launched dialer!', res))
-    .catch(err => console.log('Error launching dialer', err));
   }
 }
