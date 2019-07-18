@@ -9,7 +9,7 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>KH thường xuyên</ion-title>
+      <ion-title><ion-icon name="people"></ion-icon> KH thường xuyên</ion-title>
       <ion-buttons end>
           <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
       </ion-buttons>
@@ -30,7 +30,7 @@
           <ion-col align-items-center>Huyện</ion-col>        
           <ion-col align-items-center>Điện thoại</ion-col>        
           <ion-col align-items-center>Lần cuối gọi ra</ion-col>        
-          <ion-col align-items-center>Lần cuối bảo dưỡng</ion-col>
+          <ion-col align-items-center>Lần cuối ghé CH</ion-col>
           <ion-col align-items-center>Thao tác</ion-col>
         </ion-row>
         <ion-row ngClass="row-body" *ngFor='let customer of customers'>

@@ -14,8 +14,16 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-.scroll-content {
+.menu-inner .scroll-content {
     overflow-y: auto !important
+}
+
+ion-menu ion-content {
+    background-color: map-get($map: $colors, $key: primary) !important
+}
+
+.split-pane-md.split-pane-visible > .split-pane-side {
+    max-width: 22% !important
 }
 
 .table {

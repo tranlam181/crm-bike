@@ -94,10 +94,10 @@ export class MaintancePage {
 
     this.apiCustomer.addMaintance(this.maintance).then((data:any) => {
         loading.dismiss()
-      // Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
-      //   this.events.publish(EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, Date.now());
-        this.navCtrl.pop()
-      // })
+        Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
+        //   this.events.publish(EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, Date.now());
+          this.navCtrl.pop()
+        })
     }).catch(err => {
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})

@@ -9,7 +9,7 @@
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-      <ion-title>KH sau 3 ngày dịch vụ</ion-title>
+      <ion-title><ion-icon name="people"></ion-icon> KH sau 3 ngày dịch vụ</ion-title>
       <ion-buttons end>
           <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
       </ion-buttons>
@@ -35,10 +35,10 @@
         <ion-row ngClass="row-body" *ngFor='let customer of customers'>
             <ion-col>{{customer.full_name}}</ion-col>        
             <ion-col>{{customer.birthday}}</ion-col>        
-            <ion-col>{{customer.phone}}</ion-col>        
+            <ion-col>{{customer.phone}}</ion-col>  
             <ion-col><p ion-text color='secondary' no-margin>{{customer.last_maintance_date}}</p></ion-col>        
             <ion-col>Chưa có</ion-col>        
-            <ion-col><button ion-button small clear outline no-padding no-margin (click)='showFeedbackAfterMaintance($event, customer)'>Chi tiết</button></ion-col>
+            <ion-col><button ion-button small clear outline no-padding no-margin (click)='showFeedbackAfterMaintance($event, customer)'>Lấy ý kiến</button></ion-col>
         </ion-row>
       </ion-grid>
       <!-- <ion-list>
