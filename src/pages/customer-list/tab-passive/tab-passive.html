@@ -39,7 +39,7 @@
           <ion-col>{{customer.precinct}}, {{customer.district}}</ion-col>        
           <ion-col>{{customer.phone}}</ion-col>        
           <ion-col>{{customer.last_call_out_date}}</ion-col>        
-          <ion-col><p ion-text color='secondary' no-margin>{{customer.last_maintance_date}}</p></ion-col>
+          <ion-col><p ion-text color='secondary' no-margin>{{customer.last_visit_date | dayago}}</p></ion-col>
           <ion-col><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>Chi tiết</button></ion-col>
       </ion-row>
     </ion-grid>
@@ -68,7 +68,7 @@
                 <p>Lần cuối bảo dưỡng</p>
             </ion-col>
             <ion-col no-padding text-right>
-                <p ion-text color='secondary'><ion-icon name="clock"></ion-icon> {{customer.last_maintance_date}}</p>
+                <p ion-text color='secondary'><ion-icon name="clock"></ion-icon> {{customer.last_visit_date}}</p>
             </ion-col>
           </ion-row>
           <p><ion-icon name="pin"></ion-icon> {{customer.precinct}}, {{customer.district}}</p>

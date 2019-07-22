@@ -41,6 +41,7 @@ export class MaintancePage {
       {loai_bao_duong:{}, price:''}
     ]
   }
+  tien_cong: ''
   maintance_type_list: any
   shop_list: any
   isLoading:boolean = false
@@ -88,11 +89,15 @@ export class MaintancePage {
   }
 
   onSaveMaintance() {
-    console.log(this.maintance);    
+    // Them tien cong, vi KH muon tach tieng cong thanh muc rieng
+    let maintance_tmp = {...this.maintance, details: [...this.maintance.details]}
+    maintance_tmp.details.push({loai_bao_duong:{id: 276, name: 'TIỀN CÔNG'}, price: this.tien_cong})
+
+    console.log(maintance_tmp);    
     // let tabNameNeedReload = this.navCtrl.first().name;
     let loading = Utils.showLoading(this.loadingCrtl)
 
-    this.apiCustomer.addMaintance(this.maintance).then((data:any) => {
+    this.apiCustomer.addMaintance(maintance_tmp).then((data:any) => {
         loading.dismiss()
         Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
         //   this.events.publish(EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, Date.now());
