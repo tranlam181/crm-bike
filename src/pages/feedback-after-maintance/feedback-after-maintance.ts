@@ -22,6 +22,7 @@ export class FeedbackAfterMaintancePage {
     full_name: '',
     phone: '',
     maintance_date: '',
+    maintance_name: '',
     bike_name: ''
   }
   maintance_details: [any]

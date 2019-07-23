@@ -23,26 +23,31 @@ ion-menu ion-content {
 }
 
 .split-pane-md.split-pane-visible > .split-pane-side {
-    max-width: 22% !important
+    max-width: 22% !important;
 }
 
 .table {
+    width: 100%;
     .row-header {
-        .col {
+        th {
             border-width: 1px 1px 1px 0;
             border-style: solid;
             border-color: map-get($colors, table-line-color );
             font-weight: bold;
-            color: map-get($colors, table-text-color )
+            color: map-get($colors, table-text-color );
+            padding: 4px;
+            text-align: left
         }
     }
 
     .row-body {
-        .col {
+        td {
             border-width: 0 1px 1px 0;
             border-style: solid;
             border-color: map-get($colors, table-line-color );
-            color: map-get($colors, table-text-color )
+            color: map-get($colors, table-text-color );
+            padding: 0 4px 0 4px;
+            font-size: 0.9em
         }
     }
 }

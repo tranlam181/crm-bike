@@ -37,16 +37,16 @@
     <form (ngSubmit)="onSaveMaintance()">  
       <ion-item-divider color="light"><p ion-text color="primary">Nhập chi tiết bảo dưỡng</p></ion-item-divider>
       <ion-item>
-        <ion-label>Cửa hàng:</ion-label>
-        <ion-select placeholder='Chọn cửa hàng' [(ngModel)]="maintance.shop_id" name="shop_id" interface='popover'>
-          <ion-option *ngFor="let shop of shop_list" value="{{shop.id}}">{{shop.name}}</ion-option>
+        <ion-label>Loại bảo dưỡng:</ion-label>
+        <ion-select placeholder='Chọn loại bảo dưỡng' [(ngModel)]="maintance.kieu_bao_duong_id" name="kieu_bao_duong_id" interface='popover'>
+          <ion-option *ngFor="let kieu of kieu_bao_duong_list" value="{{kieu.id}}">{{kieu.name}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-list no-margin>
         <div *ngFor='let detail of maintance.details; let i = index; trackBy: customTrackBy'>
           <ion-item-sliding>
             <ion-item no-lines>
-              <ion-label>Loại bảo dưỡng</ion-label>
+              <ion-label>Mục</ion-label>
               <ionic-selectable
                 item-content
                 [(ngModel)]="maintance.details[i].loai_bao_duong"
@@ -67,7 +67,7 @@
             </ion-item-options>
           </ion-item-sliding>
           <ion-item >
-            <ion-label>Giá</ion-label>
+            <ion-label>Chi phí</ion-label>
             <ion-input type="tel" placeholder="0" [(ngModel)]="maintance.details[i].price" [name]="'price-'+i" text-right></ion-input>
           </ion-item>
         </div>

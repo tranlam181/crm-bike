@@ -23,64 +23,25 @@
         refreshingSpinner="circles"
         refreshingText="Đang tải..."></ion-refresher-content>
       </ion-refresher>
-      <ion-grid ngClass="table">
-        <ion-row ngClass="row-header">
-          <ion-col align-items-center>Tên</ion-col>        
-          <ion-col align-items-center>Ngày sinh</ion-col>        
-          <ion-col align-items-center>Điện thoại</ion-col>        
-          <ion-col align-items-center>Loại xe</ion-col>        
-          <ion-col align-items-center>Ngày mua xe</ion-col>
-          <ion-col align-items-center>Ý kiến KH</ion-col>
-          <ion-col align-items-center>Thao tác</ion-col>
-        </ion-row>
-        <ion-row ngClass="row-body" *ngFor='let customer of customers'>
-            <ion-col>{{customer.full_name}}</ion-col>        
-            <ion-col>{{customer.birthday}}</ion-col>        
-            <ion-col>{{customer.phone}}</ion-col>        
-            <ion-col>{{customer.bike_name}}</ion-col>        
-            <ion-col><p ion-text color='secondary' no-margin>{{customer.buy_date}}</p></ion-col>       
-            <ion-col>Chưa có</ion-col>        
-            <ion-col><button ion-button small clear outline no-padding no-margin (click)='showFeedbackAfterBuy($event, customer)'>Xin ý kiến</button></ion-col>
-        </ion-row>
-      </ion-grid>
-      <!-- <ion-list>
-        <ion-item-sliding *ngFor='let customer of customers'>
-          <ion-item (click)='showFeedbackAfterBuy($event, customer)'>
-            <h2>{{customer.full_name}}</h2>
-            <ion-row>
-              <ion-col no-padding>
-                  <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
-              </ion-col>
-              <ion-col no-padding text-right>
-                  <p><ion-icon name="rose"></ion-icon> {{customer.birthday}}</p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col no-padding>
-                  <p><ion-icon name="bicycle"></ion-icon> Loại xe</p>
-              </ion-col>
-              <ion-col no-padding text-right>
-                  <p>{{customer.bike_name}}</p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col no-padding>
-                  <p><ion-icon name="clock"></ion-icon> Ngày mua xe</p>
-              </ion-col>
-              <ion-col no-padding text-right>
-                  <p ion-text color='secondary'>{{customer.buy_date}}</p>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col no-padding>
-                  <p><ion-icon name="megaphone"></ion-icon> Ý kiến KH</p>
-              </ion-col>
-              <ion-col no-padding text-right>
-                  <p ion-text color='secondary'><i>Chưa có</i></p>
-              </ion-col>
-            </ion-row>
-          </ion-item>
-        </ion-item-sliding>
-      </ion-list> -->
+      <table ngClass="table">
+        <tr ngClass="row-header">
+          <th align-items-center>Tên</th>        
+          <th align-items-center>Ngày sinh</th>        
+          <th align-items-center>Điện thoại</th>        
+          <th align-items-center>Loại xe</th>        
+          <th align-items-center>Ngày mua xe</th>
+          <th align-items-center>Ý kiến KH</th>
+          <th align-items-center>Thao tác</th>
+        </tr>
+        <tr ngClass="row-body" *ngFor='let customer of customers'>
+            <td><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>{{customer.full_name}}</button></td>        
+            <td>{{customer.birthday}}</td>   
+            <td>{{customer.phone}}</td>        
+            <td>{{customer.bike_name}}</td>        
+            <td><p ion-text color='secondary' no-margin>{{customer.buy_date}}</p></td>       
+            <td>Chưa có</td>        
+            <td><button ion-button small clear outline no-padding no-margin (click)='showFeedbackAfterBuy($event, customer)'>Xin ý kiến</button></td>
+        </tr>
+      </table>     
     </ion-content>
   

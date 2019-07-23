@@ -29,63 +29,55 @@
     </ion-card>
 
     <ion-card no-padding>
-        <ion-item-divider color="light"><p ion-text color="primary">Xe đã mua</p></ion-item-divider>
-        <ion-grid ngClass="table">
-          <ion-row ngClass="row-header">
-            <ion-col align-items-center>Xe</ion-col>        
-            <ion-col align-items-center>Mua tại CH</ion-col>        
-            <ion-col align-items-center>Ngày mua</ion-col>        
-            <ion-col align-items-center>Ngày hẹn</ion-col>
-            <ion-col align-items-center>Dịch vụ</ion-col>
-            <ion-col align-items-center>Miễn phí?</ion-col>
-            <ion-col align-items-center>Thao tác</ion-col>
-          </ion-row>
-          <ion-row ngClass="row-body" *ngFor='let bike of bikes'>
-              <ion-col>{{bike.bike_name}}</ion-col>        
-              <ion-col>{{bike.shop_name}}</ion-col>        
-              <ion-col>{{bike.buy_date}}</ion-col>        
-              <ion-col>{{bike.book_date}}</ion-col>        
-              <ion-col>{{bike.service_name}}</ion-col>        
-              <ion-col>{{bike.is_free == 1 ? 'Miễn phí' : ''}}</ion-col>        
-              <ion-col>
-                <ion-buttons>
-                  <button ion-button small clear outline (click)="onMaintance(bike.id)">
-                      <ion-icon name="construct"></ion-icon>
-                  </button>
-                  <button ion-button small clear outline color="secondary" (click)="onCallout(bike.id)">
-                      <ion-icon name="call"></ion-icon>
-                  </button>
-                </ion-buttons>
-              </ion-col>
-          </ion-row>
-        </ion-grid>
-        <!-- <ion-list>
-          <ion-item-sliding *ngFor="let bike of bikes">
-            <ion-item>
-              <h3><ion-icon name="bicycle"></ion-icon> {{bike.bike_name}}</h3>
-              <p><ion-icon name="basket"></ion-icon>CH: {{bike.shop_name}}</p>
-              <p><ion-icon name="calendar"></ion-icon> Ngày mua: {{bike.buy_date}}</p>
-              <p><ion-icon name="calendar"></ion-icon> Ngày hẹn: {{bike.book_date}}</p>
-              <ion-row>
-                <ion-col col-8 no-padding>
-                    <p><ion-icon name="hammer"></ion-icon> Dịch vụ: {{bike.service_name}}</p>
-                </ion-col>
-                <ion-col col-4 no-padding>
-                    <p text-right><ion-icon name="cash"></ion-icon>&nbsp;{{bike.is_free == 1 ? 'Miễn phí' : ''}}</p>
-                </ion-col>
-              </ion-row>
-            </ion-item>
-            <ion-item-options side="right">
-              <button ion-button (click)="onMaintance(bike.id)">
-                  <ion-icon slot="icon-only" name="construct"></ion-icon>
-                  Bảo dưỡng
-              </button>
-              <button ion-button color="secondary" (click)="onCallout(bike.id)">
-                  <ion-icon slot="icon-only" name="call"></ion-icon>
-                  Gọi ra
-              </button>
-            </ion-item-options>
-          </ion-item-sliding>
-        </ion-list> -->
+      <ion-item-divider color="light"><p ion-text color="primary">Các xe đã mua</p></ion-item-divider>
+      <table ngClass="table">
+        <tr ngClass="row-header">
+          <th align-items-center>Xe</th>        
+          <th align-items-center>Mua tại CH</th>        
+          <th align-items-center>Ngày mua</th>        
+          <th align-items-center>Ngày hẹn</th>
+          <th align-items-center>Dịch vụ</th>
+          <th align-items-center>Miễn phí?</th>
+          <th align-items-center>Thao tác</th>
+        </tr>
+        <tr ngClass="row-body" *ngFor='let bike of bikes'>
+            <td>{{bike.bike_name}}</td>        
+            <td>{{bike.shop_name}}</td>        
+            <td>{{bike.buy_date}}</td>        
+            <td>{{bike.book_date}}</td>        
+            <td>{{bike.service_name}}</td>        
+            <td>{{bike.is_free == 1 ? 'Miễn phí' : ''}}</td>        
+            <td>
+              <ion-buttons>
+                <button ion-button small clear outline (click)="onMaintance(bike.id)">
+                    <ion-icon name="construct"></ion-icon>
+                </button>
+                <button ion-button small clear outline color="secondary" (click)="onCallout(bike.id)">
+                    <ion-icon name="call"></ion-icon>
+                </button>
+              </ion-buttons>
+            </td>
+          </tr>
+      </table>
+    </ion-card>
+
+    <ion-card no-padding>
+      <ion-item-divider color="light"><p ion-text color="primary">Lịch sử ghé CH</p></ion-item-divider>
+      <table ngClass="table">
+        <tr ngClass="row-header">
+          <th align-items-center>Xe</th>        
+          <th align-items-center>Ngày</th>        
+          <th align-items-center>Loại bảo dưỡng</th>        
+          <th align-items-center>Chi phí</th>
+          <th align-items-center>Ý kiến</th>
+        </tr>
+        <tr ngClass="row-body" *ngFor='let man of maintances'>
+          <td>{{man.bike_name}}</td>        
+            <td>{{man.maintance_date}}</td>        
+            <td>{{man.maintance_name}}</td>        
+            <td>{{man.total_price | number}}</td>        
+            <td>{{man.feedback}}</td>        
+          </tr>
+      </table>
     </ion-card>
 </ion-content>

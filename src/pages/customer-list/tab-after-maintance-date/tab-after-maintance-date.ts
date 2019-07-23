@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { FeedbackAfterMaintancePage } from '../../feedback-after-maintance/feedback-after-maintance';
+import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 
 /**
  * Generated class for the TabAfterMaintanceDatePage page.
@@ -48,4 +49,8 @@ export class TabAfterMaintanceDatePage {
       refresher.complete();
     })
   }	 
+
+  showDetailCustomer(ev, customer) {
+    this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
+  }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { FeedbackAfterBuyPage } from '../../feedback-after-buy/feedback-after-buy';
+import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 
 /**
  * Generated class for the TabAfterBuyDatePage page.
@@ -47,5 +48,9 @@ export class TabAfterBuyDatePage {
     this._load().then(data => {
       refresher.complete();
     })
+  }
+
+  showDetailCustomer(ev, customer) {
+    this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
   }
 }

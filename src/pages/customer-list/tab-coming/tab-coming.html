@@ -23,66 +23,28 @@
         refreshingSpinner="circles"
         refreshingText="Đang tải..."></ion-refresher-content>
     </ion-refresher>
-    <ion-grid ngClass="table">
-      <ion-row ngClass="row-header">
-        <ion-col align-items-center color='primary'>Tên</ion-col>        
-        <ion-col align-items-center>Ngày sinh</ion-col>        
-        <ion-col align-items-center>Huyện</ion-col>        
-        <ion-col align-items-center>Điện thoại</ion-col>        
-        <ion-col align-items-center>Lần cuối gọi ra</ion-col>        
-        <ion-col align-items-center>Lần cuối bảo dưỡng</ion-col>
-        <ion-col align-items-center>Hẹn ngày</ion-col>
-        <ion-col align-items-center>Thao tác</ion-col>
-      </ion-row>
-      <ion-row ngClass="row-body" *ngFor='let customer of customers'>
-          <ion-col>{{customer.full_name}}</ion-col>        
-          <ion-col>{{customer.birthday}}</ion-col>        
-          <ion-col>{{customer.precinct}}, {{customer.district}}</ion-col>        
-          <ion-col>{{customer.phone}}</ion-col>        
-          <ion-col>{{customer.last_call_out_date}}</ion-col>        
-          <ion-col>{{customer.last_maintance_date}}</ion-col>
-          <ion-col><p ion-text color='secondary' no-margin>{{customer.next_book_date}}</p></ion-col>
-          <ion-col><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>Chi tiết</button></ion-col>
-      </ion-row>
-    </ion-grid>
-    <!-- <ion-list>
-      <ion-item-sliding *ngFor='let customer of customers'>
-        <ion-item (click)='showDetailCustomer($event, customer)'>
-          <h2>{{customer.full_name}}</h2>
-          <ion-row>
-            <ion-col no-padding>
-                <p><ion-icon name="call"></ion-icon> {{customer.phone}}</p>
-            </ion-col>
-            <ion-col no-padding text-right>
-                <p><ion-icon name="rose"></ion-icon> {{customer.birthday}}</p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col no-padding>
-                <p>Lần cuối gọi ra</p>
-            </ion-col>
-            <ion-col no-padding text-right>
-                <p><ion-icon name="clock"></ion-icon> {{customer.last_call_out_date}}</p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col no-padding>
-                <p>Lần cuối bảo dưỡng</p>
-            </ion-col>
-            <ion-col no-padding text-right>
-                <p><ion-icon name="clock"></ion-icon> {{customer.last_maintance_date}}</p>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col no-padding>
-                <p>Hẹn ngày</p>
-            </ion-col>
-            <ion-col no-padding text-right>
-                <p ion-text color='secondary'><ion-icon name="calendar"></ion-icon> {{customer.next_book_date}}</p>
-            </ion-col>
-          </ion-row>
-          <p><ion-icon name="pin"></ion-icon> {{customer.precinct}}, {{customer.district}}</p>
-        </ion-item>
-      </ion-item-sliding>
-    </ion-list> -->
+    <table ngClass="table">
+      <tr ngClass="row-header">
+        <th align-items-center color='primary'>Tên</th>        
+        <th align-items-center>Ngày sinh</th>        
+        <th align-items-center>Huyện</th>        
+        <th align-items-center>Điện thoại</th>        
+        <th align-items-center>Lần cuối bảo dưỡng</th>
+        <th align-items-center>Lần cuối gọi ra</th>
+        <th align-items-center>Kết quả</th>
+        <th align-items-center>Hẹn ngày</th>
+        <th align-items-center>Thao tác</th>
+      </tr>
+      <tr ngClass="row-body" *ngFor='let customer of customers'>
+          <td>{{customer.full_name}}</td>        
+          <td>{{customer.birthday}}</td>        
+          <td>{{customer.district}}</td>        
+          <td>{{customer.phone}}</td>        
+          <td>{{customer.last_maintance_date}}</td>
+          <td>{{customer.last_call_out_date}}</td>
+          <td>{{customer.call_out_result}}</td>
+          <td><p ion-text color='secondary' no-margin>{{customer.next_book_date}}</p></td>
+          <td><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>Chi tiết</button></td>
+      </tr>
+    </table>
   </ion-content>

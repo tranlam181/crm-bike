@@ -30,6 +30,7 @@ export class CustomerDetailPage {
     province: '',
     sex: ''
   }
+  maintances: any
   bikes:any
   isLoading:boolean = false
 
@@ -51,6 +52,10 @@ export class CustomerDetailPage {
     }).then(msg => {
       return this.apiCustomer.getCustomerBikes(this.khach_hang_id).then(data => {
         this.bikes = data
+      })
+    }).then(msg => {
+      return this.apiCustomer.getCustomerMaintances(this.khach_hang_id).then(data => {
+        this.maintances = data
       })
     }).then(data => {
       this.isLoading = false

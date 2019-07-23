@@ -114,4 +114,15 @@ export class ApiCategoryProvider {
       })
     })
   }
+
+  getKieuBaoDuongs() {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + '/category/kieu-bao-duongs').subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
 }

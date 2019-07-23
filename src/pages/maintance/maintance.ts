@@ -37,13 +37,12 @@ export class MaintancePage {
   maintance = {
     khach_hang_xe_id: '',
     shop_id: '',
-    details: [
-      {loai_bao_duong:{}, price:''}
-    ]
+    kieu_bao_duong_id: '',
+    details: []
   }
   tien_cong: ''
   maintance_type_list: any
-  shop_list: any
+  kieu_bao_duong_list: any
   isLoading:boolean = false
   maxSelectableDate: string
   port: Port;
@@ -76,8 +75,8 @@ export class MaintancePage {
       })
     })
     .then(msg => {
-      return this.apiCategory.getShops().then(data => {
-        this.shop_list = data
+      return this.apiCategory.getKieuBaoDuongs().then(data => {
+        this.kieu_bao_duong_list = data
       })
     })
     .then(data => {
