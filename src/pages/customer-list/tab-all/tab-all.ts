@@ -42,10 +42,6 @@ export class TabAllPage {
     this._load()
   }
 
-  ionViewDidEnter() {
-    console.log('ionViewDidEnter customerList');
-  }
-
   ionViewWillUnload() {
     console.log('ionViewWillUnload() customerList');
     // this.events.unsubscribe(EVENTS.CUSTOMER_EDITED)

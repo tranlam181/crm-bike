@@ -36,6 +36,10 @@ export class TabComingPage {
     })
   }
 
+  ionViewDidEnter() {
+    this._load()
+  }
+  
   ionViewDidLoad() {
     this._load()
   }

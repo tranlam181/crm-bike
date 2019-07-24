@@ -28,19 +28,28 @@
           <th align-items-center>Tên</th>        
           <th align-items-center>Ngày sinh</th>        
           <th align-items-center>Điện thoại</th>        
+          <th align-items-center>Xe</th>        
           <th align-items-center>Loại dịch vụ</th>        
           <th align-items-center>Ngày dịch vụ</th>
+          <th align-items-center>Phàn nàn?</th>
           <th align-items-center>Ý kiến KH</th>
+          <th align-items-center>Hẹn ngày</th>
           <th align-items-center>Thao tác</th>
         </tr>
         <tr ngClass="row-body" *ngFor='let customer of customers'>
             <td><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>{{customer.full_name}}</button></td>
             <td>{{customer.birthday}}</td>        
-            <td>{{customer.phone}}</td>  
+            <td>{{customer.phone}}</td>
+            <td>{{customer.bike_name}}</td>
             <td>{{customer.maintance_name}}</td>  
             <td><p ion-text color='secondary' no-margin>{{customer.maintance_date}}</p></td>        
-            <td>Chưa có</td>        
-            <td><button ion-button small clear outline no-padding no-margin (click)='showFeedbackAfterMaintance($event, customer)'>Xin ý kiến</button></td>
+            <td>{{customer.is_complain == 1 ? 'Có' : ''}}</td>        
+            <td>{{customer.feedback}}</td>        
+            <td>{{customer.next_book_date}}</td>        
+            <td>
+                <button *ngIf='!customer.feedback && !customer.is_complain' ion-button small clear outline no-padding no-margin (click)='showFeedbackAfterMaintance($event, customer)'>Xin ý kiến</button>
+                <button *ngIf='(customer.feedback || customer.is_complain) && !customer.next_book_date' ion-button small clear outline no-padding no-margin (click)='onShowSchedule($event, customer)'>Đặt hẹn</button>
+            </td>
         </tr>
       </table>
     </ion-content>

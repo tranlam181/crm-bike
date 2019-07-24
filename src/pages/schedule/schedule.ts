@@ -5,17 +5,17 @@ import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
 
 /**
- * Generated class for the FeedbackAfterMaintancePage page.
+ * Generated class for the SchedulePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
 
 @Component({
-  selector: 'page-feedback-after-maintance',
-  templateUrl: 'feedback-after-maintance.html',
+  selector: 'page-schedule',
+  templateUrl: 'schedule.html',
 })
-export class FeedbackAfterMaintancePage {
+export class SchedulePage {
 
   bao_duong_id: number
   khach_hang_id: number
@@ -28,13 +28,11 @@ export class FeedbackAfterMaintancePage {
   }
   maintance_details: [any]
   sum = 0
-  feedback_after_maintance = {
+  schedule = {
     bao_duong_id: '',
-    feedback: '',
-    is_complain: false,
     book_date: '',
     dich_vu_id: '',
-    is_free: false
+    is_free: true
   }
   dich_vu_list: [any]
   opinion_list:any
@@ -51,7 +49,7 @@ export class FeedbackAfterMaintancePage {
 
     this.bao_duong_id = navParams.data.bao_duong_id
     this.khach_hang_id = navParams.data.khach_hang_id
-    this.feedback_after_maintance.bao_duong_id = navParams.data.bao_duong_id
+    this.schedule.bao_duong_id = navParams.data.bao_duong_id
     let curDate = new Date()
     curDate.setFullYear(curDate.getFullYear() + 5)
     this.maxSelectableDate = curDate.toISOString().substring(0, 10)
@@ -92,10 +90,10 @@ export class FeedbackAfterMaintancePage {
   }
 
   onSaveFeedbackAfterMaintance() {
-    console.log(this.feedback_after_maintance);
+    console.log(this.schedule);
     let loading = Utils.showLoading(this.loadingCrtl)
 
-    this.apiCustomer.updateFeedbackAfterMaintance(this.feedback_after_maintance).then((data:any) => {
+    this.apiCustomer.updateFeedbackAfterMaintance(this.schedule).then((data:any) => {
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
         this.navCtrl.pop()
@@ -109,4 +107,5 @@ export class FeedbackAfterMaintancePage {
   onCallPhone(phone) {
     console.log(phone);
   }
+
 }

@@ -28,6 +28,7 @@ import { TabAfterMaintanceDatePage } from '../pages/customer-list/tab-after-main
 import { FeedbackAfterBuyPage } from '../pages/feedback-after-buy/feedback-after-buy';
 import { FeedbackAfterMaintancePage } from '../pages/feedback-after-maintance/feedback-after-maintance';
 import { PipesModule } from '../pipes/pipes.module';
+import { SchedulePage } from '../pages/schedule/schedule';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PipesModule } from '../pipes/pipes.module';
     TabAfterMaintanceDatePage,
     FeedbackAfterBuyPage,
     FeedbackAfterMaintancePage,
+    SchedulePage,
     HomePage
   ],
   imports: [
@@ -74,6 +76,7 @@ import { PipesModule } from '../pipes/pipes.module';
     TabAfterMaintanceDatePage,
     FeedbackAfterBuyPage,
     FeedbackAfterMaintancePage,
+    SchedulePage,
     HomePage
   ],
   providers: [

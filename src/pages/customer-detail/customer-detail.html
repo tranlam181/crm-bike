@@ -29,6 +29,28 @@
     </ion-card>
 
     <ion-card no-padding>
+      <ion-item-divider color="light"><p ion-text color="primary">Lịch sử ghé CH</p></ion-item-divider>
+      <table ngClass="table">
+        <tr ngClass="row-header">
+          <th align-items-center>Xe</th>
+          <th align-items-center>Ngày</th>
+          <th align-items-center>Loại bảo dưỡng</th>
+          <th text-right>Chi phí</th>
+          <th align-items-center>Phàn nàn?</th>
+          <th align-items-center>Ý kiến</th>
+        </tr>
+        <tr ngClass="row-body" *ngFor='let man of maintances'>
+          <td>{{man.bike_name}}</td>
+            <td>{{man.maintance_date}}</td>
+            <td>{{man.maintance_name}}</td>
+            <td text-right>{{man.total_price | number}}</td>
+            <td>{{man.is_complain == 1 ? 'Có' : ''}}</td>
+            <td>{{man.feedback}}</td>
+          </tr>
+      </table>
+    </ion-card>
+
+    <ion-card no-padding>
       <ion-item-divider color="light"><p ion-text color="primary">Các xe đã mua</p></ion-item-divider>
       <table ngClass="table">
         <tr ngClass="row-header">
@@ -57,26 +79,6 @@
                 </button>
               </ion-buttons>
             </td>
-          </tr>
-      </table>
-    </ion-card>
-
-    <ion-card no-padding>
-      <ion-item-divider color="light"><p ion-text color="primary">Lịch sử ghé CH</p></ion-item-divider>
-      <table ngClass="table">
-        <tr ngClass="row-header">
-          <th align-items-center>Xe</th>
-          <th align-items-center>Ngày</th>
-          <th align-items-center>Loại bảo dưỡng</th>
-          <th text-right>Chi phí</th>
-          <th align-items-center>Ý kiến</th>
-        </tr>
-        <tr ngClass="row-body" *ngFor='let man of maintances'>
-          <td>{{man.bike_name}}</td>
-            <td>{{man.maintance_date}}</td>
-            <td>{{man.maintance_name}}</td>
-            <td text-right>{{man.total_price | number}}</td>
-            <td>{{man.feedback}}</td>
           </tr>
       </table>
     </ion-card>

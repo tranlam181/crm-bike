@@ -36,6 +36,10 @@ export class TabActivePage {
     })
   }
 
+  ionViewDidEnter() {
+    this._load()
+  }
+  
   ionViewDidLoad() {
     this._load()
   }

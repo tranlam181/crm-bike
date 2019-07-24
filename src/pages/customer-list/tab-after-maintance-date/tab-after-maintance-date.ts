@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { FeedbackAfterMaintancePage } from '../../feedback-after-maintance/feedback-after-maintance';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
+import { SchedulePage } from '../../schedule/schedule';
 
 /**
  * Generated class for the TabAfterMaintanceDatePage page.
@@ -36,12 +37,16 @@ export class TabAfterMaintanceDatePage {
     })
   }
 
+  ionViewDidEnter() {
+    this._load()
+  }
+  
   ionViewDidLoad() {
     this._load()
   }
 
   showFeedbackAfterMaintance(ev, customer) {
-    this.navCtrl.push(FeedbackAfterMaintancePage, {bao_duong_id: customer.bao_duong_id});
+    this.navCtrl.push(FeedbackAfterMaintancePage, {bao_duong_id: customer.bao_duong_id, khach_hang_id: customer.id});
   }
 
   onRefresh(refresher) {
@@ -52,5 +57,9 @@ export class TabAfterMaintanceDatePage {
 
   showDetailCustomer(ev, customer) {
     this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
+  }
+
+  onShowSchedule(ev, customer) {
+    this.navCtrl.push(SchedulePage, { bao_duong_id: customer.bao_duong_id, khach_hang_id: customer.id });
   }
 }

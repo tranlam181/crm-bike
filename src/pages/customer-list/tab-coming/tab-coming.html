@@ -36,7 +36,7 @@
         <th align-items-center>Thao tác</th>
       </tr>
       <tr ngClass="row-body" *ngFor='let customer of customers'>
-          <td>{{customer.full_name}}</td>        
+          <td><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>{{customer.full_name}}</button></td>
           <td>{{customer.birthday}}</td>        
           <td>{{customer.district}}</td>        
           <td>{{customer.phone}}</td>        
