@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
@@ -53,6 +53,13 @@ export class FeedbackAfterBuyPage {
     this.maxSelectableDate = curDate.toISOString().substring(0, 10)
   }
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.navCtrl.pop()
+    }
+  }
+  
   ionViewDidLoad() {
     console.log('FeedbackAfterBuyPage khach_hang_xe_id=' + this.khach_hang_xe_id);
     this._load()

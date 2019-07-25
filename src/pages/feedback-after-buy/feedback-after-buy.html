@@ -39,7 +39,7 @@
       <ion-item-divider color="light"><p ion-text color="primary">Nhập phản hồi KH sau mua xe</p></ion-item-divider>
       <ion-item>
         <ion-label>Ý kiến sau mua xe:</ion-label>
-        <ion-select placeholder='Chọn ý kiến KH' [(ngModel)]="feedback_after_buy.y_kien_mua_xe_id" interface="action-sheet" name='y_kien_mua_xe_id' >
+        <ion-select placeholder='Chọn ý kiến KH' [(ngModel)]="feedback_after_buy.y_kien_mua_xe_id" interface="popover" name='y_kien_mua_xe_id' >
           <ion-option *ngFor="let opinion of opinion_list" value="{{opinion.id}}">{{opinion.name}}</ion-option>
         </ion-select>
       </ion-item>
@@ -58,7 +58,7 @@
       </ion-item>
       <ion-item>
         <ion-label>Dịch vụ:</ion-label>
-        <ion-select placeholder='Chọn dịch vụ' [(ngModel)]="feedback_after_buy.dich_vu_id" interface="action-sheet" name='dich_vu_id' >
+        <ion-select placeholder='Chọn dịch vụ' [(ngModel)]="feedback_after_buy.dich_vu_id" interface="popover" name='dich_vu_id' >
           <ion-option *ngFor="let dich_vu of dich_vu_list" value="{{dich_vu.id}}">{{dich_vu.name}}</ion-option>
         </ion-select>
       </ion-item>

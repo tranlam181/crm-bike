@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
@@ -55,6 +55,13 @@ export class SchedulePage {
     this.maxSelectableDate = curDate.toISOString().substring(0, 10)
   }
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.navCtrl.pop()
+    }
+  }
+  
   ionViewDidLoad() {
     console.log('FeedbackAfterMaintancePage bao_duong_id=' + this.bao_duong_id);
     this._load()
@@ -89,16 +96,18 @@ export class SchedulePage {
     })
   }
 
-  onSaveFeedbackAfterMaintance() {
+  onSaveSchedule() {
     console.log(this.schedule);
     let loading = Utils.showLoading(this.loadingCrtl)
 
-    this.apiCustomer.updateFeedbackAfterMaintance(this.schedule).then((data:any) => {
+    this.apiCustomer.addSchedule(this.schedule).then((data:any) => {
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
         this.navCtrl.pop()
       })
     }).catch(err => {
+      console.log(err);
+      
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
     })

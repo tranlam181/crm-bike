@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
 import EVENTS from '../../config/EVENTS';
 import { ApiCustomerProvider } from '../../providers/api-customer';
@@ -42,6 +42,13 @@ export class CustomerDetailPage {
       
   }
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.navCtrl.pop()
+    }
+  }
+  
   ionViewDidLoad() {
     this.khach_hang_id =  this.navParams.data.khach_hang_id
     this.isLoading = true

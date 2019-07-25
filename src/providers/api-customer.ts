@@ -138,6 +138,19 @@ export class ApiCustomerProvider {
     })
   }
 
+  addSchedule(schedule) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + `/maintances/${schedule.bao_duong_id}/schedules`,
+          JSON.stringify(schedule),
+          {headers: {'Content-Type': 'application/json'}})
+      .subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      })
+    })
+  }
+
   addCallout(callout) {
     return new Promise((resolve, reject) => {
       this.http.post(this.baseUrl + `/customers-bikes/${callout.khach_hang_xe_id}/callouts`,

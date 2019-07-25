@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
@@ -13,7 +13,7 @@ import Utils from '../../utils/utils';
 
 @Component({
   selector: 'page-feedback-after-maintance',
-  templateUrl: 'feedback-after-maintance.html',
+  templateUrl: 'feedback-after-maintance.html'
 })
 export class FeedbackAfterMaintancePage {
 
@@ -55,6 +55,13 @@ export class FeedbackAfterMaintancePage {
     let curDate = new Date()
     curDate.setFullYear(curDate.getFullYear() + 5)
     this.maxSelectableDate = curDate.toISOString().substring(0, 10)
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.navCtrl.pop()
+    }
   }
 
   ionViewDidLoad() {

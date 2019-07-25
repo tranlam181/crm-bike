@@ -45,7 +45,7 @@
     <ion-item-divider color="light"><p ion-text color="primary">Nhập kết quả gọi ra</p></ion-item-divider>
     <ion-item>
       <ion-label>Kết quả gọi:</ion-label>
-      <ion-select placeholder='Chọn kết quả gọi' [(ngModel)]="callout.ket_qua_goi_ra_id" interface="action-sheet" name='ket_qua_goi_ra_id' >
+      <ion-select placeholder='Chọn kết quả gọi' [(ngModel)]="callout.ket_qua_goi_ra_id" interface="popover" name='ket_qua_goi_ra_id' >
         <ion-option *ngFor="let call_result of call_result_list" value="{{call_result.id}}">{{call_result.name}}</ion-option>
       </ion-select>
     </ion-item>
@@ -60,7 +60,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Dịch vụ:</ion-label>
-      <ion-select placeholder='Chọn dịch vụ' [(ngModel)]="callout.dich_vu_id" interface="action-sheet" name='dich_vu_id' >
+      <ion-select placeholder='Chọn dịch vụ' [(ngModel)]="callout.dich_vu_id" interface="popover" name='dich_vu_id' >
         <ion-option *ngFor="let dich_vu of dich_vu_list" value="{{dich_vu.id}}">{{dich_vu.name}}</ion-option>
       </ion-select>
     </ion-item>
