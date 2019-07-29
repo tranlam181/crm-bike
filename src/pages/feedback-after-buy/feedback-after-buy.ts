@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
+import AppConfig from '../../config/app-config';
 
 /**
  * Generated class for the FeedbackAfterBuyPage page.
@@ -47,7 +48,7 @@ export class FeedbackAfterBuyPage {
     public alertCtrl: AlertController) {
 
     this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
-    this.feedback_after_buy.khach_hang_xe_id = navParams.data.khach_hang_xe_id
+    this.feedback_after_buy.khach_hang_xe_id = navParams.data.khach_hang_xe_id    
     let curDate = new Date()
     curDate.setFullYear(curDate.getFullYear() + 5)
     this.maxSelectableDate = curDate.toISOString().substring(0, 10)
@@ -55,7 +56,7 @@ export class FeedbackAfterBuyPage {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && this.navCtrl.canGoBack()) {
       this.navCtrl.pop()
     }
   }
@@ -75,6 +76,7 @@ export class FeedbackAfterBuyPage {
     }).then(msg => {
       return this.apiCustomer.getCustomerBikeInfo(this.khach_hang_xe_id).then((data:any) => {
         this.customer = data
+        this.feedback_after_buy.bike_number = data.bike_number
       })
     }).then(msg => {
       return this.apiCategory.getServiceTypes().then((data: any) => {
@@ -104,7 +106,6 @@ export class FeedbackAfterBuyPage {
   }
 
   onCallPhone(phone) {
-    console.log(phone);
-
+    window.open(AppConfig.baseUrl3C + phone,'_system', 'location=yes');
   }
 }

@@ -27,7 +27,8 @@
         <tr ngClass="row-header">
           <th align-items-center>Tên</th>        
           <th align-items-center>Ngày sinh</th>        
-          <th align-items-center>Điện thoại</th>        
+          <th align-items-center>Điện thoại</th>
+          <th align-items-center>CH</th>
           <th align-items-center>Loại xe</th>        
           <th align-items-center>Ngày mua xe</th>
           <th align-items-center>Ý kiến KH</th>
@@ -37,6 +38,7 @@
             <td><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>{{customer.full_name}}</button></td>        
             <td>{{customer.birthday}}</td>   
             <td>{{customer.phone}}</td>        
+            <td>{{customer.shop_name}}</td>        
             <td>{{customer.bike_name}}</td>        
             <td><p ion-text color='secondary' no-margin>{{customer.buy_date}}</p></td>       
             <td>Chưa có</td>        

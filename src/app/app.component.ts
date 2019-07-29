@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { CustomerListPage } from '../pages/customer-list/customer-list';
 import { CustomerAddNewPage } from '../pages/customer-add-new/customer-add-new';
+import { CustomerImportPage } from '../pages/customer-import/customer-import';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,7 +19,6 @@ export class MyApp {
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
-    public splashScreen: SplashScreen,
     public menuCtrl: MenuController) {
 
     this.initializeApp();
@@ -28,7 +27,8 @@ export class MyApp {
     this.pages = [
       { title: 'Trang chủ', component: HomePage, icon: 'home' },
       { title: 'DS Khách hàng', component: CustomerListPage, icon: 'people' },
-      { title: 'Thêm Khách hàng', component: CustomerAddNewPage, icon: 'add' }
+      { title: 'Thêm Khách hàng', component: CustomerAddNewPage, icon: 'add' },
+      { title: 'Import Khách hàng', component: CustomerImportPage, icon: 'cube' },
     ];
 
   }
@@ -38,7 +38,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      // this.splashScreen.hide();
     });
   }
 

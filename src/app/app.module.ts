@@ -29,6 +29,7 @@ import { FeedbackAfterBuyPage } from '../pages/feedback-after-buy/feedback-after
 import { FeedbackAfterMaintancePage } from '../pages/feedback-after-maintance/feedback-after-maintance';
 import { PipesModule } from '../pipes/pipes.module';
 import { SchedulePage } from '../pages/schedule/schedule';
+import { CustomerImportPage } from '../pages/customer-import/customer-import';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SchedulePage } from '../pages/schedule/schedule';
     CustomerAddNewPage,
     CustomerDetailPage,
     CustomerEditPage,
+    CustomerImportPage,
     MaintancePage,
     CalloutPage,
     TabComingPage,
@@ -65,6 +67,7 @@ import { SchedulePage } from '../pages/schedule/schedule';
     CustomerAddNewPage,
     CustomerDetailPage,
     CustomerEditPage,
+    CustomerImportPage,
     MaintancePage,
     CalloutPage,
     TabComingPage,

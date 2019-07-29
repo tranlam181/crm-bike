@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title><ion-icon name="cube"></ion-icon> Import Khách hàng bằng excel</ion-title>
+      <ion-buttons end>
+          <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+      <form (ngSubmit)="onImportCustomer()">
+        <ion-row>
+          <ion-col >
+              <ion-input [disabled]="isLoading" type="file" accept=".xlsx" (change)="onChangeFile($event)"></ion-input>
+          </ion-col>
+          <ion-col >
+              <button [disabled]="isLoading" ion-button type="submit"><ion-icon name="paper-plane"></ion-icon>&nbsp;Import</button>  
+              <ion-spinner *ngIf='isLoading' name='ios' style="top:14px"></ion-spinner>
+          </ion-col>
+        </ion-row>
+      </form>
+
+      <ion-item-divider color="light"><p ion-text color="primary">Kết quả import <span *ngIf="isLoading">( {{progress_index}} / {{progress_all}} )</span></p></ion-item-divider>
+      <table ngClass="table">
+        <tr ngClass="row-header">
+          <th>STT</th>
+          <th>Họ và Tên</th>
+          <th>Ngày sinh</th>
+          <th>Giới tính</th>
+          <th>Điện thoại</th>
+          <th>Huyện</th>
+          <th>Loại xe</th>
+          <th>Ngày mua</th>
+          <th>Biển số</th>
+          <th>Cửa hàng</th>
+          <th>Kết quả</th>
+        </tr>
+        <tr ngClass="row-body" *ngFor='let customer of customer_list'>
+            <td>{{customer.STT}}</td>
+            <td>{{customer.HO_TEN}}</td>
+            <td>{{customer.NGAY_SINH}}</td>
+            <td>{{customer.GIOI_TINH}}</td>
+            <td>{{customer.DIEN_THOAI}}</td>
+            <td>{{customer.HUYEN}}</td>
+            <td>{{customer.LOAI_XE}}</td>
+            <td>{{customer.NGAY_MUA}}</td>
+            <td>{{customer.BIEN_SO}}</td>
+            <td>{{customer.CUA_HANG}}</td>
+            <td><p ngClass="result-text" ion-text color="{{customer.color}}">{{customer.result ? customer.result : '...'}}</p></td>
+          </tr>
+      </table>
+  </ion-content>
+  

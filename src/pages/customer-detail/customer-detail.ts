@@ -44,7 +44,7 @@ export class CustomerDetailPage {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && this.navCtrl.canGoBack()) {
       this.navCtrl.pop()
     }
   }

@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
+import AppConfig from '../../config/app-config';
 
 /**
  * Generated class for the CalloutPage page.
@@ -90,6 +91,6 @@ export class CalloutPage {
   }
 
   onCallPhone(phone) {
-    console.log(phone);
+    window.open(AppConfig.baseUrl3C + phone,'_system', 'location=yes');
   }
 }

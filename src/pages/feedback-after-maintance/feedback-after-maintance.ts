@@ -3,6 +3,7 @@ import { NavController, NavParams, LoadingController, AlertController } from 'io
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
+import AppConfig from '../../config/app-config';
 
 /**
  * Generated class for the FeedbackAfterMaintancePage page.
@@ -59,7 +60,7 @@ export class FeedbackAfterMaintancePage {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Escape') {
+    if (event.key === 'Escape' && this.navCtrl.canGoBack()) {
       this.navCtrl.pop()
     }
   }
@@ -114,6 +115,6 @@ export class FeedbackAfterMaintancePage {
   }
 
   onCallPhone(phone) {
-    console.log(phone);
+    window.open(AppConfig.baseUrl3C + phone,'_system', 'location=yes');
   }
 }
