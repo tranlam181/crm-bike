@@ -6,20 +6,25 @@ import { HomePage } from '../pages/home/home';
 import { CustomerListPage } from '../pages/customer-list/customer-list';
 import { CustomerAddNewPage } from '../pages/customer-add-new/customer-add-new';
 import { CustomerImportPage } from '../pages/customer-import/customer-import';
+import { LogoutPage } from '../pages/logout/logout';
+import { ApiAuthenticateProvider } from '../providers/api-authenticate';
+import { LoginPage } from '../pages/login/login';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-
   rootPage: any = HomePage;
-
   pages: Array<{title: string, component: any, icon: string}>;
+  logInPage: {title: string, component: any, icon: string};
+  isLoggedIn: boolean = true
+  user = {user_name: '', shop_name: ''}
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
-    public menuCtrl: MenuController) {
+    public menuCtrl: MenuController,
+    private apiAuthenticate: ApiAuthenticateProvider ) {
 
     this.initializeApp();
 
@@ -29,8 +34,10 @@ export class MyApp {
       { title: 'DS Khách hàng', component: CustomerListPage, icon: 'people' },
       { title: 'Thêm Khách hàng', component: CustomerAddNewPage, icon: 'add' },
       { title: 'Import Khách hàng', component: CustomerImportPage, icon: 'cube' },
+      { title: 'Thoát', component: LogoutPage, icon: 'log-out' },
     ];
 
+    this.logInPage = { title: 'Đăng nhập', component: LoginPage, icon: 'log-in'}
   }
 
   initializeApp() {
@@ -39,6 +46,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       // this.splashScreen.hide();
+      this.apiAuthenticate.checkLoggedIn().then(ok => {
+        this.isLoggedIn = ok
+      })
     });
   }
 

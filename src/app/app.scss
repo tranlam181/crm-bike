@@ -22,6 +22,10 @@ ion-menu ion-content {
     background-color: map-get($map: $colors, $key: primary) !important
 }
 
+.user-info-wrapper {
+    background-color: map-get($map: $colors, $key: primary)
+}
+
 .split-pane-md.split-pane-visible > .split-pane-side {
     max-width: 22% !important;
 }

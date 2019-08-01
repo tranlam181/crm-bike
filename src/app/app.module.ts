@@ -30,6 +30,10 @@ import { FeedbackAfterMaintancePage } from '../pages/feedback-after-maintance/fe
 import { PipesModule } from '../pipes/pipes.module';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { CustomerImportPage } from '../pages/customer-import/customer-import';
+import { IonicStorageModule } from '@ionic/storage';
+import { ApiAuthenticateProvider } from '../providers/api-authenticate';
+import { LoginPage } from '../pages/login/login';
+import { LogoutPage } from '../pages/logout/logout';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,8 @@ import { CustomerImportPage } from '../pages/customer-import/customer-import';
     FeedbackAfterBuyPage,
     FeedbackAfterMaintancePage,
     SchedulePage,
+    LoginPage,
+    LogoutPage,
     HomePage
   ],
   imports: [
@@ -58,6 +64,7 @@ import { CustomerImportPage } from '../pages/customer-import/customer-import';
     HttpClientModule,
     IonicSelectableModule,
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     PipesModule
   ],
   bootstrap: [IonicApp],
@@ -80,6 +87,8 @@ import { CustomerImportPage } from '../pages/customer-import/customer-import';
     FeedbackAfterBuyPage,
     FeedbackAfterMaintancePage,
     SchedulePage,
+    LoginPage,
+    LogoutPage,
     HomePage
   ],
   providers: [
@@ -87,7 +96,8 @@ import { CustomerImportPage } from '../pages/customer-import/customer-import';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiCustomerProvider,
-    ApiCategoryProvider
+    ApiCategoryProvider,
+    ApiAuthenticateProvider
   ]
 })
 export class AppModule {}

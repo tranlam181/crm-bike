@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { CustomerListPage } from '../customer-list/customer-list';
 import { CustomerAddNewPage } from '../customer-add-new/customer-add-new';
 import { CustomerImportPage } from '../customer-import/customer-import';
+import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -10,8 +12,18 @@ import { CustomerImportPage } from '../customer-import/customer-import';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController,
+    private apiAuthenticate: ApiAuthenticateProvider,
+    public app: App) {
 
+  }
+
+  async ionViewCanEnter() {
+    let ok = await this.apiAuthenticate.checkLoggedIn()
+    if (!ok) {
+      setTimeout(() => this.app.getRootNavs()[0].setRoot(LoginPage))
+    }
+    return ok
   }
 
   onGoToPage(pageName) {

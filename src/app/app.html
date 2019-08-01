@@ -6,11 +6,23 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list>
+    <ion-item *ngIf="isLoggedIn" ngClass="user-info-wrapper">
+      <ion-avatar item-start>
+        <img src="assets/imgs/human.svg">
+      </ion-avatar>
+      <h2>{{user.user_name}}</h2>
+      <p>{{user.shop_name}}</p>
+    </ion-item>
+    <ion-list *ngIf="isLoggedIn">
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" color="primary">
           <ion-icon name="{{p.icon}}"></ion-icon> {{p.title}}
-      </button>
+      </button>      
     </ion-list>
+    <ion-list *ngIf="!isLoggedIn">
+      <button menuClose ion-item (click)="openPage(logInPage)" color="primary">
+          <ion-icon name="{{logInPage.icon}}"></ion-icon> {{logInPage.title}}
+      </button>
+  </ion-list>
   </ion-content>
 </ion-menu>
 

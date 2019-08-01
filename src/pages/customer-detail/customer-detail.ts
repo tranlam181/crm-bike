@@ -1,12 +1,13 @@
 import { Component, HostListener } from '@angular/core';
-import { NavController, NavParams, Events, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, Events, LoadingController, App } from 'ionic-angular';
 import EVENTS from '../../config/EVENTS';
 import { ApiCustomerProvider } from '../../providers/api-customer';
-import Utils from '../../utils/utils';
 import { Customer } from '../../interfaces/customer';
 import { CustomerEditPage } from '../customer-edit/customer-edit';
 import { MaintancePage } from '../maintance/maintance';
 import { CalloutPage } from '../callout/callout';
+import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the CustomerDetailPage page.
@@ -38,17 +39,27 @@ export class CustomerDetailPage {
     public navParams: NavParams, 
     public events: Events,
     public loadingCtrl: LoadingController,
-    public apiCustomer: ApiCustomerProvider) {
+    public apiCustomer: ApiCustomerProvider,
+    private apiAuthenticate: ApiAuthenticateProvider,
+    public app: App) {
       
   }
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Escape' && this.navCtrl.canGoBack()) {
+    if (event.key === 'Escape' && this.navCtrl.getViews() && this.navCtrl.canGoBack()) {
       this.navCtrl.pop()
     }
   }
   
+  async ionViewCanEnter() {
+    let ok = await this.apiAuthenticate.checkLoggedIn()
+    if (!ok) {
+      setTimeout(() => this.app.getRootNavs()[0].setRoot(LoginPage))
+    }
+    return ok
+  }
+
   ionViewDidLoad() {
     this.khach_hang_id =  this.navParams.data.khach_hang_id
     this.isLoading = true

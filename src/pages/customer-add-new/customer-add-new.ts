@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, App } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from "../../utils/utils";
 import { CustomerDetailPage } from '../customer-detail/customer-detail';
 import { CustomerListPage } from '../customer-list/customer-list';
+import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the CustomerAddNewPage page.
@@ -42,7 +44,17 @@ export class CustomerAddNewPage {
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    private apiAuthenticate: ApiAuthenticateProvider,
+    private app: App) {
+  }
+
+  async ionViewCanEnter() {
+    let ok = await this.apiAuthenticate.checkLoggedIn()
+    if (!ok) {
+      setTimeout(() => this.app.getRootNavs()[0].setRoot(LoginPage))
+    }
+    return ok
   }
 
   ionViewDidLoad() {

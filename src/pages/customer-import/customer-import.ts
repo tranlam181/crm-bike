@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, App } from 'ionic-angular';
 import * as XLSX from 'ts-xlsx';
 import Utils from '../../utils/utils';
 import moment from 'moment';
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import sleep from 'sleep-promise';
+import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the CustomerImportPage page.
@@ -34,7 +36,17 @@ export class CustomerImportPage {
     public navParams: NavParams,
     private toastCtrl: ToastController,
     private apiCategory: ApiCategoryProvider,
-    private apiCustomer: ApiCustomerProvider) {
+    private apiCustomer: ApiCustomerProvider,
+    private apiAuthenticate: ApiAuthenticateProvider,
+    private app: App) {
+  }
+
+  async ionViewCanEnter() {
+    let ok = await this.apiAuthenticate.checkLoggedIn()
+    if (!ok) {
+      setTimeout(() => this.app.getRootNavs()[0].setRoot(LoginPage))
+    }
+    return ok
   }
 
   ionViewDidLoad() {
