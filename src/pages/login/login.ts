@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Events, LoadingController } from 'ionic-angular';
 import Utils from '../../utils/utils';
 import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
+import EVENTS from '../../config/EVENTS';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -18,10 +20,12 @@ export class LoginPage {
 
   user = {user_name: '', password: ''}
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private toast: ToastController,
-    private apiAuthenticate: ApiAuthenticateProvider) {
+    private apiAuthenticate: ApiAuthenticateProvider,
+    private event: Events,
+    private loadingCtrl: LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -35,13 +39,21 @@ export class LoginPage {
       return
     }
 
+    let loading = Utils.showLoading(this.loadingCtrl, "Đang đăng nhập...")
+
     this.apiAuthenticate.login(this.user).then((data: any) => {
-      console.log(data);
-      this.apiAuthenticate.saveToken(data.token, data.user).then(res => {
+      let userInfo = {token: data.token, user: data.user}
+
+      this.apiAuthenticate.saveToken(userInfo).then(res => {
         // thuc hien reload menu
+        this.event.publish(EVENTS.USER_LOG_CHANGED)
         // thuc hien redirect -> home
+        this.navCtrl.setRoot(HomePage)
+        // close loading
+        loading.dismiss()
       })
     }).catch(err => {
+      loading.dismiss()
       console.log(err);
     })
   }

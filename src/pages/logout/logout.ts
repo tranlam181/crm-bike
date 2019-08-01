@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Events } from 'ionic-angular';
 import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
+import { LoginPage } from '../login/login';
+import EVENTS from '../../config/EVENTS';
 
 /**
  * Generated class for the LogoutPage page.
@@ -15,14 +17,18 @@ import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
 })
 export class LogoutPage {
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private auth: ApiAuthenticateProvider) {
+    private auth: ApiAuthenticateProvider,
+    private event: Events) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LogoutPage');
-    this.auth.logout()
+    this.auth.logout().then(res => {
+      this.event.publish(EVENTS.USER_LOG_CHANGED)
+      this.navCtrl.setRoot(LoginPage)
+    })
   }
 
 }

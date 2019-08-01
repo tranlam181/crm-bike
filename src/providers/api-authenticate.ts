@@ -12,7 +12,9 @@ import AppConfig from '../config/app-config';
 @Injectable()
 export class ApiAuthenticateProvider {
 
-  public isLoggedIn: boolean = false
+  private userInfoKey = "userInfo"
+  public userInfo: any
+  private isLoggedIn: boolean = false
   private isReadStorage: boolean = false
   baseUrl = AppConfig.baseUrlAuth
 
@@ -22,22 +24,34 @@ export class ApiAuthenticateProvider {
     console.log('Hello ApiAuthenticateProvider Provider');
   }
 
+  _resetReadState() {
+    this._setReadState(false)
+  }
+
+  _getReadState() {
+    return this.isReadStorage
+  }
+
+  _setReadState(isReadToken: boolean) {
+    this.isReadStorage = isReadToken
+  }
+
   _readToken() {
-    return this.storage.get("token").then(token => {
-      this.isReadStorage = true
-      this.isLoggedIn = token ? true : false
+    return this.storage.get(this.userInfoKey).then(result => {
+      this._setReadState(true)
+      this.userInfo = result
+      this.isLoggedIn = result ? true : false
       return this.isLoggedIn
     })
   }
 
-  saveToken(token, user) {
-    return this.storage.set("token", token)
-      .then(res => this.storage.set("user", user))
-      .then(res => this._readToken())
+  saveToken(userInfo) {
+    return this.storage.set(this.userInfoKey, userInfo)
+      .then(res => this._resetReadState())
   }
 
   async checkLoggedIn() {
-    if (this.isReadStorage) {
+    if (this._getReadState()) {
       return this.isLoggedIn
     } else {
       return await this._readToken()
@@ -45,7 +59,8 @@ export class ApiAuthenticateProvider {
   }
 
   logout() {
-    this.storage.clear().then(res => {
+    return this.storage.clear().then(res => {
+      this._resetReadState()
       return true
     }).catch (err => {
       console.log(err);

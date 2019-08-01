@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, MenuController } from 'ionic-angular';
+import { Nav, Platform, MenuController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { HomePage } from '../pages/home/home';
@@ -9,6 +9,7 @@ import { CustomerImportPage } from '../pages/customer-import/customer-import';
 import { LogoutPage } from '../pages/logout/logout';
 import { ApiAuthenticateProvider } from '../providers/api-authenticate';
 import { LoginPage } from '../pages/login/login';
+import EVENTS from '../config/EVENTS';
 
 @Component({
   templateUrl: 'app.html'
@@ -18,13 +19,18 @@ export class MyApp {
   rootPage: any = HomePage;
   pages: Array<{title: string, component: any, icon: string}>;
   logInPage: {title: string, component: any, icon: string};
-  isLoggedIn: boolean = true
-  user = {user_name: '', shop_name: ''}
+  isLoggedIn: boolean = false
+  userInfo: any
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
     public menuCtrl: MenuController,
-    private apiAuthenticate: ApiAuthenticateProvider ) {
+    private apiAuthenticate: ApiAuthenticateProvider,
+    private event: Events ) {
+
+    event.subscribe(EVENTS.USER_LOG_CHANGED, () => {
+      this._load()
+    })
 
     this.initializeApp();
 
@@ -40,15 +46,30 @@ export class MyApp {
     this.logInPage = { title: 'Đăng nhập', component: LoginPage, icon: 'log-in'}
   }
 
+  ngOnDestroy() {
+    this.event.unsubscribe(EVENTS.USER_LOG_CHANGED)
+  }
+
+  _load() {
+    console.log('Run ham app@_load()');
+
+    this.apiAuthenticate.checkLoggedIn().then(ok => {
+      this.isLoggedIn = ok
+      if (ok) {
+        this.userInfo = this.apiAuthenticate.userInfo
+      }
+      console.log(this.userInfo);
+
+    })
+  }
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       // this.splashScreen.hide();
-      this.apiAuthenticate.checkLoggedIn().then(ok => {
-        this.isLoggedIn = ok
-      })
+      this._load()
     });
   }
 

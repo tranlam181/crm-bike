@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import AppConfig from '../config/app-config';
+import { ApiAuthenticateProvider } from './api-authenticate';
 
 /*
   Generated class for the ApiCustomerProvider provider.
@@ -12,8 +13,15 @@ import AppConfig from '../config/app-config';
 export class ApiCustomerProvider {
 
   baseUrl = AppConfig.baseUrl
+  headers: any
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient,
+    private apiAuthenticate: ApiAuthenticateProvider) {
+      this.headers = {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json',
+        'Authorization': apiAuthenticate.userInfo.token
+      }
   }
 
   addCustomer(customer) {
@@ -43,7 +51,9 @@ export class ApiCustomerProvider {
   getCustomer(khach_hang_id) {
     return new Promise((resolve, reject) => {
       // http get
-      this.http.get(this.baseUrl + '/customers/' + khach_hang_id).subscribe(data => {
+      this.http.get(this.baseUrl + '/customers/' + khach_hang_id,
+        {headers: this.headers}
+      ).subscribe(data => {
         console.log(data);
         resolve(data)
       }, err => {
