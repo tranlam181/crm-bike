@@ -64,7 +64,6 @@ export class SchedulePage {
   }
   
   ionViewDidLoad() {
-    console.log('FeedbackAfterMaintancePage bao_duong_id=' + this.bao_duong_id);
     this._load()
   }
 
@@ -98,7 +97,6 @@ export class SchedulePage {
   }
 
   onSaveSchedule() {
-    console.log(this.schedule);
     let loading = Utils.showLoading(this.loadingCrtl)
 
     this.apiCustomer.addSchedule(this.schedule).then((data:any) => {
@@ -107,8 +105,6 @@ export class SchedulePage {
         this.navCtrl.pop()
       })
     }).catch(err => {
-      console.log(err);
-      
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message, ()=>{})
     })

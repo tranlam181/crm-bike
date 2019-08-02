@@ -1,8 +1,8 @@
-import { LoadingController, ToastController, AlertController } from "ionic-angular";
+import { LoadingController, ToastController, AlertController, Loading, Toast, Alert } from "ionic-angular";
 
 export default class Utils {
     static showLoading(loadingCtrl:LoadingController, msg?: string) {
-        let loading:any = loadingCtrl.create({
+        let loading: Loading = loadingCtrl.create({
             spinner: 'dots',
             content: msg ? msg : 'Đang tải...'
           })
@@ -11,7 +11,7 @@ export default class Utils {
     }
 
     static showToast(toastCtrl: ToastController, msg: string) {
-        let toast = toastCtrl.create({
+        let toast: Toast = toastCtrl.create({
           message: msg,
           duration: 3600,
           position: 'middle',
@@ -22,7 +22,7 @@ export default class Utils {
     }
 
     static showConfirmAlert(alertCtrl: AlertController, title: string, msg: string, handler?) {
-      let confirm = alertCtrl.create({
+      let confirm: Alert = alertCtrl.create({
         title: title,
         message: msg,
         buttons: [         

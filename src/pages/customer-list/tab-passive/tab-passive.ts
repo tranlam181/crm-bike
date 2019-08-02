@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import Utils from '../../../utils/utils';
 import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 
@@ -41,9 +40,9 @@ export class TabPassivePage {
     this._load()
   }
   
-  ionViewDidLoad() {
-    this._load()
-  }
+  // ionViewDidLoad() {
+  //   this._load()
+  // }
 
   showDetailCustomer(ev, customer) {
     this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});

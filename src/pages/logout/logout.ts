@@ -24,7 +24,6 @@ export class LogoutPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LogoutPage');
     this.auth.logout().then(res => {
       this.event.publish(EVENTS.USER_LOG_CHANGED)
       this.navCtrl.setRoot(LoginPage)

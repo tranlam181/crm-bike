@@ -30,9 +30,9 @@ export class TabAfterBuyDatePage {
     this._load()
   }
   
-  ionViewDidLoad() {
-    this._load()
-  }
+  // ionViewDidLoad() {
+  //   this._load()
+  // }
 
   _load() {
     this.isLoading = true

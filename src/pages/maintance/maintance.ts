@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ViewController, Events } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, Events } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import Utils from '../../utils/utils';
-import { TabComingPage } from '../customer-list/tab-coming/tab-coming';
-import EVENTS from '../../config/EVENTS';
 
 /**
  * Generated class for the MaintancePage page.
@@ -63,7 +61,6 @@ export class MaintancePage {
   }
 
   ionViewDidLoad() {
-    console.log('MaintancePage khach_hang_xe_id= ' + this.khach_hang_xe_id);
     this.isLoading = true
 
     this.apiCategory.getMaintanceTypes().then(data => {
@@ -82,7 +79,6 @@ export class MaintancePage {
     .then(data => {
       this.isLoading = false
     }).catch(err => {
-      console.log("Error on MaintancePage: ", err);  
       this.isLoading = false
     })
   }
@@ -92,7 +88,6 @@ export class MaintancePage {
     let maintance_tmp = {...this.maintance, details: [...this.maintance.details]}
     maintance_tmp.details.push({loai_bao_duong:{id: 276, name: 'TIỀN CÔNG'}, price: this.tien_cong})
 
-    console.log(maintance_tmp);    
     // let tabNameNeedReload = this.navCtrl.first().name;
     let loading = Utils.showLoading(this.loadingCrtl)
 
@@ -116,7 +111,6 @@ export class MaintancePage {
 
   onDellMaintance(ev: Event, index) {
     ev.preventDefault()
-    console.log(index);
     this.maintance.details.splice(index, 1)
   }
 

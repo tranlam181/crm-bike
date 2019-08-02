@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, Events, App } from 'ionic-angular';
 import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
-import EVENTS from '../../../config/EVENTS';
 import { CustomerAddNewPage } from '../../customer-add-new/customer-add-new';
 
 /**
@@ -43,7 +42,6 @@ export class TabAllPage {
   }
 
   ionViewWillUnload() {
-    console.log('ionViewWillUnload() customerList');
     // this.events.unsubscribe(EVENTS.CUSTOMER_EDITED)
   }
 
@@ -74,8 +72,6 @@ export class TabAllPage {
   }
 
   searchCustomer(ev) {
-    console.log(this.searchString);
-    
     // Reset items back to all of the items
     this._resetFilterUsers()
 

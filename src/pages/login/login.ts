@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, Events, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Events } from 'ionic-angular';
 import Utils from '../../utils/utils';
 import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
 import EVENTS from '../../config/EVENTS';
@@ -19,42 +19,38 @@ import { HomePage } from '../home/home';
 export class LoginPage {
 
   user = {user_name: '', password: ''}
+  isLoading: boolean = false
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private toast: ToastController,
     private apiAuthenticate: ApiAuthenticateProvider,
-    private event: Events,
-    private loadingCtrl: LoadingController) {
+    private event: Events) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
 
   onLogin() {
-    console.log(this.user);
     if (!this.user.user_name || !this.user.password) {
       Utils.showToast(this.toast, "Tên đăng nhập và mật khẩu là bắt buộc")
       return
     }
 
-    let loading = Utils.showLoading(this.loadingCtrl, "Đang đăng nhập...")
+    this.isLoading = true
 
     this.apiAuthenticate.login(this.user).then((data: any) => {
-      let userInfo = {token: data.token, user: data.user}
-
-      this.apiAuthenticate.saveToken(userInfo).then(res => {
+      this.apiAuthenticate.saveToken(data.token, data.user).then(res => {
         // thuc hien reload menu
         this.event.publish(EVENTS.USER_LOG_CHANGED)
         // thuc hien redirect -> home
         this.navCtrl.setRoot(HomePage)
         // close loading
-        loading.dismiss()
+        this.isLoading = false
       })
     }).catch(err => {
-      loading.dismiss()
-      console.log(err);
+      this.isLoading = false
+      Utils.showToast(this.toast, err.error.msg)
     })
   }
 }

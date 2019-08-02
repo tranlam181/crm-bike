@@ -12,16 +12,15 @@ import AppConfig from '../config/app-config';
 @Injectable()
 export class ApiAuthenticateProvider {
 
-  private userInfoKey = "userInfo"
+  private authKey = "authKey"
   public userInfo: any
+  public token: any
   private isLoggedIn: boolean = false
   private isReadStorage: boolean = false
   baseUrl = AppConfig.baseUrlAuth
 
   constructor(public http: HttpClient,
     private storage: Storage) {
-
-    console.log('Hello ApiAuthenticateProvider Provider');
   }
 
   _resetReadState() {
@@ -37,16 +36,17 @@ export class ApiAuthenticateProvider {
   }
 
   _readToken() {
-    return this.storage.get(this.userInfoKey).then(result => {
+    return this.storage.get(this.authKey).then(data => {
       this._setReadState(true)
-      this.userInfo = result
-      this.isLoggedIn = result ? true : false
+      this.userInfo = data ? data.userInfo : null
+      this.token = data ? data.token : null
+      this.isLoggedIn = data ? true : false
       return this.isLoggedIn
     })
   }
 
-  saveToken(userInfo) {
-    return this.storage.set(this.userInfoKey, userInfo)
+  saveToken(token, userInfo) {
+    return this.storage.set(this.authKey, {token: token, userInfo: userInfo})
       .then(res => this._resetReadState())
   }
 
@@ -63,7 +63,6 @@ export class ApiAuthenticateProvider {
       this._resetReadState()
       return true
     }).catch (err => {
-      console.log(err);
       return false
     })
   }
@@ -74,6 +73,7 @@ export class ApiAuthenticateProvider {
           JSON.stringify(user),
           {headers: {'Content-Type': 'application/json'}})
       .subscribe(data => {
+        this._resetReadState()
         resolve(data);
       }, err => {
         reject(err);

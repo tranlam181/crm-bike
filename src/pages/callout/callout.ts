@@ -53,7 +53,6 @@ export class CalloutPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CalloutPage ' + this.khach_hang_xe_id);
     this.isLoading = true
 
     this.apiCustomer.getCustomerBikeInfo(this.khach_hang_xe_id).then((data:any) => {
@@ -75,8 +74,6 @@ export class CalloutPage {
   }
 
   onSaveCallout() {
-    console.log(this.callout);
-
     let loading = Utils.showLoading(this.loadingCrtl)
 
     this.apiCustomer.addCallout(this.callout).then((data:any) => {

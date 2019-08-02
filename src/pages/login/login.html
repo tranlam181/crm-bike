@@ -21,6 +21,6 @@
         <ion-input type="password" [(ngModel)]="user.password" name="password" text-capitalize></ion-input>
       </ion-item>
       <ion-item-divider no-lines></ion-item-divider>
-      <button ion-button type="submit" block>Đăng nhập</button>
+      <button [disabled]="isLoading" ion-button type="submit" block>{{isLoading ? 'Đang xử lý' : 'Đăng nhập'}}</button>
   </form>
 </ion-content>

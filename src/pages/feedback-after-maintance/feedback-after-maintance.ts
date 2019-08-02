@@ -66,7 +66,6 @@ export class FeedbackAfterMaintancePage {
   }
 
   ionViewDidLoad() {
-    console.log('FeedbackAfterMaintancePage bao_duong_id=' + this.bao_duong_id);
     this._load()
   }
 
@@ -100,7 +99,6 @@ export class FeedbackAfterMaintancePage {
   }
 
   onSaveFeedbackAfterMaintance() {
-    console.log(this.feedback_after_maintance);
     let loading = Utils.showLoading(this.loadingCrtl)
 
     this.apiCustomer.updateFeedbackAfterMaintance(this.feedback_after_maintance).then((data:any) => {

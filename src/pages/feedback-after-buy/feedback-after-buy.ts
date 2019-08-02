@@ -62,12 +62,10 @@ export class FeedbackAfterBuyPage {
   }
   
   ionViewDidLoad() {
-    console.log('FeedbackAfterBuyPage khach_hang_xe_id=' + this.khach_hang_xe_id);
     this._load()
   }
 
   _load() {
-    console.log('ionViewDidLoad CalloutPage ' + this.khach_hang_xe_id);
     this.isLoading = true
 
     this.apiCategory.getBuyOpinions().then(data => {
@@ -91,7 +89,6 @@ export class FeedbackAfterBuyPage {
   }
 
   onSaveFeedbackAfterBuy() {
-    console.log(this.feedback_after_buy);
     let loading = Utils.showLoading(this.loadingCrtl)
 
     this.apiCustomer.updateFeedbackAfterBuy(this.feedback_after_buy).then((data:any) => {

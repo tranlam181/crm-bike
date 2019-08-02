@@ -40,9 +40,9 @@ export class TabComingPage {
     this._load()
   }
   
-  ionViewDidLoad() {
-    this._load()
-  }
+  // ionViewDidLoad() {
+  //   this._load()
+  // }
 
   showDetailCustomer(ev, customer) {
     this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});

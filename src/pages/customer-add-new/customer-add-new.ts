@@ -74,6 +74,7 @@ export class CustomerAddNewPage {
       let curDate = new Date()
       let formatedDate = curDate.toISOString().substring(0, 10)
       this.customer.buy_date = formatedDate
+      this.customer.shop_id = this.apiAuthenticate.userInfo.cua_hang_id ? this.apiAuthenticate.userInfo.cua_hang_id : this.customer.shop_id
       return "OK"
     }).then(msg => {
       loading.dismiss()
@@ -107,7 +108,6 @@ export class CustomerAddNewPage {
   }
 
   onChangeProvince(val) {
-    console.log(val);
     this.district_list = [{district_code:'', name:'Đang tải...'}]
     this.apiCategory.getDistricts(val).then(data => {
       this.district_list = data

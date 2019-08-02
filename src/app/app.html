@@ -8,10 +8,10 @@
   <ion-content>
     <ion-item *ngIf="isLoggedIn" ngClass="user-info-wrapper">
       <ion-avatar item-start>
-        <img src="assets/imgs/human.svg">
+        <img style="background-color: white" src="assets/imgs/human.svg">
       </ion-avatar>
-      <h2>{{userInfo.user.user_name}}</h2>
-      <p>{{userInfo.user.shop_name}}</p>
+      <h2 ion-text color='light'>{{userInfo?.user_name}}</h2>
+      <p>{{userInfo?.shop_name}}</p>
     </ion-item>
     <ion-list *ngIf="isLoggedIn">
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" color="primary">

@@ -51,15 +51,11 @@ export class MyApp {
   }
 
   _load() {
-    console.log('Run ham app@_load()');
-
     this.apiAuthenticate.checkLoggedIn().then(ok => {
       this.isLoggedIn = ok
       if (ok) {
         this.userInfo = this.apiAuthenticate.userInfo
       }
-      console.log(this.userInfo);
-
     })
   }
 

@@ -41,9 +41,9 @@ export class TabAfterMaintanceDatePage {
     this._load()
   }
   
-  ionViewDidLoad() {
-    this._load()
-  }
+  // ionViewDidLoad() {
+  //   this._load()
+  // }
 
   showFeedbackAfterMaintance(ev, customer) {
     this.navCtrl.push(FeedbackAfterMaintancePage, {bao_duong_id: customer.bao_duong_id, khach_hang_id: customer.id});

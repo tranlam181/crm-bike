@@ -83,7 +83,6 @@ export class CustomerDetailPage {
   }
 
   onEditCustomer(ev) {
-    console.log('Publish event '+ EVENTS.CUSTOMER_EDITED);
     this.events.publish(EVENTS.CUSTOMER_EDITED, this.khach_hang_id, Date.now());
     this.navCtrl.push(CustomerEditPage, {khach_hang_id: this.khach_hang_id})
   }

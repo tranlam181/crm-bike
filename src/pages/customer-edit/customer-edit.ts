@@ -20,7 +20,6 @@ export class CustomerEditPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CustomerEditPage');
     this.khach_hang_id = this.navParams.data.khach_hang_id
   }
 

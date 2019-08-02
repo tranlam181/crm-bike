@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController, App } from 'ionic-angular';
-import * as XLSX from 'ts-xlsx';
+import * as XLSX from 'xlsx';
 import Utils from '../../utils/utils';
 import moment from 'moment';
 import { ApiCategoryProvider } from '../../providers/api-category';
@@ -64,7 +64,6 @@ export class CustomerImportPage {
         this.isLoading = false
       })
     ).catch(err => {
-      console.log("Error on CustomerImportPage: ", err);  
       this.isLoading = false
     })
   }
