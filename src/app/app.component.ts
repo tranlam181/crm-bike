@@ -28,10 +28,6 @@ export class MyApp {
     private apiAuthenticate: ApiAuthenticateProvider,
     private event: Events ) {
 
-    event.subscribe(EVENTS.USER_LOG_CHANGED, () => {
-      this._load()
-    })
-
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -48,6 +44,7 @@ export class MyApp {
 
   ngOnDestroy() {
     this.event.unsubscribe(EVENTS.USER_LOG_CHANGED)
+    this.event.unsubscribe(EVENTS.USER_UNAUTHORIZED)
   }
 
   _load() {
@@ -64,6 +61,16 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
+      // subscriber event
+      this.event.subscribe(EVENTS.USER_LOG_CHANGED, () => {
+        this._load()
+      })
+      this.event.subscribe(EVENTS.USER_UNAUTHORIZED, () => {
+        this.apiAuthenticate.logout().then(data => {
+          this._load()
+          this.nav.setRoot(LoginPage)
+        })
+      })
       // this.splashScreen.hide();
       this._load()
     });

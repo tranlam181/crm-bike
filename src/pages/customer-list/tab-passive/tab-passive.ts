@@ -48,6 +48,10 @@ export class TabPassivePage {
     this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
   }
 
+  onDelCustomer(ev, customer) {
+    
+  }
+
   onRefresh(refresher) {
     this._load().then(data => {
       refresher.complete();

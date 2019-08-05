@@ -40,14 +40,12 @@ export class LoginPage {
     this.isLoading = true
 
     this.apiAuthenticate.login(this.user).then((data: any) => {
-      this.apiAuthenticate.saveToken(data.token, data.user).then(res => {
         // thuc hien reload menu
         this.event.publish(EVENTS.USER_LOG_CHANGED)
         // thuc hien redirect -> home
         this.navCtrl.setRoot(HomePage)
         // close loading
         this.isLoading = false
-      })
     }).catch(err => {
       this.isLoading = false
       Utils.showToast(this.toast, err.error.msg)

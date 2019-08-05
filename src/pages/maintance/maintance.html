@@ -43,6 +43,10 @@
         </ion-select>
       </ion-item>
       <ion-list no-margin>
+        <ion-item >
+          <ion-label>Tiền công</ion-label>
+          <ion-input type="tel" placeholder="0" text-right [(ngModel)]="tien_cong" name="tien_cong"></ion-input>
+        </ion-item>
         <div *ngFor='let detail of maintance.details; let i = index; trackBy: customTrackBy'>
           <ion-item-sliding>
             <ion-item no-lines>
@@ -71,10 +75,6 @@
             <ion-input type="tel" placeholder="0" [(ngModel)]="maintance.details[i].price" [name]="'price-'+i" text-right></ion-input>
           </ion-item>
         </div>
-        <ion-item >
-          <ion-label>Tiền công</ion-label>
-          <ion-input type="tel" placeholder="0" text-right [(ngModel)]="tien_cong" name="tien_cong"></ion-input>
-        </ion-item>
       </ion-list>
       <ion-item no-lines>
           <button ion-button no-margin clear item-end (click)='onAddMaintance($event)'>

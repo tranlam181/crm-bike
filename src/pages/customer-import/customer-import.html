@@ -37,6 +37,10 @@
           <th>Ngày mua</th>
           <th>Biển số</th>
           <th>Cửa hàng</th>
+          <th>Ngày đến</th>
+          <th>Loại BD</th>
+          <th>Tiền công</th>
+          <th>Tiền phụ tùng</th>
           <th>Kết quả</th>
         </tr>
         <tr ngClass="row-body" *ngFor='let customer of customer_list'>
@@ -50,6 +54,10 @@
             <td>{{customer.NGAY_MUA}}</td>
             <td>{{customer.BIEN_SO}}</td>
             <td>{{customer.CUA_HANG}}</td>
+            <td>{{customer.NGAY_DEN}}</td>
+            <td>{{customer.LOAI_BAO_DUONG}}</td>
+            <td>{{customer.TIEN_CONG}}</td>
+            <td>{{customer.TIEN_PHU_TUNG}}</td>
             <td><p ngClass="result-text" ion-text color="{{customer.color}}">{{customer.result ? customer.result : '...'}}</p></td>
           </tr>
       </table>

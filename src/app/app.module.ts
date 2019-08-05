@@ -34,6 +34,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { ApiAuthenticateProvider } from '../providers/api-authenticate';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
+import { InterceptorModule, ResponseInterceptorProvider } from '../providers/response-interceptor';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { LogoutPage } from '../pages/logout/logout';
     BrowserModule,
     HttpClientModule,
     IonicSelectableModule,
+    InterceptorModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     PipesModule
@@ -97,7 +99,8 @@ import { LogoutPage } from '../pages/logout/logout';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiCustomerProvider,
     ApiCategoryProvider,
-    ApiAuthenticateProvider
+    ApiAuthenticateProvider,
+    ResponseInterceptorProvider
   ]
 })
 export class AppModule {}

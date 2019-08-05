@@ -44,7 +44,10 @@
           <td><p ion-text color='secondary' no-margin>{{customer.last_visit_date}}</p></td>
           <td>{{customer.last_call_out_date}}</td>
           <td>{{customer.call_out_result}}</td>    
-          <td><button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>Chi tiết</button></td>
+          <td>
+            <button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>Chi tiết</button>
+            &nbsp;&nbsp;<button ion-button small clear outline no-padding no-margin color='danger' (click)='onDelCustomer($event, customer)'><ion-icon name="trash"></ion-icon></button>
+          </td>
       </tr>
     </table>
   </ion-content>

@@ -29,6 +29,7 @@ export class CustomerImportPage {
   shop_list: any[]
   district_list: any[]
   bike_types: any[]
+  maintance_list: any[]
   progress_index: number = 0 
   progress_all: number = 0
 
@@ -58,6 +59,10 @@ export class CustomerImportPage {
       this.apiCategory.getShops().then((data: any[]) => {
         this.shop_list = data
       })
+    ).then(msg => 
+      this.apiCategory.getKieuBaoDuongs().then((data: any[]) => {
+        this.maintance_list = data
+      })
     ).then(obj =>
       this.apiCategory.getDistricts("QTR").then((data: any[]) => {
         this.district_list = data
@@ -86,9 +91,10 @@ export class CustomerImportPage {
     // chuan hoa du lieu ngay tu client cho mau
     customer.NGAY_SINH = customer.NGAY_SINH ? customer.NGAY_SINH.replace(/[^/0-9]/gi,"") : ''
     customer.NGAY_MUA = customer.NGAY_MUA ? customer.NGAY_MUA.replace(/[^/0-9]/gi,"") : ''
+    customer.NGAY_DEN = customer.NGAY_DEN ? customer.NGAY_DEN.replace(/[^/0-9]/gi,"") : ''
     customer.DIEN_THOAI = customer.DIEN_THOAI ? customer.DIEN_THOAI.replace(/[^0-9]/gi,"") : ''
 
-    if ( !moment(customer.NGAY_SINH, "DD/MM/YYYY").isValid() ) {
+    if ( customer.NGAY_SINH && !moment(customer.NGAY_SINH, "DD/MM/YYYY").isValid() ) {
       customer.result = "Ngày sinh không đúng"
       customer.color = "danger"
       return
@@ -142,8 +148,21 @@ export class CustomerImportPage {
       return
     }
 
+    if ( !moment(customer.NGAY_DEN, "DD/MM/YYYY").isValid() ) {
+      customer.result = "Ngày đến không đúng"
+      customer.color = "danger"
+      return
+    }
+
+    if ( !customer.LOAI_BAO_DUONG || !this._checkValueInArray(this.maintance_list, customer.LOAI_BAO_DUONG)) {
+      customer.result = "Loại bảng dưỡng chưa đúng"
+      customer.color = "danger"
+      return
+    }
+
     customer.birthday = moment(customer.NGAY_SINH, "DD/MM/YYYY").format("YYYY-MM-DD")
     customer.buy_date = moment(customer.NGAY_MUA, "DD/MM/YYYY").format("YYYY-MM-DD")
+    customer.last_visit_date = moment(customer.NGAY_DEN, "DD/MM/YYYY").format("YYYY-MM-DD")
     customer.phone = customer.DIEN_THOAI
     customer.full_name = customer.HO_TEN
     customer.sex = customer.GIOI_TINH
@@ -151,6 +170,9 @@ export class CustomerImportPage {
     customer.bike_number = customer.BIEN_SO
     customer.shop_id = this._getKeyInArray(this.shop_list, customer.CUA_HANG)
     customer.district_code = customer.HUYEN
+    customer.kieu_bao_duong_id = this._getKeyInArray(this.maintance_list, customer.LOAI_BAO_DUONG)
+    customer.price = customer.TIEN_CONG ? customer.TIEN_CONG : 0
+    customer.price_equip = customer.TIEN_PHU_TUNG ? customer.TIEN_PHU_TUNG : 0
 
     this.apiCustomer.addCustomer(customer).then((result: any) => {
       customer.result = result.msg

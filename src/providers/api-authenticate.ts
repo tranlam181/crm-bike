@@ -45,17 +45,17 @@ export class ApiAuthenticateProvider {
     })
   }
 
-  saveToken(token, userInfo) {
-    return this.storage.set(this.authKey, {token: token, userInfo: userInfo})
-      .then(res => this._resetReadState())
-  }
-
   async checkLoggedIn() {
-    if (this._getReadState()) {
+    if (this._getReadState() && this.token) {
       return this.isLoggedIn
     } else {
       return await this._readToken()
     }
+  }
+
+  saveToken(token, userInfo) {
+    return this.storage.set(this.authKey, {token: token, userInfo: userInfo})
+      .then(res => this._resetReadState())
   }
 
   logout() {
@@ -72,8 +72,9 @@ export class ApiAuthenticateProvider {
       this.http.post(this.baseUrl + '/login',
           JSON.stringify(user),
           {headers: {'Content-Type': 'application/json'}})
-      .subscribe(data => {
+      .subscribe(async (data: any) => {
         this._resetReadState()
+        await this.saveToken(data.token, data.user)
         resolve(data);
       }, err => {
         reject(err);

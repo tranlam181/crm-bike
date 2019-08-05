@@ -41,6 +41,7 @@ export class ApiCustomerProvider {
       // http get
       this.http.get(this.baseUrl + '/customers?filter=' + filter + '&s=' + s,
         {headers: {...this.headers, 'Authorization': this.apiAuthenticate.token}}
+        // {headers: {...this.headers}}
       ).subscribe(data => {
         resolve(data)
       }, err => {
