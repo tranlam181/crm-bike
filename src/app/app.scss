@@ -30,6 +30,14 @@ ion-menu ion-content {
     max-width: 22% !important;
 }
 
+div.alert-message {
+    overflow-y: auto !important
+}
+
+.alert-md .alert-wrapper {
+    max-width: 380px !important
+}
+
 .table {
     width: 100%;
     .row-header {

@@ -10,6 +10,8 @@ import { LogoutPage } from '../pages/logout/logout';
 import { ApiAuthenticateProvider } from '../providers/api-authenticate';
 import { LoginPage } from '../pages/login/login';
 import EVENTS from '../config/EVENTS';
+import { CalloutReportPage } from '../pages/callout-report/callout-report';
+import { MaintanceReportPage } from '../pages/maintance-report/maintance-report';
 
 @Component({
   templateUrl: 'app.html'
@@ -35,6 +37,8 @@ export class MyApp {
       { title: 'Trang chủ', component: HomePage, icon: 'home' },
       { title: 'DS Khách hàng', component: CustomerListPage, icon: 'people' },
       { title: 'Thêm Khách hàng', component: CustomerAddNewPage, icon: 'add' },
+      { title: 'Báo cáo gọi ra', component: CalloutReportPage, icon: 'stats' },
+      { title: 'Báo cáo KH đến', component: MaintanceReportPage, icon: 'stats' },
       { title: 'Import Khách hàng', component: CustomerImportPage, icon: 'cube' },
       { title: 'Thoát', component: LogoutPage, icon: 'log-out' },
     ];

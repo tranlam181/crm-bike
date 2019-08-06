@@ -35,6 +35,8 @@ import { ApiAuthenticateProvider } from '../providers/api-authenticate';
 import { LoginPage } from '../pages/login/login';
 import { LogoutPage } from '../pages/logout/logout';
 import { InterceptorModule, ResponseInterceptorProvider } from '../providers/response-interceptor';
+import { CalloutReportPage } from '../pages/callout-report/callout-report';
+import { MaintanceReportPage } from '../pages/maintance-report/maintance-report';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { InterceptorModule, ResponseInterceptorProvider } from '../providers/res
     CustomerEditPage,
     CustomerImportPage,
     MaintancePage,
+    MaintanceReportPage,
     CalloutPage,
+    CalloutReportPage,
     TabComingPage,
     TabPassivePage,
     TabActivePage,
@@ -78,7 +82,9 @@ import { InterceptorModule, ResponseInterceptorProvider } from '../providers/res
     CustomerEditPage,
     CustomerImportPage,
     MaintancePage,
+    MaintanceReportPage,
     CalloutPage,
+    CalloutReportPage,
     TabComingPage,
     TabPassivePage,
     TabActivePage,

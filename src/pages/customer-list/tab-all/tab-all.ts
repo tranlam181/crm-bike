@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Events, App } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Events, App, AlertController } from 'ionic-angular';
 import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
 import { CustomerAddNewPage } from '../../customer-add-new/customer-add-new';
+import Utils from '../../../utils/utils';
 
 /**
  * Generated class for the CustomerListPage page.
@@ -17,7 +18,7 @@ import { CustomerAddNewPage } from '../../customer-add-new/customer-add-new';
 })
 export class TabAllPage {
 
-  customers: any
+  customers: any[]
   filterCustomers: any
   searchCustomerString: string = ''
   isSearching: boolean = false
@@ -28,7 +29,8 @@ export class TabAllPage {
     public apiCustomer: ApiCustomerProvider,
     public loadingCtrl: LoadingController,
     public events: Events,
-    public app: App) {
+    public app: App,
+    public alertCtrl: AlertController) {
       // events.subscribe(EVENTS.TAB_NEED_RELOAD, (tabNameNeedReload, time) => {
       //   if (tabNameNeedReload == TabAllPage.name) {
       //     this._searchCustomer(this.searchString)
@@ -38,7 +40,15 @@ export class TabAllPage {
   }
 
   ionViewDidLoad() {
-    this._load()
+    
+  }
+
+  ionViewDidEnter() {
+    if (this.searchString && this.searchString.length > 2) {
+      this._searchCustomer(this.searchString)
+    } else {
+      this._load()
+    }
   }
 
   ionViewWillUnload() {
@@ -47,7 +57,7 @@ export class TabAllPage {
 
   _load() {
     this.isSearching = true
-    this.apiCustomer.getCustomers().then(data => {
+    this.apiCustomer.getCustomers().then((data: any[]) => {
       this.customers = data
       this.filterCustomers = data
       this.isSearching = false
@@ -93,11 +103,19 @@ export class TabAllPage {
     this._searchCustomer(val)
   }
 
-  callCustomer(ev, customer) {
-  }
-
   showDetailCustomer(ev, customer) {
     this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
+  }
+
+  onDelCustomer(ev, customer) {
+    Utils.showConfirmAlert(this.alertCtrl, 
+      "Thông báo", 
+      "Bạn có đồng ý xóa Khách hàng này ? " + customer.full_name, 
+      () => {
+        let foundIdx = this.customers.indexOf(customer)
+        this.customers.splice(foundIdx, 1)
+        this.apiCustomer.delCustomer(customer.id)
+      })
   }
 
   onAddCustomer(ev) {

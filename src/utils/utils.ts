@@ -21,7 +21,10 @@ export default class Utils {
         toast.present();
     }
 
-    static showConfirmAlert(alertCtrl: AlertController, title: string, msg: string, handler?) {
+    static showConfirmAlert(alertCtrl: AlertController, 
+      title: string, 
+      msg: string, 
+      handler?) {
       let confirm: Alert = alertCtrl.create({
         title: title,
         message: msg,
@@ -29,9 +32,12 @@ export default class Utils {
           {
             text: 'OK',
             handler: handler
+          },
+          {
+            text: 'Cancel'
           }
         ]
       });
-      confirm.present()
+      return confirm.present()
     }
 }

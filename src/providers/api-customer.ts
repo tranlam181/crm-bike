@@ -36,6 +36,18 @@ export class ApiCustomerProvider {
     })
   }
 
+  delCustomer(khach_hang_id) {
+    return new Promise((resolve, reject) => {
+      this.http.delete(this.baseUrl + '/customers/' + khach_hang_id,
+          {headers: {...this.headers, 'Authorization': this.apiAuthenticate.token}}
+      ).subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      })
+    })
+  }
+
   getCustomers(filter?, s?) {
     return new Promise((resolve, reject) => {
       // http get

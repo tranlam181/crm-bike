@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { ApiCustomerProvider } from '../../../providers/api-customer';
 import { CustomerDetailPage } from '../../customer-detail/customer-detail';
+import Utils from '../../../utils/utils';
 
 /**
  * Generated class for the TabActivePage page.
@@ -22,7 +23,8 @@ export class TabActivePage {
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     public loadingCtrl: LoadingController,
-    public apiCustomer: ApiCustomerProvider) {
+    public apiCustomer: ApiCustomerProvider  ,
+    public alertCtrl: AlertController) {
   }
 
   _load() {
@@ -48,6 +50,17 @@ export class TabActivePage {
     this.navCtrl.push(CustomerDetailPage, {khach_hang_id: customer.id});
   }
 
+  onDelCustomer(ev, customer) {
+    Utils.showConfirmAlert(this.alertCtrl, 
+      "Thông báo", 
+      "Bạn có đồng ý xóa Khách hàng này ? " + customer.full_name, 
+      () => {
+        let foundIdx = this.customers.indexOf(customer)
+        this.customers.splice(foundIdx, 1)
+        this.apiCustomer.delCustomer(customer.id)
+      })
+  }
+  
   onRefresh(refresher) {
     this._load().then(data => {
       refresher.complete();

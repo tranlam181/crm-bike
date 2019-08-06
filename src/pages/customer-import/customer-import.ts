@@ -100,7 +100,7 @@ export class CustomerImportPage {
       return
     }
 
-    if ( !moment(customer.NGAY_MUA, "DD/MM/YYYY").isValid() ) {
+    if ( customer.NGAY_MUA && !moment(customer.NGAY_MUA, "DD/MM/YYYY").isValid() ) {
       customer.result = "Ngày mua không đúng"
       customer.color = "danger"
       return
@@ -118,13 +118,7 @@ export class CustomerImportPage {
       return
     }
 
-    if ( !customer.hasOwnProperty('GIOI_TINH') ) {
-      customer.result = "Giới tính chưa đúng"
-      customer.color = "danger"
-      return
-    }
-
-    if ( !customer.HUYEN || !this._checkValueInArray(this.district_list, customer.HUYEN)) {
+    if ( customer.HUYEN && !this._checkValueInArray(this.district_list, customer.HUYEN)) {
       customer.result = "Mã huyện chưa đúng"
       customer.color = "danger"
       return
@@ -136,25 +130,19 @@ export class CustomerImportPage {
       return
     }
 
-    if ( !customer.BIEN_SO ) {
-      customer.result = "Biển số chưa đúng"
-      customer.color = "danger"
-      return
-    }
-
     if ( !customer.CUA_HANG || !this._checkValueInArray(this.shop_list, customer.CUA_HANG)) {
       customer.result = "Cửa hàng chưa đúng"
       customer.color = "danger"
       return
     }
 
-    if ( !moment(customer.NGAY_DEN, "DD/MM/YYYY").isValid() ) {
+    if ( customer.NGAY_DEN && !moment(customer.NGAY_DEN, "DD/MM/YYYY").isValid() ) {
       customer.result = "Ngày đến không đúng"
       customer.color = "danger"
       return
     }
 
-    if ( !customer.LOAI_BAO_DUONG || !this._checkValueInArray(this.maintance_list, customer.LOAI_BAO_DUONG)) {
+    if ( customer.LOAI_BAO_DUONG && !this._checkValueInArray(this.maintance_list, customer.LOAI_BAO_DUONG)) {
       customer.result = "Loại bảng dưỡng chưa đúng"
       customer.color = "danger"
       return
