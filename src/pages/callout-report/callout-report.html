@@ -31,10 +31,10 @@
               <button [disabled]="isLoading" ion-button small (click)="onReportDetail()">Báo cáo chi tiết</button>
               <button [disabled]="isLoading" ion-button small (click)="onReportSum()">Báo cáo tổng hợp</button>
               <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>
-              <ion-spinner *ngIf='isLoading' name='ios' style="top:14px"></ion-spinner>
+              <ion-spinner *ngIf='isLoading' name='ios-small' style="position: initial;display: initial"></ion-spinner>
           </ion-col>
         </ion-row>
-    </form>    
+    </form>
     <table ngClass="table" *ngIf='type=="detail"'>
         <tr ngClass="row-header">
           <th>STT</th>
@@ -53,6 +53,7 @@
         </tr>
         <tr ngClass="row-body" *ngFor='let rp of reportData;let i=index'>
           <td>{{i + 1}}</td>
+          <td>{{rp.month_not_come | number}}</td>
           <td>{{rp.customer_type}}</td>
           <td>{{rp.full_name}}</td>
           <td>{{rp.precinct}}</td>

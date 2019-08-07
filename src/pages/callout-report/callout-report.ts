@@ -29,7 +29,7 @@ export class CalloutReportPage {
   reportDataSum: number
   type = 'detail'
 
-  constructor(public navCtrl: NavController, 
+  constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiAuthenticate: ApiAuthenticateProvider,
     public apiCustomer: ApiCustomerProvider,
@@ -57,14 +57,19 @@ export class CalloutReportPage {
 
   onReportDetail() {
     this.type = 'detail'
+    this.isLoading = true
+
     this.apiCustomer.reportCallout("detail", this.myForm.value.date_sta, this.myForm.value.date_end)
       .then((data: any[]) => {
         this.reportData = data
-      })
+        this.isLoading = false
+    })
   }
 
   onReportSum() {
     this.type = 'sum'
+    this.isLoading = true
+
     this.apiCustomer.reportCallout("sum", this.myForm.value.date_sta, this.myForm.value.date_end)
       .then((data: any[]) => {
         this.reportData = data
@@ -72,34 +77,56 @@ export class CalloutReportPage {
           result += obj.count_
           return result
         }, 0)
+        this.isLoading = false
       })
   }
 
   onExcelDetail() {
-    console.log("Xuat excel");
-    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet([], {skipHeader: true})
-    // XLSX.utils.sheet_add_json(ws, [
-    //   'Số tháng chưa đến', 
-    //   'Loại KH',
-    //   'Họ tên',
-    //   'Phường/xã',
-    //   'Quận/huyện',
-    //   'Điện thoại',
-    //   'Loại xe',
-    //   'Biển số',
-    //   'Ngày gọi',
-    //   'Kết quả gọi',
-    //   'Người gọi',
-    //   'CH'
-    // ])
-    XLSX.utils.sheet_add_json(ws, this.reportData, {
-      origin: -1,
-      skipHeader: true
+    this.type = 'detail'
+    this.isLoading = true
+
+    this.apiCustomer.reportCallout("detail", this.myForm.value.date_sta, this.myForm.value.date_end)
+      .then((data: any[]) => {
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(
+          [
+            {
+              month_not_come: "Số tháng chưa đến",
+              customer_type: "Loại KH",
+              full_name: "Họ tên",
+              precinct: "Phường/xã",
+              district: "Quận/huyện",
+              phone: "Điện thoại",
+              bike_name: "Loại xe",
+              bike_number: 'Biển số',
+              call_date: 'Ngày gọi',
+              call_out_result: 'Kết quả gọi',
+              user_name: 'Người gọi',
+              shop_name: 'CH'
+            },
+            ...data
+          ],
+          {
+            skipHeader: true,
+            header: [
+              "month_not_come",
+              "customer_type",
+              "full_name",
+              "precinct",
+              "district",
+              "phone",
+              "bike_name",
+              "bike_number",
+              "call_date",
+              "call_out_result",
+              "user_name",
+              "shop_name"
+            ]
+          })
+        const wb: XLSX.WorkBook = XLSX.utils.book_new()
+        XLSX.utils.book_append_sheet(wb, ws, 'baocao')
+        XLSX.writeFile(wb, this.exportDetailFileName)
+
+        this.isLoading = false
     })
-    const wb: XLSX.WorkBook = XLSX.utils.book_new()
-    XLSX.utils.book_append_sheet(wb, ws, 'baocao')
-    XLSX.writeFile(wb, this.exportDetailFileName)
-    console.log(this.myForm.value);
-    
   }
 }
