@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, App } from 'ionic-angular';
+import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the MaintanceReportPage page.
@@ -14,7 +16,18 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class MaintanceReportPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public apiAuthenticate: ApiAuthenticateProvider,
+    public app: App,
+    public navParams: NavParams) {
+  }
+
+  async ionViewCanEnter() {
+    let ok = await this.apiAuthenticate.checkLoggedIn()
+    if (!ok) {
+      setTimeout(() => this.app.getRootNavs()[0].setRoot(LoginPage))
+    }
+    return ok
   }
 
   ionViewDidLoad() {

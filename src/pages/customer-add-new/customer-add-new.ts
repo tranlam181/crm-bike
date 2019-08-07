@@ -61,6 +61,7 @@ export class CustomerAddNewPage {
     let loading = Utils.showLoading(this.loadingCtrl) //this._showLoading()
     this.apiCategory.getProvinces().then(data => {
       this.province_list = data
+      this.customer.province_code = 'QTR'
       return "OK"
     }).then(msg => {
       return this.apiCategory.getBikeTypes().then(data => {

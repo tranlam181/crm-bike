@@ -11,5 +11,75 @@
 </ion-header>
 
 <ion-content>
-
+    <form [formGroup]="myForm">
+        <ion-row>
+          <ion-col >
+              <ion-item>
+                  <ion-label position="floating">Từ ngày</ion-label>
+                  <ion-datetime formControlName="date_sta" displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" ></ion-datetime>
+              </ion-item>
+          </ion-col>
+          <ion-col >
+              <ion-item>
+                  <ion-label position="floating">Đến ngày</ion-label>
+                  <ion-datetime formControlName="date_end" displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" ></ion-datetime>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col text-center>
+              <button [disabled]="isLoading" ion-button small (click)="onReportDetail()">Báo cáo chi tiết</button>
+              <button [disabled]="isLoading" ion-button small (click)="onReportSum()">Báo cáo tổng hợp</button>
+              <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>
+              <ion-spinner *ngIf='isLoading' name='ios' style="top:14px"></ion-spinner>
+          </ion-col>
+        </ion-row>
+    </form>    
+    <table ngClass="table" *ngIf='type=="detail"'>
+        <tr ngClass="row-header">
+          <th>STT</th>
+          <th>Số tháng KH chưa đến</th>
+          <th>Phân loại KH</th>
+          <th>Họ tên</th>
+          <th>Phường/xã</th>
+          <th>Quận/huyện</th>
+          <th>Điện thoại</th>
+          <th>Loại xe</th>
+          <th>Biển số</th>
+          <th>Ngày gọi</th>
+          <th>Kết quả</th>
+          <th>Người gọi</th>
+          <th>CH</th>
+        </tr>
+        <tr ngClass="row-body" *ngFor='let rp of reportData;let i=index'>
+          <td>{{i + 1}}</td>
+          <td>{{rp.customer_type}}</td>
+          <td>{{rp.full_name}}</td>
+          <td>{{rp.precinct}}</td>
+          <td>{{rp.district}}</td>
+          <td>{{rp.phone}}</td>
+          <td>{{rp.bike_name}}</td>
+          <td>{{rp.bike_number}}</td>
+          <td>{{rp.call_date}}</td>
+          <td>{{rp.call_out_result}}</td>
+          <td>{{rp.user_name}}</td>
+          <td>{{rp.shop_name}}</td>
+        </tr>
+    </table>
+    <div *ngIf='type=="sum"' style="width: 420px;margin:0 auto">
+      <table ngClass="table">
+        <tr ngClass="row-header">
+          <th>Kết quả gọi ra</th>
+          <th text-right>Số lượng</th>
+        </tr>
+        <tr ngClass="row-body" *ngFor='let rp of reportData'>
+          <td>{{rp.call_out_result}}</td>
+          <td text-right>{{rp.count_}}</td>
+        </tr>
+        <tr ngClass="row-body">
+          <td>TỔNG</td>
+          <td text-right style="font-weight: bold">{{reportDataSum | number}}</td>
+        </tr>
+      </table>
+    </div>
 </ion-content>

@@ -141,6 +141,19 @@ export class ApiCustomerProvider {
     })
   }
 
+  reportCallout(type, date_sta, date_end) {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + `/report-callouts?type=${type}&date_sta=${date_sta}&date_end=${date_end}`,
+        {headers: {...this.headers, 'Authorization': this.apiAuthenticate.token}}
+      ).subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
   updateFeedbackAfterBuy(feedback) {
     return new Promise((resolve, reject) => {
       this.http.put(this.baseUrl + `/customers/bikes/${feedback.khach_hang_xe_id}`,

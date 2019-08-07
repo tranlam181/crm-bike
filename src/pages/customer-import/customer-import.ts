@@ -148,9 +148,9 @@ export class CustomerImportPage {
       return
     }
 
-    customer.birthday = moment(customer.NGAY_SINH, "DD/MM/YYYY").format("YYYY-MM-DD")
-    customer.buy_date = moment(customer.NGAY_MUA, "DD/MM/YYYY").format("YYYY-MM-DD")
-    customer.last_visit_date = moment(customer.NGAY_DEN, "DD/MM/YYYY").format("YYYY-MM-DD")
+    customer.birthday = customer.NGAY_SINH ? moment(customer.NGAY_SINH, "DD/MM/YYYY").format("YYYY-MM-DD") : null
+    customer.buy_date = customer.NGAY_MUA ? moment(customer.NGAY_MUA, "DD/MM/YYYY").format("YYYY-MM-DD") : null
+    customer.last_visit_date = customer.NGAY_DEN ? moment(customer.NGAY_DEN, "DD/MM/YYYY").format("YYYY-MM-DD") : null
     customer.phone = customer.DIEN_THOAI
     customer.full_name = customer.HO_TEN
     customer.sex = customer.GIOI_TINH
