@@ -12,6 +12,7 @@ import { LoginPage } from '../pages/login/login';
 import EVENTS from '../config/EVENTS';
 import { CalloutReportPage } from '../pages/callout-report/callout-report';
 import { MaintanceReportPage } from '../pages/maintance-report/maintance-report';
+import { CustomerExportPage } from '../pages/customer-export/customer-export';
 
 @Component({
   templateUrl: 'app.html'
@@ -40,6 +41,7 @@ export class MyApp {
       { title: 'Báo cáo gọi ra', component: CalloutReportPage, icon: 'stats' },
       { title: 'Báo cáo KH đến', component: MaintanceReportPage, icon: 'stats' },
       { title: 'Import Khách hàng', component: CustomerImportPage, icon: 'cube' },
+      { title: 'Export Khách hàng', component: CustomerExportPage, icon: 'cube' },
       { title: 'Thoát', component: LogoutPage, icon: 'log-out' },
     ];
 

@@ -37,6 +37,7 @@ import { LogoutPage } from '../pages/logout/logout';
 import { InterceptorModule, ResponseInterceptorProvider } from '../providers/response-interceptor';
 import { CalloutReportPage } from '../pages/callout-report/callout-report';
 import { MaintanceReportPage } from '../pages/maintance-report/maintance-report';
+import { CustomerExportPage } from '../pages/customer-export/customer-export';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MaintanceReportPage } from '../pages/maintance-report/maintance-report'
     CustomerDetailPage,
     CustomerEditPage,
     CustomerImportPage,
+    CustomerExportPage,
     MaintancePage,
     MaintanceReportPage,
     CalloutPage,
@@ -81,6 +83,7 @@ import { MaintanceReportPage } from '../pages/maintance-report/maintance-report'
     CustomerDetailPage,
     CustomerEditPage,
     CustomerImportPage,
+    CustomerExportPage,
     MaintancePage,
     MaintanceReportPage,
     CalloutPage,

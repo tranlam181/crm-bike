@@ -95,7 +95,7 @@ export class MaintancePage {
         loading.dismiss()
         Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
         //   this.events.publish(EVENTS.TAB_NEED_RELOAD, tabNameNeedReload, Date.now());
-          this.navCtrl.pop()
+          this.navCtrl.popToRoot()
         })
     }).catch(err => {
       loading.dismiss()

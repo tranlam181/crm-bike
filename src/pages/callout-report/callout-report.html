@@ -7,6 +7,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title><ion-icon name="stats"></ion-icon> Báo cáo kết quả gọi ra</ion-title>
+    <ion-buttons end>
+        <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -30,8 +33,7 @@
           <ion-col text-center>
               <button [disabled]="isLoading" ion-button small (click)="onReportDetail()">Báo cáo chi tiết</button>
               <button [disabled]="isLoading" ion-button small (click)="onReportSum()">Báo cáo tổng hợp</button>
-              <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>
-              <ion-spinner *ngIf='isLoading' name='ios-small' style="position: initial;display: initial"></ion-spinner>
+              <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>              
           </ion-col>
         </ion-row>
     </form>

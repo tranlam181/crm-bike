@@ -79,7 +79,7 @@ export class CalloutPage {
     this.apiCustomer.addCallout(this.callout).then((data:any) => {
       loading.dismiss()
       Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg, () => {
-        this.navCtrl.pop()
+        this.navCtrl.popToRoot()
       })
     }).catch(err => {
       loading.dismiss()

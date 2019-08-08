@@ -1,15 +1,93 @@
 <!--
-  Generated template for the MaintanceReportPage page.
+  Generated template for the CalloutReportPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
-    <ion-title><ion-icon name="stats"></ion-icon> Báo cáo kết quả KH đến</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+    <ion-navbar>
+      <ion-title><ion-icon name="stats"></ion-icon> Báo cáo kết quả KH đến</ion-title>
+      <ion-buttons end>
+          <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+      <form [formGroup]="myForm">
+          <ion-row>
+            <ion-col >
+                <ion-item>
+                    <ion-label position="floating">Từ ngày</ion-label>
+                    <ion-datetime formControlName="date_sta" displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" ></ion-datetime>
+                </ion-item>
+            </ion-col>
+            <ion-col >
+                <ion-item>
+                    <ion-label position="floating">Đến ngày</ion-label>
+                    <ion-datetime formControlName="date_end" displayFormat="DD/MM/YYYY" placeholder="dd/mm/yyyy" ></ion-datetime>
+                </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col text-center>
+                <button [disabled]="isLoading" ion-button small (click)="onReportDetail()">Báo cáo chi tiết</button>
+                <button [disabled]="isLoading" ion-button small (click)="onReportSum()">Báo cáo tổng hợp</button>
+                <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>              
+            </ion-col>
+          </ion-row>
+      </form>
+      <table ngClass="table" *ngIf='type=="detail"'>
+          <tr ngClass="row-header">
+            <th>STT</th>
+            <th>Số tháng KH chưa đến</th>
+            <th>Phân loại KH</th>
+            <th>Họ tên</th>
+            <th>Phường/xã</th>
+            <th>Quận/huyện</th>
+            <th>Điện thoại</th>
+            <th>Loại xe</th>
+            <th>Biển số</th>
+            <th>Ngày đến</th>
+            <th>Loại hình KH</th>
+            <th>Tiền công</th>
+            <th>Tiền phụ tùng</th>
+            <th>Ghi chú</th>
+            <th>CH</th>
+          </tr>
+          <tr ngClass="row-body" *ngFor='let rp of reportData;let i=index'>
+            <td>{{i + 1}}</td>
+            <td>{{rp.month_not_come | number}}</td>
+            <td>{{rp.customer_type}}</td>
+            <td>{{rp.full_name}}</td>
+            <td>{{rp.precinct}}</td>
+            <td>{{rp.district}}</td>
+            <td>{{rp.phone}}</td>
+            <td>{{rp.bike_name}}</td>
+            <td>{{rp.bike_number}}</td>
+            <td>{{rp.maintance_date}}</td>
+            <td>{{rp.maintance_name}}</td>
+            <td>{{rp.price_wage | number}}</td>
+            <td>{{rp.price_equip | number}}</td>
+            <td>{{rp.maintance_detail}}</td>
+            <td>{{rp.shop_name}}</td>
+          </tr>
+      </table>
+      <div *ngIf='type=="sum"' style="width: 420px;margin:0 auto">
+        <table ngClass="table">
+          <tr ngClass="row-header">
+            <th>Kết quả gọi ra</th>
+            <th text-right>Số lượng</th>
+          </tr>
+          <tr ngClass="row-body" *ngFor='let rp of reportData'>
+            <td>{{rp.maintance_name}}</td>
+            <td text-right>{{rp.count_}}</td>
+          </tr>
+          <tr ngClass="row-body">
+            <td>TỔNG</td>
+            <td text-right style="font-weight: bold">{{reportDataSum | number}}</td>
+          </tr>
+        </table>
+      </div>
+  </ion-content>
+  

@@ -1,0 +1,29 @@
+<!--
+  Generated template for the CustomerExportPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title><ion-icon name="cube"></ion-icon> Export Khách hàng ra excel</ion-title>
+      <ion-buttons end>
+          <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+          <button [disabled]="isLoading" ion-button small (click)="onExportActive()">Xuất KH thường xuyên</button>
+          <button [disabled]="isLoading" ion-button small (click)="onExportPassive()">Xuất KH thụ động</button>
+          <button [disabled]="isLoading" ion-button small (click)="onExportAll()">Xuất tất cả KH</button>              
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

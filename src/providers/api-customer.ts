@@ -154,6 +154,32 @@ export class ApiCustomerProvider {
     })
   }
 
+  reportMaintance(type, date_sta, date_end) {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + `/report-maintances?type=${type}&date_sta=${date_sta}&date_end=${date_end}`,
+        {headers: {...this.headers, 'Authorization': this.apiAuthenticate.token}}
+      ).subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
+  exportCustomer(type) {
+    return new Promise((resolve, reject) => {
+      // http get
+      this.http.get(this.baseUrl + `/export-customers?type=${type}`,
+        {headers: {...this.headers, 'Authorization': this.apiAuthenticate.token}}
+      ).subscribe(data => {
+        resolve(data)
+      }, err => {
+        reject(err.message)
+      })
+    })
+  }
+
   updateFeedbackAfterBuy(feedback) {
     return new Promise((resolve, reject) => {
       this.http.put(this.baseUrl + `/customers/bikes/${feedback.khach_hang_xe_id}`,
