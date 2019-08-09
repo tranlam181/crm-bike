@@ -13,6 +13,8 @@ import EVENTS from '../config/EVENTS';
 import { CalloutReportPage } from '../pages/callout-report/callout-report';
 import { MaintanceReportPage } from '../pages/maintance-report/maintance-report';
 import { CustomerExportPage } from '../pages/customer-export/customer-export';
+import { FeedbackAfterBuyReportPage } from '../pages/feedback-after-buy-report/feedback-after-buy-report';
+import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-maintance-report/feedback-after-maintance-report';
 
 @Component({
   templateUrl: 'app.html'
@@ -38,6 +40,8 @@ export class MyApp {
       { title: 'Trang chủ', component: HomePage, icon: 'home' },
       { title: 'DS Khách hàng', component: CustomerListPage, icon: 'people' },
       { title: 'Thêm Khách hàng', component: CustomerAddNewPage, icon: 'add' },
+      { title: 'Báo cáo ý kiến mua xe', component: FeedbackAfterBuyReportPage, icon: 'stats' },
+      { title: 'Báo cáo ý kiến dịch vụ', component: FeedbackAfterMaintanceReportPage, icon: 'stats' },
       { title: 'Báo cáo gọi ra', component: CalloutReportPage, icon: 'stats' },
       { title: 'Báo cáo KH đến', component: MaintanceReportPage, icon: 'stats' },
       { title: 'Import Khách hàng', component: CustomerImportPage, icon: 'cube' },

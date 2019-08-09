@@ -38,6 +38,8 @@ import { InterceptorModule, ResponseInterceptorProvider } from '../providers/res
 import { CalloutReportPage } from '../pages/callout-report/callout-report';
 import { MaintanceReportPage } from '../pages/maintance-report/maintance-report';
 import { CustomerExportPage } from '../pages/customer-export/customer-export';
+import { FeedbackAfterBuyReportPage } from '../pages/feedback-after-buy-report/feedback-after-buy-report';
+import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-maintance-report/feedback-after-maintance-report';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,8 @@ import { CustomerExportPage } from '../pages/customer-export/customer-export';
     TabAfterMaintanceDatePage,
     FeedbackAfterBuyPage,
     FeedbackAfterMaintancePage,
+    FeedbackAfterBuyReportPage,
+    FeedbackAfterMaintanceReportPage,
     SchedulePage,
     LoginPage,
     LogoutPage,
@@ -97,6 +101,8 @@ import { CustomerExportPage } from '../pages/customer-export/customer-export';
     TabAfterMaintanceDatePage,
     FeedbackAfterBuyPage,
     FeedbackAfterMaintancePage,
+    FeedbackAfterBuyReportPage,
+    FeedbackAfterMaintanceReportPage,
     SchedulePage,
     LoginPage,
     LogoutPage,

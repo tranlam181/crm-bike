@@ -20,9 +20,6 @@ import { ApiCustomerProvider } from '../../providers/api-customer';
 })
 export class CalloutReportPage {
 
-  data = [ ['Đinh Văn Thọ', 25000], [3, '03/09/2019'] ];
-	wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
-  exportDetailFileName: string = 'bao_cao_goi_ra.xlsx';
   myForm: any
   isLoading: boolean = false
   reportData: any[]
@@ -52,7 +49,6 @@ export class CalloutReportPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CalloutReportPage');
   }
 
   onReportDetail() {
@@ -123,8 +119,8 @@ export class CalloutReportPage {
             ]
           })
         const wb: XLSX.WorkBook = XLSX.utils.book_new()
-        XLSX.utils.book_append_sheet(wb, ws, 'baocao')
-        XLSX.writeFile(wb, this.exportDetailFileName)
+        XLSX.utils.book_append_sheet(wb, ws, 'bao_cao_goi_ra')
+        XLSX.writeFile(wb, 'bao_cao_goi_ra.xlsx')
 
         this.isLoading = false
     })
