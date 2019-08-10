@@ -49,6 +49,7 @@ export class CalloutReportPage {
   }
 
   ionViewDidLoad() {
+    this.onReportDetail()
   }
 
   onReportDetail() {
@@ -102,21 +103,7 @@ export class CalloutReportPage {
             ...data
           ],
           {
-            skipHeader: true,
-            header: [
-              "month_not_come",
-              "customer_type",
-              "full_name",
-              "precinct",
-              "district",
-              "phone",
-              "bike_name",
-              "bike_number",
-              "call_date",
-              "call_out_result",
-              "user_name",
-              "shop_name"
-            ]
+            skipHeader: true
           })
         const wb: XLSX.WorkBook = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(wb, ws, 'bao_cao_goi_ra')

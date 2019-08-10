@@ -48,6 +48,7 @@ export class FeedbackAfterMaintanceReportPage {
   }
 
   ionViewDidLoad() {
+    this.onReportDetail()
   }
 
   onReportDetail() {
@@ -90,25 +91,7 @@ export class FeedbackAfterMaintanceReportPage {
             ...data
           ],
           {
-            skipHeader: true,
-            header: [
-              "month_not_come",
-              "customer_type",
-              "full_name",
-              "precinct",
-              "district",
-              "phone",
-              "bike_name",
-              "bike_number",
-              "maintance_date",
-              "maintance_name",
-              "price_wage",
-              "price_equip",
-              "maintance_detail",
-              "feedback_date",
-              "feedback",
-              "shop_name"
-            ]
+            skipHeader: true
           })
         const wb: XLSX.WorkBook = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(wb, ws, 'bao_cao_y_kien_sau_dich_vu')

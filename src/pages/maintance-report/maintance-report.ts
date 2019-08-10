@@ -49,7 +49,7 @@ export class MaintanceReportPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CalloutReportPage');
+    this.onReportDetail()
   }
 
   onReportDetail() {
@@ -105,23 +105,7 @@ export class MaintanceReportPage {
             ...data
           ],
           {
-            skipHeader: true,
-            header: [
-              "month_not_come",
-              "customer_type",
-              "full_name",
-              "precinct",
-              "district",
-              "phone",
-              "bike_name",
-              "bike_number",
-              "maintance_date",
-              "maintance_name",
-              "price_wage",
-              "price_equip",
-              "maintance_detail",
-              "shop_name"
-            ]
+            skipHeader: true
           })
         const wb: XLSX.WorkBook = XLSX.utils.book_new()
         XLSX.utils.book_append_sheet(wb, ws, 'bao_cao_kh_den')

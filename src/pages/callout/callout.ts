@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
@@ -44,7 +44,8 @@ export class CalloutPage {
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCrtl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public toast: ToastController) {
       this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       this.callout.khach_hang_xe_id = navParams.data.khach_hang_xe_id
       let curDate = new Date()
@@ -74,6 +75,11 @@ export class CalloutPage {
   }
 
   onSaveCallout() {
+    if (!this.callout.ket_qua_goi_ra_id) {
+      Utils.showToast(this.toast, "Bạn phải Chọn kết quả gọi ra")
+      return
+    }
+
     let loading = Utils.showLoading(this.loadingCrtl)
 
     this.apiCustomer.addCallout(this.callout).then((data:any) => {

@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { ApiCategoryProvider } from '../../providers/api-category';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import Utils from '../../utils/utils';
@@ -45,10 +45,11 @@ export class FeedbackAfterBuyPage {
     public apiCategory: ApiCategoryProvider,
     public apiCustomer: ApiCustomerProvider,
     public loadingCrtl: LoadingController,
-    public alertCtrl: AlertController) {
+    public alertCtrl: AlertController,
+    public toast: ToastController) {
 
     this.khach_hang_xe_id = navParams.data.khach_hang_xe_id
-    this.feedback_after_buy.khach_hang_xe_id = navParams.data.khach_hang_xe_id    
+    this.feedback_after_buy.khach_hang_xe_id = navParams.data.khach_hang_xe_id
     let curDate = new Date()
     curDate.setFullYear(curDate.getFullYear() + 5)
     this.maxSelectableDate = curDate.toISOString().substring(0, 10)
@@ -60,7 +61,7 @@ export class FeedbackAfterBuyPage {
       this.navCtrl.pop()
     }
   }
-  
+
   ionViewDidLoad() {
     this._load()
   }
@@ -89,6 +90,11 @@ export class FeedbackAfterBuyPage {
   }
 
   onSaveFeedbackAfterBuy() {
+    if (!this.feedback_after_buy.y_kien_mua_xe_id) {
+      Utils.showToast(this.toast, "Bạn phải chọn mục Ý kiến sau mua xe")
+      return
+    }
+
     let loading = Utils.showLoading(this.loadingCrtl)
 
     this.apiCustomer.updateFeedbackAfterBuy(this.feedback_after_buy).then((data:any) => {
