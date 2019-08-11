@@ -25,7 +25,7 @@ export class FeedbackAfterBuyReportPage {
   reportData: any[]
   reportDataSum: number
   type = 'detail'
-  
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiAuthenticate: ApiAuthenticateProvider,
@@ -47,8 +47,9 @@ export class FeedbackAfterBuyReportPage {
    }
    return ok
  }
-  
+
   ionViewDidLoad() {
+    this.onReportDetail()
   }
 
   onReportDetail() {

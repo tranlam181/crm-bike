@@ -32,7 +32,7 @@ export class CalloutReportPage {
     public apiCustomer: ApiCustomerProvider,
     public app: App,
     public formBuilder: FormBuilder) {
-      const startOfMonth = moment().startOf('month').format('YYYY-MM-DD');
+      const startOfMonth = moment().format('YYYY-MM-DD');
       const endOfMonth   = moment().endOf('month').format('YYYY-MM-DD');
       this.myForm = formBuilder.group({
           date_sta: [startOfMonth, Validators.compose([Validators.required])],
@@ -97,7 +97,8 @@ export class CalloutReportPage {
               bike_number: 'Biển số',
               call_date: 'Ngày gọi',
               call_out_result: 'Kết quả gọi',
-              user_name: 'Người gọi',
+              buy_opinion: 'Ý kiến mua xe',
+              note: 'Ghi chú',
               shop_name: 'CH'
             },
             ...data

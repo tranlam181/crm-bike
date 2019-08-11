@@ -33,7 +33,7 @@
           <ion-col text-center>
               <button [disabled]="isLoading" ion-button small (click)="onReportDetail()">Báo cáo chi tiết</button>
               <button [disabled]="isLoading" ion-button small (click)="onReportSum()">Báo cáo tổng hợp</button>
-              <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>              
+              <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>
           </ion-col>
         </ion-row>
     </form>
@@ -43,14 +43,14 @@
           <th>Số tháng KH chưa đến</th>
           <th>Phân loại KH</th>
           <th>Họ tên</th>
-          <th>Phường/xã</th>
           <th>Quận/huyện</th>
           <th>Điện thoại</th>
           <th>Loại xe</th>
           <th>Biển số</th>
           <th>Ngày gọi</th>
-          <th>Kết quả</th>
-          <th>Người gọi</th>
+          <th>Kết quả gọi</th>
+          <th>Ý kiến mua xe</th>
+          <th>Ghi chú</th>
           <th>CH</th>
         </tr>
         <tr ngClass="row-body" *ngFor='let rp of reportData;let i=index'>
@@ -58,14 +58,14 @@
           <td>{{rp.month_not_come | number}}</td>
           <td>{{rp.customer_type}}</td>
           <td>{{rp.full_name}}</td>
-          <td>{{rp.precinct}}</td>
           <td>{{rp.district}}</td>
           <td>{{rp.phone}}</td>
           <td>{{rp.bike_name}}</td>
           <td>{{rp.bike_number}}</td>
           <td>{{rp.call_date}}</td>
           <td>{{rp.call_out_result}}</td>
-          <td>{{rp.user_name}}</td>
+          <td>{{rp.buy_opinion}}</td>
+          <td>{{rp.note}}</td>
           <td>{{rp.shop_name}}</td>
         </tr>
     </table>

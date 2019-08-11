@@ -12,7 +12,7 @@
       </ion-buttons>
     </ion-navbar>
   </ion-header>
-  
+
   <ion-content>
       <form [formGroup]="myForm">
           <ion-row>
@@ -33,7 +33,7 @@
             <ion-col text-center>
                 <button [disabled]="isLoading" ion-button small (click)="onReportDetail()">Báo cáo chi tiết</button>
                 <button [disabled]="isLoading" ion-button small (click)="onReportSum()">Báo cáo tổng hợp</button>
-                <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>              
+                <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>
             </ion-col>
           </ion-row>
       </form>
@@ -43,7 +43,6 @@
             <th>Số tháng KH chưa đến</th>
             <th>Phân loại KH</th>
             <th>Họ tên</th>
-            <th>Phường/xã</th>
             <th>Quận/huyện</th>
             <th>Điện thoại</th>
             <th>Loại xe</th>
@@ -58,7 +57,6 @@
             <td>{{rp.month_not_come | number}}</td>
             <td>{{rp.customer_type}}</td>
             <td>{{rp.full_name}}</td>
-            <td>{{rp.precinct}}</td>
             <td>{{rp.district}}</td>
             <td>{{rp.phone}}</td>
             <td>{{rp.bike_name}}</td>
@@ -86,4 +84,3 @@
         </table>
       </div>
   </ion-content>
-  
