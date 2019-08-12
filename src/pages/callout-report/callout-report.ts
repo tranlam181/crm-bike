@@ -20,6 +20,7 @@ import { ApiCustomerProvider } from '../../providers/api-customer';
 })
 export class CalloutReportPage {
 
+  localDate: Date = new Date()
   myForm: any
   isLoading: boolean = false
   reportData: any[]
@@ -50,6 +51,11 @@ export class CalloutReportPage {
 
   ionViewDidLoad() {
     this.onReportDetail()
+  }
+
+  onChangedDate(ev) {
+    console.log(ev);
+    
   }
 
   onReportDetail() {
