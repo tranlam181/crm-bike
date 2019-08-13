@@ -1,11 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import moment from 'moment';
 
-/**
- * Generated class for the DayagoPipe pipe.
- *
- * See https://angular.io/api/core/Pipe for more info on Angular Pipes.
- */
 @Pipe({
   name: 'dayago',
 })

@@ -40,7 +40,6 @@ import { MaintanceReportPage } from '../pages/maintance-report/maintance-report'
 import { CustomerExportPage } from '../pages/customer-export/customer-export';
 import { FeedbackAfterBuyReportPage } from '../pages/feedback-after-buy-report/feedback-after-buy-report';
 import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-maintance-report/feedback-after-maintance-report';
-import { DatetimePickerModule } from 'ion-datetime-picker';
 
 @NgModule({
   declarations: [
@@ -78,8 +77,7 @@ import { DatetimePickerModule } from 'ion-datetime-picker';
     InterceptorModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    PipesModule,
-    DatetimePickerModule
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -64,26 +64,7 @@ export class CustomerExportPage {
         ...data
       ],
       {
-        skipHeader: true,
-        header: [
-          "month_not_come",
-          "customer_type",
-          "full_name",
-          "precinct",
-          "district",
-          "phone",
-          "bike_name",
-          "bike_number",
-          "maintance_date",
-          "maintance_name",
-          "price_wage",
-          "price_equip",
-          "maintance_detail",
-          "maintance_feedback",
-          "shop_name",
-          "buy_feedback",
-          "note"
-        ]
+        skipHeader: true
       })
     const wb: XLSX.WorkBook = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(wb, ws, sheetName)
