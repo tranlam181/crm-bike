@@ -14,10 +14,12 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+// disable scroll bar trong menu
 ion-menu ion-content .scroll-content::-webkit-scrollbar {
     display: none;
 }
-
+// cho phep select text
 body {
     -webkit-user-select: text;
     -moz-user-select: text;
@@ -28,27 +30,35 @@ body {
 .menu-inner .scroll-content {
     overflow-y: auto !important
 }
-
+// mau cua menu
 ion-menu ion-content {
     background-color: map-get($map: $colors, $key: primary) !important
 }
-
+side-menu-content ion-item.item, ion-list.accordion-menu ion-item.item.header {
+    background-color: map-get($map: $colors, $key: primary);
+    color: map-get($map: $colors, $key: light)
+}
+// hight light active menu
+.active-menu, .selected-menu {
+    background-color: map-get($map: $colors, $key: menu-hightlight-background) !important
+}
+// phan info user
 .user-info-wrapper {
     background-color: map-get($map: $colors, $key: primary)
 }
-
+// giam width cua menu
 .split-pane-md.split-pane-visible > .split-pane-side {
     max-width: 22% !important;
 }
-
+// 
 div.alert-message {
     overflow-y: auto !important
 }
-
+// tang width cua alert
 .alert-md .alert-wrapper {
     max-width: 380px !important
 }
-
+// bang du lieu
 .table {
     width: 100%;
     .row-header {

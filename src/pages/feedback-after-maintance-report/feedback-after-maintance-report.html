@@ -39,7 +39,7 @@
       <table ngClass="table" *ngIf='type=="detail"'>
           <tr ngClass="row-header">
             <th>STT</th>
-            <th>Số tháng KH chưa đến</th>
+            <th>Số tháng<br>KH chưa đến</th>
             <th>Phân loại KH</th>
             <th>Họ tên</th>
             <th>Điện thoại</th>
@@ -54,8 +54,8 @@
             <th>Ý kiến sau dịch vụ</th>
             <th>CH</th>
           </tr>
-          <tr ngClass="row-body" *ngFor='let rp of reportData;let i=index'>
-            <td>{{i + 1}}</td>
+          <tr ngClass="row-body" *ngFor='let rp of reportData | paginate: {itemsPerPage: itemsPerPage, currentPage: p};let i=index'>
+            <td>{{((p-1) * itemsPerPage) + i + 1}}</td>
             <td>{{rp.month_not_come | number}}</td>
             <td>{{rp.customer_type}}</td>
             <td>{{rp.full_name}}</td>
@@ -70,6 +70,14 @@
             <td>{{rp.feedback_date}}</td>
             <td>{{rp.feedback}}</td>
             <td>{{rp.shop_name}}</td>
+          </tr>
+          <tr>
+            <td colspan="15" text-center>
+              <pagination-controls 
+                  (pageChange)="p = $event"
+                  previousLabel="Trước"
+                  nextLabel="Sau"></pagination-controls>
+            </td>
           </tr>
       </table>
       <div *ngIf='type=="sum"' style="width: 420px;margin:0 auto">

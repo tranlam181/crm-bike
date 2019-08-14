@@ -20,6 +20,8 @@ import { ApiCustomerProvider } from '../../providers/api-customer';
 })
 export class FeedbackAfterBuyReportPage {
 
+  p: number = 1
+  itemsPerPage: number = 15
   myForm: any
   isLoading: boolean = false
   reportData: any[]

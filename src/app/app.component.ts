@@ -16,16 +16,43 @@ import { CustomerExportPage } from '../pages/customer-export/customer-export';
 import { FeedbackAfterBuyReportPage } from '../pages/feedback-after-buy-report/feedback-after-buy-report';
 import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-maintance-report/feedback-after-maintance-report';
 
+// RxJS
+import { ReplaySubject } from "rxjs/ReplaySubject";
+import { ArrayObservable } from "rxjs/observable/ArrayObservable";
+// Models
+import { SideMenuContentComponent } from '../components/side-menu-content/side-menu-content.component';
+import { SideMenuSettings } from '../components/side-menu-content/models/side-menu-settings';
+import { MenuOptionModel } from '../components/side-menu-content/models/menu-option-model';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
+
   @ViewChild(Nav) nav: Nav;
   rootPage: any = HomePage;
+  activePage: any
   pages: Array<{title: string, component: any, icon: string}>;
   logInPage: {title: string, component: any, icon: string};
   isLoggedIn: boolean = false
   userInfo: any
+
+  // Get the instance to call the public methods
+  @ViewChild(SideMenuContentComponent) sideMenu: SideMenuContentComponent;
+  // Options to show in the SideMenuComponent
+	public options: Array<MenuOptionModel>;
+	// Settings for the SideMenuComponent
+	public sideMenuSettings: SideMenuSettings = {
+		accordionMode: true,
+		showSelectedOption: true,
+		selectedOptionClass: 'selected-menu',
+    subOptionIndentation: {
+      md: '32px',
+      ios: '48px',
+      wp: '32px'
+    }
+  };
+  private unreadCountObservable: any = new ReplaySubject<number>(0);
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
@@ -33,7 +60,7 @@ export class MyApp {
     private apiAuthenticate: ApiAuthenticateProvider,
     private event: Events ) {
 
-    this.initializeApp();
+    this.initializeApp();    
 
     // used for an example of ngFor and navigation
     this.pages = [
@@ -50,6 +77,8 @@ export class MyApp {
     ];
 
     this.logInPage = { title: 'Đăng nhập', component: LoginPage, icon: 'log-in'}
+
+    this.activePage = this.pages[0]
   }
 
   ngOnDestroy() {
@@ -83,12 +112,68 @@ export class MyApp {
       })
       // this.splashScreen.hide();
       this._load()
+
+      this.initializeOptions();
     });
+
+    // Change the value for the batch every 5 seconds
+		setInterval(() => {
+			this.unreadCountObservable.next(Math.floor(Math.random() * 10));
+		}, 5000);
   }
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+    this.activePage = page
   }
+
+
+  // menu 
+  private initializeOptions(): void {
+		this.options = new Array<MenuOptionModel>();
+		// Load simple menu options
+    // ------------------------------------------
+    this.options.push(...[
+      { displayName: 'Trang chủ', component: HomePage, iconName: 'home', selected: true },
+      { displayName: 'DS Khách hàng', component: CustomerListPage, iconName: 'people' },
+      { displayName: 'Thêm Khách hàng', component: CustomerAddNewPage, iconName: 'add' },
+      { displayName: 'Báo cáo', subItems: [
+        { displayName: 'Báo cáo ý kiến mua xe', component: FeedbackAfterBuyReportPage, iconName: 'stats' },
+        { displayName: 'Báo cáo ý kiến dịch vụ', component: FeedbackAfterMaintanceReportPage, iconName: 'stats' },
+        { displayName: 'Báo cáo gọi ra', component: CalloutReportPage, iconName: 'stats' },
+        { displayName: 'Báo cáo KH đến', component: MaintanceReportPage, iconName: 'stats' },
+      ]},
+      { displayName: 'Import Khách hàng', component: CustomerImportPage, iconName: 'cube' },
+      { displayName: 'Export Khách hàng', component: CustomerExportPage, iconName: 'cube' },
+      { displayName: 'Thoát', component: LogoutPage, iconName: 'log-out' }
+    ])
+	}
+
+	public selectOption(option: MenuOptionModel): void {
+		this.menuCtrl.close().then(() => {
+
+			if (option.custom && option.custom.isLogin) {
+				this.presentAlert('You\'ve clicked the login option!');
+			} else if (option.custom && option.custom.isLogout) {
+				this.presentAlert('You\'ve clicked the logout option!');
+			} else if(option.custom && option.custom.isExternalLink) {
+				let url = option.custom.externalUrl;
+				window.open(url, '_blank');
+			} else {
+				// Redirect to the selected page
+				this.nav.setRoot(option.component || HomePage, { 'title': option.displayName });
+			}
+		});
+	}
+
+	public collapseMenuOptions(): void {
+		// Collapse all the options
+		this.sideMenu.collapseAllOptions();
+	}
+
+	public presentAlert(message: string): void {
+		console.log(message);
+	}
 }

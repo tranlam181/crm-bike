@@ -19,6 +19,9 @@ import moment from 'moment';
   templateUrl: 'feedback-after-maintance-report.html',
 })
 export class FeedbackAfterMaintanceReportPage {
+
+  p: number = 1
+  itemsPerPage: number = 15
   myForm: any
   isLoading: boolean = false
   reportData: any[]

@@ -20,6 +20,8 @@ import { ApiCustomerProvider } from '../../providers/api-customer';
 })
 export class CalloutReportPage {
 
+  p: number = 1
+  itemsPerPage: number = 15
   localDate: Date = new Date()
   myForm: any
   isLoading: boolean = false

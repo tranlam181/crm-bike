@@ -31,6 +31,7 @@
     "ionic-selectable": "^3.4.0",
     "ionicons": "3.0.0",
     "moment": "^2.24.0",
+    "ngx-pagination": "^4.1.0",
     "rxjs": "5.5.11",
     "rxjs-compat": "^6.5.2",
     "sleep-promise": "^8.0.1",

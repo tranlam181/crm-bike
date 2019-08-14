@@ -40,10 +40,13 @@ import { MaintanceReportPage } from '../pages/maintance-report/maintance-report'
 import { CustomerExportPage } from '../pages/customer-export/customer-export';
 import { FeedbackAfterBuyReportPage } from '../pages/feedback-after-buy-report/feedback-after-buy-report';
 import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-maintance-report/feedback-after-maintance-report';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { SideMenuContentComponent } from '../components/side-menu-content/side-menu-content.component';
 
 @NgModule({
   declarations: [
     MyApp,
+    SideMenuContentComponent,
     CustomerListPage,
     CustomerAddNewPage,
     CustomerDetailPage,
@@ -75,6 +78,7 @@ import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-mainta
     HttpClientModule,
     IonicSelectableModule,
     InterceptorModule,
+    NgxPaginationModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     PipesModule
