@@ -18,7 +18,7 @@ import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-mainta
 
 // RxJS
 import { ReplaySubject } from "rxjs/ReplaySubject";
-import { ArrayObservable } from "rxjs/observable/ArrayObservable";
+// import { ArrayObservable } from "rxjs/observable/ArrayObservable";
 // Models
 import { SideMenuContentComponent } from '../components/side-menu-content/side-menu-content.component';
 import { SideMenuSettings } from '../components/side-menu-content/models/side-menu-settings';
