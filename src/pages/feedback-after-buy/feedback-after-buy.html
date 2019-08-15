@@ -38,6 +38,12 @@
     <form (ngSubmit)="onSaveFeedbackAfterBuy()">
       <ion-item-divider color="light"><p ion-text color="primary">Nhập phản hồi KH sau mua xe</p></ion-item-divider>
       <ion-item>
+        <ion-label>Mục đích gọi ra:</ion-label>
+        <ion-select placeholder='Chọn mục đích gọi ra' [(ngModel)]="feedback_after_buy.muc_dich_goi_ra_id" interface="popover" name='muc_dich_goi_ra_id' >
+          <ion-option *ngFor="let purpose of call_out_purposes" value="{{purpose.id}}">{{purpose.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
         <ion-label>Ý kiến sau mua xe:</ion-label>
         <ion-select placeholder='Chọn ý kiến KH' [(ngModel)]="feedback_after_buy.y_kien_mua_xe_id" interface="popover" name='y_kien_mua_xe_id' >
           <ion-option *ngFor="let opinion of opinion_list" value="{{opinion.id}}">{{opinion.name}}</ion-option>

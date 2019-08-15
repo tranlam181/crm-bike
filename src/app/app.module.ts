@@ -42,6 +42,7 @@ import { FeedbackAfterBuyReportPage } from '../pages/feedback-after-buy-report/f
 import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-maintance-report/feedback-after-maintance-report';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SideMenuContentComponent } from '../components/side-menu-content/side-menu-content.component';
+import { ChartsModule } from 'ng2-charts-x';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { SideMenuContentComponent } from '../components/side-menu-content/side-m
     IonicSelectableModule,
     InterceptorModule,
     NgxPaginationModule,
+    ChartsModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     PipesModule

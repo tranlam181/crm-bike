@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, App } from 'ionic-angular';
 import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
 import { LoginPage } from '../login/login';
@@ -6,6 +6,10 @@ import * as XLSX from 'xlsx';
 import { ApiCustomerProvider } from '../../providers/api-customer';
 import { FormBuilder, Validators } from '@angular/forms';
 import moment from 'moment';
+
+import { ChartOptions, ChartType } from 'chart.js';
+import { Label } from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts-x';
 
 /**
  * Generated class for the MaintanceReportPage page.
@@ -28,6 +32,28 @@ export class MaintanceReportPage {
   reportDataSum: number
   type = 'detail'
 
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: { 
+      xAxes: [{barThickness: 12, scaleLabel: {display: true}}], 
+      yAxes: [{}] 
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabels: Label[] = [];
+  public barChartType: ChartType = 'horizontalBar';
+  public barChartLegend = false;
+  public barChartData = [
+    { data: [], label: 'Số lượng' },
+  ];
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiAuthenticate: ApiAuthenticateProvider,
@@ -76,6 +102,16 @@ export class MaintanceReportPage {
           result += obj.count_
           return result
         }, 0)
+
+        // chart
+        this.barChartLabels.length = 0
+        this.barChartData[0].data.length = 0
+        data.map((e, idx) => {
+          this.barChartLabels.push(e.maintance_name)
+          this.barChartData[0].data.push(e.count_)
+        })
+        this.chart.chart.update()
+
         this.isLoading = false
       })
   }

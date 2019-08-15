@@ -27,7 +27,7 @@ export class FeedbackAfterMaintanceReportPage {
   reportData: any[]
   reportDataSum: number
   type = 'detail'
-
+  
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiAuthenticate: ApiAuthenticateProvider,

@@ -31,10 +31,12 @@ export class CalloutPage {
   callout = {
     khach_hang_xe_id: '',
     ket_qua_goi_ra_id: '',
+    muc_dich_goi_ra_id: '',
     note: '',
     book_date: ''
   }
   call_result_list:any
+  call_out_purposes: any[]
   isLoading:boolean = false
   maxSelectableDate: string
   dich_vu_list: [any]
@@ -66,6 +68,10 @@ export class CalloutPage {
       return this.apiCategory.getServiceTypes().then((data: any) => {
         this.dich_vu_list = data
       })
+    }).then(msg => {
+      return this.apiCategory.getCalloutPurposes().then((data: any) => {
+        this.call_out_purposes = data
+      })
     })
     .then(data => {
       this.isLoading = false
@@ -75,6 +81,11 @@ export class CalloutPage {
   }
 
   onSaveCallout() {
+    if (!this.callout.muc_dich_goi_ra_id) {
+      Utils.showToast(this.toast, "Bạn phải Chọn mục đích gọi ra")
+      return
+    }
+
     if (!this.callout.ket_qua_goi_ra_id) {
       Utils.showToast(this.toast, "Bạn phải Chọn kết quả gọi ra")
       return

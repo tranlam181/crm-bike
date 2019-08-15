@@ -62,23 +62,7 @@ export class MyApp {
 
     this.initializeApp();    
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Trang chủ', component: HomePage, icon: 'home' },
-      { title: 'DS Khách hàng', component: CustomerListPage, icon: 'people' },
-      { title: 'Thêm Khách hàng', component: CustomerAddNewPage, icon: 'add' },
-      { title: 'Báo cáo ý kiến mua xe', component: FeedbackAfterBuyReportPage, icon: 'stats' },
-      { title: 'Báo cáo ý kiến dịch vụ', component: FeedbackAfterMaintanceReportPage, icon: 'stats' },
-      { title: 'Báo cáo gọi ra', component: CalloutReportPage, icon: 'stats' },
-      { title: 'Báo cáo KH đến', component: MaintanceReportPage, icon: 'stats' },
-      { title: 'Import Khách hàng', component: CustomerImportPage, icon: 'cube' },
-      { title: 'Export Khách hàng', component: CustomerExportPage, icon: 'cube' },
-      { title: 'Thoát', component: LogoutPage, icon: 'log-out' },
-    ];
-
     this.logInPage = { title: 'Đăng nhập', component: LoginPage, icon: 'log-in'}
-
-    this.activePage = this.pages[0]
   }
 
   ngOnDestroy() {

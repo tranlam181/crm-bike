@@ -95,4 +95,15 @@
           </tr>
         </table>
       </div>
+      <div *ngIf='type=="sum"'>
+          <div style="display: block">
+            <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+            </canvas>
+          </div>
+      </div>
   </ion-content>

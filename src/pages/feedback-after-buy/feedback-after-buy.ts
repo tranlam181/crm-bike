@@ -29,6 +29,7 @@ export class FeedbackAfterBuyPage {
   feedback_after_buy = {
     khach_hang_xe_id: '',
     y_kien_mua_xe_id: '',
+    muc_dich_goi_ra_id: '',
     bike_number: '',
     note: '',
     book_date: '',
@@ -36,6 +37,7 @@ export class FeedbackAfterBuyPage {
     is_free: false
   }
   opinion_list:any
+  call_out_purposes: any[]
   isLoading:boolean = false
   dich_vu_list: [any]
   maxSelectableDate: string
@@ -81,6 +83,10 @@ export class FeedbackAfterBuyPage {
       return this.apiCategory.getServiceTypes().then((data: any) => {
         this.dich_vu_list = data
       })
+    }).then(msg => {
+      return this.apiCategory.getCalloutPurposes().then((data: any) => {
+        this.call_out_purposes = data
+      })
     })
     .then(data => {
       this.isLoading = false
@@ -90,6 +96,10 @@ export class FeedbackAfterBuyPage {
   }
 
   onSaveFeedbackAfterBuy() {
+    if (!this.feedback_after_buy.muc_dich_goi_ra_id) {
+      Utils.showToast(this.toast, "Bạn phải chọn Mục đích gọi ra")
+      return
+    }
     if (!this.feedback_after_buy.y_kien_mua_xe_id) {
       Utils.showToast(this.toast, "Bạn phải chọn mục Ý kiến sau mua xe")
       return

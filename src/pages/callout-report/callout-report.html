@@ -48,6 +48,7 @@
           <th>Loại xe</th>
           <th>Biển số</th>
           <th>Ngày gọi</th>
+          <th>Mục đích gọi</th>
           <th>Kết quả gọi</th>
           <th>Ý kiến mua xe</th>
           <th>Ghi chú</th>
@@ -63,6 +64,7 @@
           <td>{{rp.bike_name}}</td>
           <td>{{rp.bike_number}}</td>
           <td>{{rp.call_date}}</td>
+          <td>{{rp.call_out_purpose}}</td>
           <td>{{rp.call_out_result}}</td>
           <td>{{rp.buy_opinion}}</td>
           <td>{{rp.note}}</td>
@@ -92,5 +94,16 @@
           <td text-right style="font-weight: bold">{{reportDataSum | number}}</td>
         </tr>
       </table>
+    </div>
+    <div *ngIf='type=="sum"'>
+        <div style="display: block">
+          <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+          </canvas>
+        </div>
     </div>
 </ion-content>
