@@ -36,9 +36,9 @@ export class MaintanceReportPage {
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { 
-      xAxes: [{barThickness: 12, scaleLabel: {display: true}}], 
-      yAxes: [{}] 
+    scales: {
+      xAxes: [{barThickness: 12, scaleLabel: {display: true}}],
+      yAxes: [{}]
     },
     plugins: {
       datalabels: {
@@ -53,7 +53,7 @@ export class MaintanceReportPage {
   public barChartData = [
     { data: [], label: 'Số lượng' },
   ];
-  
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiAuthenticate: ApiAuthenticateProvider,
@@ -77,7 +77,7 @@ export class MaintanceReportPage {
   }
 
   ionViewDidLoad() {
-    this.onReportDetail()
+    this.onReportSum()
   }
 
   onReportDetail() {

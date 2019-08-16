@@ -32,7 +32,8 @@
         <th>Điện thoại</th>
         <th>CH</th>
         <th>Lần cuối ghé CH</th>
-        <th>Lần cuối gọi ra</th>        
+        <th>Lần cuối gọi ra</th>
+        <th>Mục đích gọi</th>
         <th>Kết quả</th>        
         <th>Thao tác</th>
       </tr>
@@ -45,6 +46,7 @@
           <td>{{customer.shop_name}}</td>        
           <td><p ion-text color='secondary' no-margin>{{customer.last_visit_date}}</p></td>
           <td>{{customer.last_call_out_date}}</td>
+          <td>{{customer.call_out_purpose}}</td>
           <td>{{customer.call_out_result}}</td>    
           <td>
             <button ion-button small clear outline no-padding no-margin (click)='showDetailCustomer($event, customer)'>Chi tiết</button>

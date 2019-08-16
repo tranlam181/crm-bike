@@ -29,7 +29,7 @@ export class FeedbackAfterBuyPage {
   feedback_after_buy = {
     khach_hang_xe_id: '',
     y_kien_mua_xe_id: '',
-    muc_dich_goi_ra_id: '',
+    muc_dich_goi_ra_id: '1',
     bike_number: '',
     note: '',
     book_date: '',

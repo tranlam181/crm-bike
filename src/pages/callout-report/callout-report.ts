@@ -38,9 +38,9 @@ export class CalloutReportPage {
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { 
-      xAxes: [{barThickness: 12, scaleLabel: {display: true}}], 
-      yAxes: [{}] 
+    scales: {
+      xAxes: [{barThickness: 12, scaleLabel: {display: true}}],
+      yAxes: [{}]
     },
     plugins: {
       datalabels: {
@@ -79,12 +79,12 @@ export class CalloutReportPage {
   }
 
   ionViewDidLoad() {
-    this.onReportDetail()
+    this.onReportSum()
   }
 
   onChangedDate(ev) {
     console.log(ev);
-    
+
   }
 
   onReportDetail() {
@@ -113,7 +113,7 @@ export class CalloutReportPage {
         // chart
         this.barChartLabels.length = 0
         this.barChartData[0].data.length = 0
-        
+
         data.map((e, idx) => {
           this.barChartLabels.push(e.call_out_result)
           this.barChartData[0].data.push(e.count_)

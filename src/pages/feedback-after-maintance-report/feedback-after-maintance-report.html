@@ -12,7 +12,7 @@
       </ion-buttons>
     </ion-navbar>
   </ion-header>
-  
+
   <ion-content>
       <form [formGroup]="myForm">
           <ion-row>
@@ -32,7 +32,7 @@
           <ion-row>
             <ion-col text-center>
                 <button [disabled]="isLoading" ion-button small (click)="onReportDetail()">Báo cáo chi tiết</button>
-                <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>              
+                <button [disabled]="isLoading" ion-button small (click)="onExcelDetail()">Excel chi tiết</button>
             </ion-col>
           </ion-row>
       </form>
@@ -73,7 +73,7 @@
           </tr>
           <tr>
             <td colspan="15" text-center>
-              <pagination-controls 
+              <pagination-controls
                   (pageChange)="p = $event"
                   previousLabel="Trước"
                   nextLabel="Sau"></pagination-controls>
@@ -94,7 +94,6 @@
             <td>TỔNG</td>
             <td text-right style="font-weight: bold">{{reportDataSum | number}}</td>
           </tr>
-        </table>        
+        </table>
       </div>
   </ion-content>
-  

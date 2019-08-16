@@ -31,7 +31,7 @@ export class CalloutPage {
   callout = {
     khach_hang_xe_id: '',
     ket_qua_goi_ra_id: '',
-    muc_dich_goi_ra_id: '',
+    muc_dich_goi_ra_id: '1',
     note: '',
     book_date: ''
   }

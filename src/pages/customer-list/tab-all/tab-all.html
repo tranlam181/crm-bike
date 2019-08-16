@@ -24,7 +24,8 @@
       <th>Điện thoại</th>        
       <th>CH</th>
       <th>Lần cuối bảo dưỡng</th>
-      <th>Lần cuối gọi ra</th>        
+      <th>Lần cuối gọi ra</th>
+      <th>Mục đích gọi</th>
       <th>Kết quả</th>
       <th>Hẹn ngày</th>
       <th>Thao tác</th>
@@ -40,7 +41,8 @@
         <td>{{customer.phone}}</td>        
         <td>{{customer.shop_name}}</td>        
         <td>{{customer.last_maintance_date}}</td>
-        <td>{{customer.last_call_out_date}}</td>        
+        <td>{{customer.last_call_out_date}}</td>
+        <td>{{customer.call_out_purpose}}</td>
         <td>{{customer.call_out_result}}</td>        
         <td><p ion-text color='secondary' no-margin>{{customer.next_book_date}}</p></td>
         <td>
