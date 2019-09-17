@@ -43,6 +43,7 @@ import { FeedbackAfterMaintanceReportPage } from '../pages/feedback-after-mainta
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SideMenuContentComponent } from '../components/side-menu-content/side-menu-content.component';
 import { ChartsModule } from 'ng2-charts-x';
+import { SettingPage } from '../pages/setting/setting';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ChartsModule } from 'ng2-charts-x';
     SchedulePage,
     LoginPage,
     LogoutPage,
+    SettingPage,
     HomePage
   ],
   imports: [
@@ -112,6 +114,7 @@ import { ChartsModule } from 'ng2-charts-x';
     SchedulePage,
     LoginPage,
     LogoutPage,
+    SettingPage,
     HomePage
   ],
   providers: [

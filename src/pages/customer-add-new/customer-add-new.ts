@@ -80,7 +80,7 @@ export class CustomerAddNewPage {
     }).then(msg => {
       loading.dismiss()
     }).catch(err => {
-      loading.dismiss()    
+      loading.dismiss()
     })
   }
 

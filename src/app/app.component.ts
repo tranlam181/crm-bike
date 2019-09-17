@@ -23,6 +23,7 @@ import { ReplaySubject } from "rxjs/ReplaySubject";
 import { SideMenuContentComponent } from '../components/side-menu-content/side-menu-content.component';
 import { SideMenuSettings } from '../components/side-menu-content/models/side-menu-settings';
 import { MenuOptionModel } from '../components/side-menu-content/models/menu-option-model';
+import { SettingPage } from '../pages/setting/setting';
 
 @Component({
   templateUrl: 'app.html'
@@ -60,7 +61,7 @@ export class MyApp {
     private apiAuthenticate: ApiAuthenticateProvider,
     private event: Events ) {
 
-    this.initializeApp();    
+    this.initializeApp();
 
     this.logInPage = { title: 'Đăng nhập', component: LoginPage, icon: 'log-in'}
   }
@@ -114,7 +115,7 @@ export class MyApp {
   }
 
 
-  // menu 
+  // menu
   private initializeOptions(): void {
 		this.options = new Array<MenuOptionModel>();
 		// Load simple menu options
@@ -131,6 +132,7 @@ export class MyApp {
       ]},
       { displayName: 'Import Khách hàng', component: CustomerImportPage, iconName: 'cube' },
       { displayName: 'Export Khách hàng', component: CustomerExportPage, iconName: 'cube' },
+      { displayName: 'Cấu hình', component: SettingPage, iconName: 'settings' },
       { displayName: 'Thoát', component: LogoutPage, iconName: 'log-out' }
     ])
 	}
