@@ -68,7 +68,6 @@ export class ApiCustomerProvider {
       this.http.get(this.baseUrl + '/customers/' + khach_hang_id,
         {headers: {...this.headers, 'Authorization': this.apiAuthenticate.token}}
       ).subscribe(data => {
-        (data);
         resolve(data)
       }, err => {
         reject(err.message)

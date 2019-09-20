@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
+import { NavController, NavParams, App, AlertController } from 'ionic-angular';
 import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
 import { LoginPage } from '../login/login';
+import Utils from '../../utils/utils';
+import AppConfig from '../../config/app-config';
 
 /**
  * Generated class for the SettingPage page.
@@ -16,10 +18,17 @@ import { LoginPage } from '../login/login';
 })
 export class SettingPage {
 
+  myForm = {
+    link_3c: ''
+  }
+  isLoading: boolean = false
+
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public apiAuthenticate: ApiAuthenticateProvider,
-    public app: App) {
+    public app: App,
+    public alertCtrl: AlertController) {
+
   }
 
   async ionViewCanEnter() {
@@ -31,7 +40,25 @@ export class SettingPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingPage');
+    this.apiAuthenticate.getLink3c().then((data: any) => {
+      console.log(data);
+      this.myForm.link_3c = data.link_3c
+    })
   }
 
+  onSaveSetting() {
+    if (!this.myForm.link_3c)
+      return
+
+    this.isLoading = true
+
+    this.apiAuthenticate.saveLink3c(this.myForm).then((data:any) => {
+      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', data.msg)
+      AppConfig.baseUrl3C = this.myForm.link_3c
+      this.isLoading = false
+    }).catch(err => {
+      Utils.showConfirmAlert(this.alertCtrl, 'Thông báo', err.error.message)
+      this.isLoading = false
+    })
+  }
 }

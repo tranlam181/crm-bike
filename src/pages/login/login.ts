@@ -4,6 +4,7 @@ import Utils from '../../utils/utils';
 import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
 import EVENTS from '../../config/EVENTS';
 import { HomePage } from '../home/home';
+import AppConfig from '../../config/app-config';
 
 /**
  * Generated class for the LoginPage page.
@@ -44,6 +45,8 @@ export class LoginPage {
         this.event.publish(EVENTS.USER_LOG_CHANGED)
         // thuc hien redirect -> home
         this.navCtrl.setRoot(HomePage)
+        // save 3C api
+        AppConfig.baseUrl3C = data.user.link_3c ? data.user.link_3c : AppConfig.baseUrl3C
         // close loading
         this.isLoading = false
     }).catch(err => {

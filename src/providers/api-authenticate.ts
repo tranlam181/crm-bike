@@ -81,4 +81,29 @@ export class ApiAuthenticateProvider {
       })
     })
   }
+
+  getLink3c() {
+    return new Promise((resolve, reject) => {
+      this.http.get(this.baseUrl + '/link_3c',
+          {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': this.token}}
+      ).subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      })
+    })
+  }
+
+  saveLink3c(data) {
+    return new Promise((resolve, reject) => {
+      this.http.post(this.baseUrl + '/link_3c',
+          JSON.stringify(data),
+          {headers: {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': this.token}}
+      ).subscribe(data => {
+        resolve(data);
+      }, err => {
+        reject(err);
+      })
+    })
+  }
 }

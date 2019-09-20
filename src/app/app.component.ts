@@ -132,7 +132,7 @@ export class MyApp {
       ]},
       { displayName: 'Import Khách hàng', component: CustomerImportPage, iconName: 'cube' },
       { displayName: 'Export Khách hàng', component: CustomerExportPage, iconName: 'cube' },
-      { displayName: 'Cấu hình', component: SettingPage, iconName: 'settings' },
+      { displayName: 'Cài đặt', component: SettingPage, iconName: 'settings' },
       { displayName: 'Thoát', component: LogoutPage, iconName: 'log-out' }
     ])
 	}

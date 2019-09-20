@@ -9,7 +9,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><ion-icon name="settings"></ion-icon> Cấu hình</ion-title>
+    <ion-title><ion-icon name="settings"></ion-icon> Cài đặt</ion-title>
     <ion-buttons end>
         <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
     </ion-buttons>
@@ -17,5 +17,19 @@
 </ion-header>
 
 <ion-content padding>
-
+  <form>
+    <ion-row>
+      <ion-col >
+          <ion-item>
+              <ion-label>Link 3C:</ion-label>
+              <ion-input type="text" [(ngModel)]="myForm.link_3c" name="link_3c"></ion-input>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+          <button [disabled]="isLoading" ion-button (click)="onSaveSetting()">Lưu</button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>
