@@ -41,7 +41,6 @@ export class SettingPage {
 
   ionViewDidLoad() {
     this.apiAuthenticate.getLink3c().then((data: any) => {
-      console.log(data);
       this.myForm.link_3c = data.link_3c
     })
   }
