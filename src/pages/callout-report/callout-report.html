@@ -53,6 +53,7 @@
           <th>Ý kiến mua xe</th>
           <th>Ghi chú</th>
           <th>CH</th>
+          <th>Nghe lại</th>
         </tr>
         <tr ngClass="row-body" *ngFor='let rp of reportData | paginate: {itemsPerPage: itemsPerPage, currentPage: p}; let i=index'>
           <td>{{((p-1) * itemsPerPage) + i + 1}}</td>
@@ -69,6 +70,7 @@
           <td>{{rp.buy_opinion}}</td>
           <td>{{rp.note}}</td>
           <td>{{rp.shop_name}}</td>
+          <td><button ion-button small clear outline no-padding no-margin (click)='onCheckCallRecord($event, rp)'>Nghe lại</button></td>
         </tr>
         <tr>
           <td colspan="13" text-center>

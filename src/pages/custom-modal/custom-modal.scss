@@ -1,0 +1,11 @@
+ion-modal {
+  padding-left: 20%;
+  padding-right: 20%;
+  padding-top: 24px;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+page-custom-modal {
+  .scroll-content {
+    overflow-y: hidden;
+  }
+}

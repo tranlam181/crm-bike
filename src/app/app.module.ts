@@ -44,6 +44,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SideMenuContentComponent } from '../components/side-menu-content/side-menu-content.component';
 import { ChartsModule } from 'ng2-charts-x';
 import { SettingPage } from '../pages/setting/setting';
+import { Api3cProvider } from '../providers/api3c';
+import {CustomModalPageModule } from '../pages/custom-modal/custom-modal.module'
 
 @NgModule({
   declarations: [
@@ -83,6 +85,7 @@ import { SettingPage } from '../pages/setting/setting';
     InterceptorModule,
     NgxPaginationModule,
     ChartsModule,
+    CustomModalPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
     PipesModule
@@ -124,7 +127,8 @@ import { SettingPage } from '../pages/setting/setting';
     ApiCustomerProvider,
     ApiCategoryProvider,
     ApiAuthenticateProvider,
-    ResponseInterceptorProvider
+    ResponseInterceptorProvider,
+    Api3cProvider
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, App } from 'ionic-angular';
+import { NavController, NavParams, App, ModalController } from 'ionic-angular';
 import * as XLSX from 'xlsx';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiAuthenticateProvider } from '../../providers/api-authenticate';
@@ -10,6 +10,7 @@ import { ApiCustomerProvider } from '../../providers/api-customer';
 import { ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { BaseChartDirective } from 'ng2-charts-x';
+import { CustomModalPage } from '../custom-modal/custom-modal';
 
 
 /**
@@ -39,7 +40,7 @@ export class CalloutReportPage {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
-      xAxes: [{barThickness: 12, scaleLabel: {display: true}}],
+      xAxes: [{scaleLabel: {display: true}}],
       yAxes: [{}]
     },
     plugins: {
@@ -61,6 +62,7 @@ export class CalloutReportPage {
     public apiAuthenticate: ApiAuthenticateProvider,
     public apiCustomer: ApiCustomerProvider,
     public app: App,
+    private modalCtrl: ModalController,
     public formBuilder: FormBuilder) {
       const startOfMonth = moment().format('YYYY-MM-DD');
       const endOfMonth   = moment().endOf('month').format('YYYY-MM-DD');
@@ -173,4 +175,13 @@ export class CalloutReportPage {
       40];
     this.barChartData[0].data = data;
   }
+
+  onCheckCallRecord(e, row) {
+    console.log(e, row);
+    const profileModal = this.modalCtrl.create(CustomModalPage, { data: row });
+    profileModal.onDidDismiss(data => {
+      console.log(data);
+    });
+    profileModal.present();
+  } 
 }

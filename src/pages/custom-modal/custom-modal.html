@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+      <ion-title>Các file ghi âm cuộc gọi 3C</ion-title>
+      <ion-buttons end>
+          <button ion-button small clear outline no-padding no-margin color="primary" (click)="closeModal()">Đóng</button>
+          <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <table ngClass="table">
+    <tr ngClass="row-header">
+      <th>STT</th>
+      <th>Số 3C</th>
+      <th>Số KH</th>
+      <th>Thời gian gọi</th>
+      <th>Thời gian kết thúc</th>
+      <th>Tình trạng</th>
+    </tr>
+    <tr ngClass="row-body" *ngFor='let rp of reportData; let i=index'>
+      <td>{{i + 1}}</td>
+      <td>{{rp.called}}</td>
+      <td>{{rp.caller}}</td>
+      <td>{{rp.start_time}}</td>
+      <td>{{rp.end_time}}</td>
+      <td>{{rp.call_status}}</td>
+    </tr>
+  </table>
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col text-center>
+        <button ion-button small (click)="closeModal()">Đóng</button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

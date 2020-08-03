@@ -37,7 +37,7 @@ export class FeedbackAfterBuyReportPage {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
     scales: {
-      xAxes: [{barThickness: 12, scaleLabel: {display: true}}],
+      xAxes: [{scaleLabel: {display: true}}],
       yAxes: [{}]
     },
     plugins: {
