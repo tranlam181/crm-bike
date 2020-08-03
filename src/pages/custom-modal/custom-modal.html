@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-      <ion-title>Các file ghi âm cuộc gọi 3C</ion-title>
+      <ion-title>Các file ghi âm cuộc gọi 3C gần đây</ion-title>
       <ion-buttons end>
           <button ion-button small clear outline no-padding no-margin color="primary" (click)="closeModal()">Đóng</button>
           <ion-spinner *ngIf='isLoading' name='dots'></ion-spinner>
@@ -17,6 +17,7 @@
       <th>Thời gian gọi</th>
       <th>Thời gian kết thúc</th>
       <th>Tình trạng</th>
+      <th>Link</th>
     </tr>
     <tr ngClass="row-body" *ngFor='let rp of reportData; let i=index'>
       <td>{{i + 1}}</td>
@@ -25,6 +26,7 @@
       <td>{{rp.start_time}}</td>
       <td>{{rp.end_time}}</td>
       <td>{{rp.call_status}}</td>
+      <td><button ion-button small clear outline no-padding no-margin color="primary" (click)="onOpenLink(rp.path)">Mở</button></td>
     </tr>
   </table>
 </ion-content>

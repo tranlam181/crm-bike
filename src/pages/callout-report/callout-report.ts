@@ -177,11 +177,11 @@ export class CalloutReportPage {
   }
 
   onCheckCallRecord(e, row) {
-    console.log(e, row);
+    // console.log(e, row);
     const profileModal = this.modalCtrl.create(CustomModalPage, { data: row });
     profileModal.onDidDismiss(data => {
-      console.log(data);
+      // console.log(data);
     });
     profileModal.present();
-  } 
+  }
 }

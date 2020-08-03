@@ -6,6 +6,7 @@ import {
   ViewController,
 } from "ionic-angular";
 import { Api3cProvider } from "../../providers/api3c";
+import moment from "moment";
 
 /**
  * Generated class for the CustomModalPage page.
@@ -22,6 +23,8 @@ import { Api3cProvider } from "../../providers/api3c";
 export class CustomModalPage {
   reportData: any;
   isLoading: boolean = false;
+  callDate: any;
+  phone: String;
 
   constructor(
     public viewCtrl: ViewController,
@@ -29,23 +32,31 @@ export class CustomModalPage {
     public navParams: NavParams,
     private api3c: Api3cProvider
   ) {
-    console.log("UserId", navParams.get("data"));
+    this.callDate = navParams.get("data").call_date;
+    this.phone = navParams.get("data").phone;
   }
 
   ionViewDidLoad() {
     this.isLoading = true;
 
+    let startDate = this._getStartCallDate(this.callDate);
+    let endDate = this._getEndCallDate(this.callDate);
+
     return this.api3c
-      .get3CCallHistory("2020-07-30T00:00:00Z", "2020-07-31T00:00:00Z", 1)
+      .get3CCallHistory(startDate, endDate, 1)
       .then((data: any) => {
         if (data && data.code && data.code === "OK") {
-          this.reportData = data.calls;
+          let tmpArr = data.calls.filter((e) => {
+            return e.caller == this.phone || e.caller.indexOf(this.phone) >= 0;
+          });
+          console.log(data.calls, tmpArr);
+
+          this.reportData = tmpArr;
         }
 
         this.isLoading = false;
       })
       .catch((e) => {
-        console.error(e);
         this.isLoading = false;
       });
   }
@@ -57,5 +68,23 @@ export class CustomModalPage {
 
   closeModal() {
     this.navCtrl.pop();
+  }
+
+  onOpenLink(link) {
+    window.open(link, "_system", "location=yes");
+  }
+
+  _getStartCallDate(dateStr) {
+    return (
+      moment(dateStr, "DD/MM/YYYY").add(-3, "d").format("YYYY-MM-DDTHH:mm:ss") +
+      "Z"
+    );
+  }
+
+  _getEndCallDate(dateStr) {
+    return (
+      moment(dateStr, "DD/MM/YYYY").add(1, "d").format("YYYY-MM-DDTHH:mm:ss") +
+      "Z"
+    );
   }
 }
