@@ -21,7 +21,7 @@ import moment from "moment";
   templateUrl: "custom-modal.html",
 })
 export class CustomModalPage {
-  reportData: any;
+  reportData: [];
   isLoading: boolean = false;
   callDate: any;
   phone: String;
@@ -46,10 +46,10 @@ export class CustomModalPage {
       .get3CCallHistory(startDate, endDate, 1)
       .then((data: any) => {
         if (data && data.code && data.code === "OK") {
+
           let tmpArr = data.calls.filter((e) => {
-            return e.caller == this.phone || e.caller.indexOf(this.phone) >= 0;
+            return e.caller && (e.caller == this.phone || e.caller.indexOf(this.phone) >= 0);
           });
-          console.log(data.calls, tmpArr);
 
           this.reportData = tmpArr;
         }

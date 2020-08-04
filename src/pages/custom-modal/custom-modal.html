@@ -28,6 +28,12 @@
       <td>{{rp.call_status}}</td>
       <td><button ion-button small clear outline no-padding no-margin color="primary" (click)="onOpenLink(rp.path)">Mở</button></td>
     </tr>
+    <tr ngClass="row-body" *ngIf="isLoading">
+      <td colspan="7">Đang tải...</td>
+    </tr>
+    <tr ngClass="row-body" *ngIf="!isLoading && (!reportData || reportData.length <= 0)">
+      <td colspan="7">Không có dữ liệu.</td>
+    </tr>
   </table>
 </ion-content>
 
