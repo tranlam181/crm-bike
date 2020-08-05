@@ -21,7 +21,7 @@ import moment from "moment";
   templateUrl: "custom-modal.html",
 })
 export class CustomModalPage {
-  reportData: [];
+  reportData: any[];
   isLoading: boolean = false;
   callDate: any;
   phone: String;
